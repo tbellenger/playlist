@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/styles/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <title>Title</title>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -47,7 +50,7 @@
                     <button class="button" id="next"><i class="fa fa-forward"></i></button>
                     <button class="button" id="stop-button"><i class="fa fa-stop"></i></button>
                 </div>
-            </div>        
+            </div>
         </div>
     </div>
     <script src="https://apis.google.com/js/api.js"></script>
@@ -58,51 +61,76 @@
          * See instructions for running APIs Explorer code samples locally:
          * https://developers.google.com/explorer-help/guides/code_samples#javascript
          */
-         gapi.load("client:auth2", function() {
-          gapi.auth2.init({client_id: "762278068311-stoa3fflppk9o9qfdr2cf57mro3s7b4m.apps.googleusercontent.com"});
-        });
+
         function authenticate() {
-          return gapi.auth2.getAuthInstance()
-              .signIn({scope: "https://www.googleapis.com/auth/youtube"})
-              .then(function() { console.log("Sign-in successful"); },
-                    function(err) { console.error("Error signing in", err); });
+            return gapi.auth2.getAuthInstance()
+                .signIn({ scope: "https://www.googleapis.com/auth/youtube" })
+                .then(function () { console.log("Sign-in successful"); },
+                    function (err) { console.error("Error signing in", err); });
         }
+
         function loadClient() {
-          gapi.client.setApiKey("AIzaSyCjC_Evg4pGy3IELojH3Tm24NcuGrsOKCI");
-          return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
-              .then(function() { console.log("GAPI client loaded for API"); },
-                    function(err) { console.error("Error loading GAPI client for API", err); });
+            gapi.client.setApiKey("AIzaSyCjC_Evg4pGy3IELojH3Tm24NcuGrsOKCI");
+            return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
+                .then(function () { console.log("GAPI client loaded for API"); },
+                    function (err) { console.error("Error loading GAPI client for API", err); });
         }
+
         // Make sure the client is loaded and sign-in is complete before calling this method.
         function execute() {
-          return gapi.client.youtube.playlists.update({
-            "part": [
-              "snippet,status"
-            ],
-            "resource": {
-              "id": "PL73J_YMqHDwd8djdzf76PBSkwnJStL_dj",
-              "snippet": {
-                "title": "Updated sample playlist created via API",
-                "description": "This is the updated playlist description.",
-                "tags": [
-                  "updated playlist",
-                  "API FTW"
-                ]
-              },
-              "status": {
-                "privacyStatus": "private"
-              }
-            }
-          })
-              .then(function(response) {
-                      // Handle the results here (response.result has the parsed body).
-                      console.log("Response", response);
+            return gapi.client.youtube.playlists.update({
+                "part": [
+                    "snippet,status,contentDetails"
+                ],
+                "resource": {
+                    "id": "PL73J_YMqHDwd8djdzf76PBSkwnJStL_dj",
+                    "snippet": {
+                        "title": "Updated sample playlist created via API",
+                        "description": "This is the updated playlist description.",
+                        "tags": [
+                            "updated playlist",
+                            "API FTW"
+                        ]
                     },
-                    function(err) { console.error("Execute error", err); });
+                    "status": {
+                        "privacyStatus": "private"
+                    }
+                }
+            })
+                .then(function (response) {
+                    // Handle the results here (response.result has the parsed body).
+                    console.log("Response", response);
+                    gapi.client.youtube.playlistItems.insert({
+                        "part": [
+                            "snippet"
+                        ],
+                        "resource": {
+                            "snippet": {
+                                "playlistId": "PL73J_YMqHDwd8djdzf76PBSkwnJStL_dj",
+                                "position": 0,
+                                "resourceId": {
+                                    "kind": "youtube#video",
+                                    "videoId": "M7FIvfx5J10"
+                                }
+                            }
+                        }
+                    })
+                        .then(function (response) {
+                            // Handle the results here (response.result has the parsed body).
+                            console.log("Response", response);
+                        },
+                            function (err) { console.error("Execute error", err); });
+                },
+                    function (err) { console.error("Execute error", err); })
         }
-        
-      </script>
-      <button onclick="authenticate().then(loadClient)">authorize and load</button>
-      <button onclick="execute()">execute</button>
+
+        gapi.load("client:auth2", function () {
+            gapi.auth2.init({ client_id: "762278068311-stoa3fflppk9o9qfdr2cf57mro3s7b4m.apps.googleusercontent.com" });
+        });
+
+    </script>
+    <button onclick="authenticate().then(loadClient)">authorize and load</button>
+    <button onclick="execute()">execute</button>
 </body>
+
 </html>
