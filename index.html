@@ -43,127 +43,15 @@
             <div class="content" id="pl-link">
 
             </div>
+            <div class="controls">
+                <button id="auth-btn">Auth and Load</button>
+                <button id="create-btn" disabled='true'>Create New Playlist</button>
+                <button id="update-btn" disabled='true'>Update Playlist</button>
+            </div>
         </div>
     </div>
     <script src="https://apis.google.com/js/api.js"></script>
     <script src="./assets/scripts/script.js"></script>
-    <script>
-        /**
-         * Sample JavaScript code for youtube.playlists.update
-         * See instructions for running APIs Explorer code samples locally:
-         * https://developers.google.com/explorer-help/guides/code_samples#javascript
-         */
-
-        function authenticate() {
-            return gapi.auth2.getAuthInstance()
-                .signIn({ scope: "https://www.googleapis.com/auth/youtube" })
-                .then(function () { console.log("Sign-in successful"); },
-                    function (err) { console.error("Error signing in", err); });
-        }
-
-        function loadClient() {
-            gapi.client.setApiKey("AIzaSyCjC_Evg4pGy3IELojH3Tm24NcuGrsOKCI");
-            return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
-                .then(function () { console.log("GAPI client loaded for API"); },
-                    function (err) { console.error("Error loading GAPI client for API", err); });
-        }
-
-        var plTitle;
-        var plId;
-
-        function createPlaylist() {
-            return gapi.client.youtube.playlists.insert({
-                "part": [
-                    "snippet,status"
-                ],
-                "resource": {
-                    "snippet": {
-                        "title": "Sample playlist created via API" + new Date().getTime(),
-                        "description": "This is a sample playlist description.",
-                        "tags": [
-                            "sample playlist",
-                            "API call"
-                        ],
-                        "defaultLanguage": "en"
-                    },
-                    "status": {
-                        "privacyStatus": "private"
-                    }
-                }
-            })
-                .then(function (response) {
-                    // Handle the results here (response.result has the parsed body).
-                    console.log("Response", response);
-
-                    plTitle = response.result.snippet.title;
-                    plId = response.result.id;
-                    console.log("Playlist Title: " + plTitle);
-                    console.log("Playlist ID: " + plId);
-                },
-                    function (err) { console.error("Execute error", err); });
-        }
-
-        // Make sure the client is loaded and sign-in is complete before calling this method.
-        function execute() {
-            return gapi.client.youtube.playlists.update({
-                "part": [
-                    "snippet,status,contentDetails"
-                ],
-                "resource": {
-                    "id": plId,
-                    "snippet": {
-                        "title": "Updated sample playlist created via API",
-                        "description": "This is the updated playlist description.",
-                        "tags": [
-                            "updated playlist",
-                            "API FTW"
-                        ]
-                    },
-                    "status": {
-                        "privacyStatus": "private"
-                    }
-                }
-            })
-                .then(function (response) {
-                    // Handle the results here (response.result has the parsed body).
-                    console.log("Response", response);
-                    gapi.client.youtube.playlistItems.insert({
-                        "part": [
-                            "snippet"
-                        ],
-                        "resource": {
-                            "snippet": {
-                                "playlistId": plId,
-                                "position": 0,
-                                "resourceId": {
-                                    "kind": "youtube#video",
-                                    "videoId": "M7FIvfx5J10"
-                                }
-                            }
-                        }
-                    })
-                        .then(function (response) {
-                            // Handle the results here (response.result has the parsed body).
-                            console.log("Response", response);
-                            var linkEl = document.querySelector("#pl-link");
-                            var plLinkEl = document.createElement("a");
-                            plLinkEl.href = "https://www.youtube.com/playlist?list=" + plId;
-                            plLinkEl.innerText = plTitle;
-                            linkEl.appendChild(plLinkEl);
-                        },
-                            function (err) { console.error("Execute error", err); });
-                },
-                    function (err) { console.error("Execute error", err); })
-        }
-
-        gapi.load("client:auth2", function () {
-            gapi.auth2.init({ client_id: "762278068311-stoa3fflppk9o9qfdr2cf57mro3s7b4m.apps.googleusercontent.com" });
-        });
-
-    </script>
-    <button onclick="authenticate().then(loadClient)">Auth and Load</button>
-    <button onclick="createPlaylist()">Create Playlist</button>
-    <button onclick="execute()">Update Playlist</button>
 </body>
 
 </html>
