@@ -69,6 +69,7 @@ function createPlaylist() {
 
 // Make sure the client is loaded and sign-in is complete before calling this method.
 function updatePlaylist() {
+    plTitle = "Updated playlist " + new Date().getTime();
     return gapi.client.youtube.playlists.update({
         "part": [
             "snippet,status,contentDetails"
@@ -76,7 +77,7 @@ function updatePlaylist() {
         "resource": {
             "id": plId,
             "snippet": {
-                "title": "Updated playlist " + new Date().getTime(),
+                "title": plTitle,
                 "description": "This is the updated playlist description.",
                 "tags": [
                     "updated playlist",
@@ -109,17 +110,21 @@ function updatePlaylist() {
                 .then(function (response) {
                     // Handle the results here (response.result has the parsed body).
                     console.log("Response", response);
-                    var linkEl = document.querySelector("#pl-link");
-                    var plLinkEl = document.createElement("a");
-                    plLinkEl.href = "https://www.youtube.com/playlist?list=" + plId;
-                    plLinkEl.innerText = plTitle;
-                    console.log(plLink);
-                    linkEl.appendChild(plLinkEl);
-                    console.log(linkEl);
+                    showPlayListLink();
                 },
                     function (err) { console.error("Execute error", err); });
         },
             function (err) { console.error("Execute error", err); })
+}
+
+function showPlayListLink() {
+    var linkEl = document.querySelector("#pl-link");
+    var plLinkEl = document.createElement("a");
+    plLinkEl.href = "https://www.youtube.com/playlist?list=" + plId;
+    plLinkEl.innerText = plTitle;
+    console.log(plLink);
+    linkEl.appendChild(plLinkEl);
+    console.log(linkEl);
 }
 
 gapi.load("client:auth2", function () {
