@@ -102,7 +102,7 @@ function updatePlaylist() {
                         "position": 0,
                         "resourceId": {
                             "kind": "youtube#video",
-                            "videoId": "M7FIvfx5J10"
+                            "videoId": ["M7FIvfx5J10","_5aKcpAhTOk"]
                         }
                     }
                 }
