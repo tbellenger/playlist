@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <title>Title</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <a href="index.html">
+                </a>
+            </h1>
+
+
+            <div class="nav">
+                <ul>
+                    <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+
+                <div class="search">
+                    <form action="">
+                        <input type="text" placeholder="Search" id="search-query">
+                        <button type="submit" id="search-btn">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="content">
+                <div id="player"></div>
+                <div class="buttons">
+                    <button class="button" id="play-button"><i class="fa fa-play"></i></button>
+                    <button class="button" id="pause-button"><i class="fa fa-pause"></i></button>
+
+                    <button class="button" id="previous"><i class="fa fa-backward"></i></button>
+                    <button class="button" id="next"><i class="fa fa-forward"></i></button>
+                    <button class="button" id="stop-button"><i class="fa fa-stop"></i></button>
+                </div>
+            </div>        
+        </div>
+    </div>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="./assets/scripts/script.js"></script>
+    <script>
+        /**
+         * Sample JavaScript code for youtube.playlists.update
+         * See instructions for running APIs Explorer code samples locally:
+         * https://developers.google.com/explorer-help/guides/code_samples#javascript
+         */
+      
+        function authenticate() {
+          return gapi.auth2.getAuthInstance()
+              .signIn({scope: "https://www.googleapis.com/auth/youtube.force-ssl"})
+              .then(function() { console.log("Sign-in successful"); },
+                    function(err) { console.error("Error signing in", err); });
+        }
+        function loadClient() {
+          gapi.client.setApiKey("AIzaSyCjC_Evg4pGy3IELojH3Tm24NcuGrsOKCI");
+          return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
+              .then(function() { console.log("GAPI client loaded for API"); },
+                    function(err) { console.error("Error loading GAPI client for API", err); });
+        }
+        // Make sure the client is loaded and sign-in is complete before calling this method.
+        function execute() {
+          return gapi.client.youtube.playlists.update({
+            "part": [
+              "snippet,status"
+            ],
+            "resource": {
+              "id": "PL73J_YMqHDwd8djdzf76PBSkwnJStL_dj",
+              "snippet": {
+                "title": "Updated sample playlist created via API",
+                "description": "This is the updated playlist description.",
+                "tags": [
+                  "updated playlist",
+                  "API FTW"
+                ]
+              },
+              "status": {
+                "privacyStatus": "private"
+              }
+            }
+          })
+              .then(function(response) {
+                      // Handle the results here (response.result has the parsed body).
+                      console.log("Response", response);
+                    },
+                    function(err) { console.error("Execute error", err); });
+        }
+        gapi.load("client:auth2", function() {
+          gapi.auth2.init({client_id: "762278068311-tf0f00kql9cm5hdhu2scjgdfg1mqm822.apps.googleusercontent.com"});
+        });
+      </script>
+      <button onclick="authenticate().then(loadClient)">authorize and load</button>
+      <button onclick="execute()">execute</button>
+</body>
+</html>
