@@ -122,7 +122,7 @@ function showPlayListLink() {
     var plLinkEl = document.createElement("a");
     plLinkEl.href = "https://www.youtube.com/playlist?list=" + plId;
     plLinkEl.innerText = plTitle;
-    console.log(plLink);
+    console.log(plLinkEl);
     linkEl.appendChild(plLinkEl);
     console.log(linkEl);
 }
