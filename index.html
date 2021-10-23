@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="main">
-            <div class="content">
+            <div class="content" id="pl-link">
 
             </div>
         </div>
@@ -145,6 +145,11 @@
                         .then(function (response) {
                             // Handle the results here (response.result has the parsed body).
                             console.log("Response", response);
+                            var linkEl = document.querySelector("#pl-link");
+                            var plLinkEl = document.createElement("a");
+                            plLinkEl.href = "https://www.youtube.com/playlist?list=" + plId;
+                            plLinkEl.innerText = plTitle;
+                            linkEl.appendChild(plLinkEl);
                         },
                             function (err) { console.error("Execute error", err); });
                 },
