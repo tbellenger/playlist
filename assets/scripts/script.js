@@ -135,6 +135,7 @@ gapi.load("client:auth2", function () {
         function() {
             if (gauth.isSignedIn.get()) {
                 console.log("already signed in");
+                btnAuth.disabled=true;
                 loadClient();
             }
         }, 
