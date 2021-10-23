@@ -130,5 +130,17 @@ function showPlayListLink() {
 gapi.load("client:auth2", function () {
     //var localhost = "762278068311-tf0f00kql9cm5hdhu2scjgdfg1mqm822.apps.googleusercontent.com";
     var github = "762278068311-stoa3fflppk9o9qfdr2cf57mro3s7b4m.apps.googleusercontent.com"
-    gapi.auth2.init({ client_id: github });
+    let gauth = gapi.auth2.init({ client_id: github });
+    gauth.then(
+        function() {
+            if (gauth.isSignedIn.get()) {
+                console.log("already signed in");
+                loadClient();
+            }
+        }, 
+        function(onError) {
+            console.log(onError);
+        }
+    );
+
 });
