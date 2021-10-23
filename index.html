@@ -75,6 +75,39 @@
                 .then(function () { console.log("GAPI client loaded for API"); },
                     function (err) { console.error("Error loading GAPI client for API", err); });
         }
+var plTitle;
+var plId;
+        function createPlaylist() {
+    return gapi.client.youtube.playlists.insert({
+      "part": [
+        "snippet,status"
+      ],
+      "resource": {
+        "snippet": {
+          "title": "Sample playlist created via API",
+          "description": "This is a sample playlist description.",
+          "tags": [
+            "sample playlist",
+            "API call"
+          ],
+          "defaultLanguage": "en"
+        },
+        "status": {
+          "privacyStatus": "private"
+        }
+      }
+    })
+        .then(function(response) {
+                // Handle the results here (response.result has the parsed body).
+                console.log("Response", response);
+
+                plTitle = response.result.snippet.title;
+                plId = response.result.id;
+                console.log("Playlist Title: " + plTitle);
+                console.log("Playlist ID: " + plId);
+              },
+              function(err) { console.error("Execute error", err); });
+            }
 
         // Make sure the client is loaded and sign-in is complete before calling this method.
         function execute() {
@@ -83,7 +116,7 @@
                     "snippet,status,contentDetails"
                 ],
                 "resource": {
-                    "id": "PL73J_YMqHDwd8djdzf76PBSkwnJStL_dj",
+                    "id": plId,
                     "snippet": {
                         "title": "Updated sample playlist created via API",
                         "description": "This is the updated playlist description.",
@@ -106,7 +139,7 @@
                         ],
                         "resource": {
                             "snippet": {
-                                "playlistId": "PL73J_YMqHDwd8djdzf76PBSkwnJStL_dj",
+                                "playlistId": plId,
                                 "position": 0,
                                 "resourceId": {
                                     "kind": "youtube#video",
@@ -124,13 +157,18 @@
                     function (err) { console.error("Execute error", err); })
         }
 
+        function createAndUpdatePlaylist() {
+            createPlaylist();
+            execute();
+    }
+
         gapi.load("client:auth2", function () {
             gapi.auth2.init({ client_id: "762278068311-stoa3fflppk9o9qfdr2cf57mro3s7b4m.apps.googleusercontent.com" });
         });
 
     </script>
     <button onclick="authenticate().then(loadClient)">authorize and load</button>
-    <button onclick="execute()">execute</button>
+    <button onclick="createAndUpdatePlaylist()">execute</button>
 </body>
 
 </html>
