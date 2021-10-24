@@ -83,8 +83,8 @@ async function createPlaylist() {
             ],
             "resource": {
                 "snippet": {
-                    "title": "Sample playlist created via API" + new Date().getTime(),
-                    "description": "This is a sample playlist description.",
+                    "title": "Playlister " + new Date().getTime(),
+                    "description": "New playlist",
                     "tags": [
                         "sample playlist",
                         "API call"
@@ -122,10 +122,10 @@ async function updatePlaylist() {
                 "id": plId,
                 "snippet": {
                     "title": plTitle,
-                    "description": "This is the updated playlist description.",
+                    "description": "Updated playlist",
                     "tags": [
-                        "updated playlist",
-                        "API FTW"
+                        "Songkick API",
+                        "Playlister"
                     ]
                 },
                 "status": {
@@ -180,6 +180,9 @@ function showPlayListLink() {
     plLinkEl.target = "_blank";
     plLinkEl.innerText = plTitle;
     linkEl.appendChild(plLinkEl);
+    searchResultsEl.empty();
+    btnUpdate.disabled=true;
+    btnCreate.disabled=false;
 }
 
 gapi.load("client:auth2", async function () {
@@ -192,6 +195,7 @@ gapi.load("client:auth2", async function () {
             console.log("already signed in");
             btnAuth.disabled=true;
             loadClient();
+            // maybe add an option for the user to sign out
         }
     } catch (err) {
         console.error("Error loading GAPI client for API", err);
