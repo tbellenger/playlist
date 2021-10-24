@@ -14,7 +14,8 @@ btnCreate.addEventListener("click", createPlaylist);
 btnUpdate.addEventListener("click", updatePlaylist);
 btnSearch.addEventListener("click", searchVideos);
 
-async function searchVideos() {
+async function searchVideos(event) {
+    event.preventDefault();
     let query = txtSearch.value;
     try {
         let response = await gapi.client.youtube.search.list({
