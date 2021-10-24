@@ -134,8 +134,9 @@ async function updatePlaylist() {
         });
         // Handle the results here (response.result has the parsed body).
         console.log("Response", response);
-        await insertVideo("M7FIvfx5J10");
-        await insertVideo("_5aKcpAhTOk");
+        for (let i = 0; i < videoIds.length; i++) {
+            await insertVideo(videoIds[i]);
+        }
     } catch (err) {
         console.error("Execute error", err);
     }
