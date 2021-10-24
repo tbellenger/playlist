@@ -138,6 +138,7 @@ async function updatePlaylist() {
         for (let i = 0; i < videoIds.length; i++) {
             await insertVideo(videoIds[i]);
         }
+        showPlayListLink();
     } catch (err) {
         console.error("Execute error", err);
     }
@@ -165,7 +166,6 @@ async function insertVideo(videoId) {
         })
         // Handle the results here (response.result has the parsed body).
         console.log("Response", response);
-        showPlayListLink();
     } catch (err) {
         console.error("Execute error", err);
     }
@@ -173,8 +173,8 @@ async function insertVideo(videoId) {
 
 // Shows the link to the newly updated playlist
 function showPlayListLink() {
-    linkEl.empty();
     var linkEl = document.querySelector("#pl-link");
+    linkEl.empty();
     var plLinkEl = document.createElement("a");
     plLinkEl.href = "https://www.youtube.com/playlist?list=" + plId;
     plLinkEl.target = "_blank";
