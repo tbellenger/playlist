@@ -136,7 +136,7 @@ async function updatePlaylist() {
         // Handle the results here (response.result has the parsed body).
         console.log("Response", response);
         for (let i = 0; i < videoIds.length; i++) {
-            await insertVideo(videoIds[i]);
+            await insertVideo(i, videoIds[i]);
         }
         showPlayListLink();
     } catch (err) {
@@ -147,7 +147,7 @@ async function updatePlaylist() {
 // Adds videos to the playlist at position 0
 // This will push existing videos to the end of the playlist
 // Updates the playlist link to YouTube
-async function insertVideo(videoId) {
+async function insertVideo(pos, videoId) {
     try {
         let response = await gapi.client.youtube.playlistItems.insert({
             "part": [
@@ -156,7 +156,7 @@ async function insertVideo(videoId) {
             "resource": {
                 "snippet": {
                     "playlistId": plId,
-                    "position": 0,
+                    "position": pos,
                     "resourceId": {
                         "kind": "youtube#video",
                         "videoId": videoId
