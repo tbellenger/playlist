@@ -1,15 +1,54 @@
 let plTitle;
 let plId;
+let videoIds = [];
 
 let btnSearch = document.querySelector("#search-btn");
 let btnAuth = document.querySelector("#auth-btn");
 let btnCreate = document.querySelector("#create-btn");
 let btnUpdate = document.querySelector("#update-btn");
+let txtSearch = document.querySelector("#search-query");
+let searchResultsEl = document.querySelector("#search-results");
 
 btnAuth.addEventListener("click", authenticate);
 btnCreate.addEventListener("click", createPlaylist);
 btnUpdate.addEventListener("click", updatePlaylist);
+btnSearch.addEventListener("click", searchVideos);
 
+async function searchVideos() {
+    let query = txtSearch.value;
+    try {
+        let response = await gapi.client.youtube.search.list({
+            "part": [
+                "snippet"
+            ],
+            "maxResults": 5,
+            "q": query,
+            "type": "video",
+            "order": "viewCount",
+            "safeSearch": "none"
+        });
+        // Handle the results here (response.result has the parsed body).
+        console.log("Response", response);
+        let videos = response.result.items;
+        videoIds = [];
+        for (let i = 0; i < videos.length; i++) {
+            videoIds.push(videos[i].id.videoId);
+            let itemEl = document.createElement("div");
+            let titleEl = document.createElement("h3");
+            titleEl.innerText = videos[i].snippet.title;
+            let thumbEl = document.createElement("img");
+            thumbEl.src = videos[i].snippet.thumbnails.default.url;
+            itemEl.appendChild(titleEl);
+            itemEl.appendChild(thumbEl);
+            searchResultsEl.appendChild(itemEl);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Called to authenticate the user to access the API 
+// that allows us to modify their youtube playlist
 async function authenticate() {
     try {
         await gapi.auth2.getAuthInstance()
@@ -21,6 +60,7 @@ async function authenticate() {
     }
 }
 
+// Loads the google client with the youtube API
 async function loadClient() {
     gapi.client.setApiKey("AIzaSyCjC_Evg4pGy3IELojH3Tm24NcuGrsOKCI");
     try {
@@ -33,6 +73,7 @@ async function loadClient() {
     }
 }
 
+// Creates a new playlist in the user's account
 async function createPlaylist() {
     try {
         let response = await gapi.client.youtube.playlists.insert({
@@ -67,6 +108,8 @@ async function createPlaylist() {
     }
 }
 
+// Makes updates to the playlist title and tags and 
+// then calls insert video to add videos to the playlist
 async function updatePlaylist() {
     try {
         plTitle = "Updated playlist " + new Date().getTime();
@@ -98,6 +141,9 @@ async function updatePlaylist() {
     }
 }
 
+// Adds videos to the playlist at position 0
+// This will push existing videos to the end of the playlist
+// Updates the playlist link to YouTube
 async function insertVideo(videoId) {
     try {
         let response = await gapi.client.youtube.playlistItems.insert({
@@ -123,10 +169,13 @@ async function insertVideo(videoId) {
     }
 }
 
+// Shows the link to the newly updated playlist
 function showPlayListLink() {
+    linkEl.empty();
     var linkEl = document.querySelector("#pl-link");
     var plLinkEl = document.createElement("a");
     plLinkEl.href = "https://www.youtube.com/playlist?list=" + plId;
+    plLinkEl.target = "_blank";
     plLinkEl.innerText = plTitle;
     linkEl.appendChild(plLinkEl);
 }
