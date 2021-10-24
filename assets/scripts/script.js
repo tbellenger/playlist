@@ -10,111 +10,117 @@ btnAuth.addEventListener("click", authenticate);
 btnCreate.addEventListener("click", createPlaylist);
 btnUpdate.addEventListener("click", updatePlaylist);
 
-function authenticate() {
-    return gapi.auth2.getAuthInstance()
-    .signIn({ scope: "https://www.googleapis.com/auth/youtube" })
-    .then(function () { 
+async function authenticate() {
+    try {
+        await gapi.auth2.getAuthInstance()
+            .signIn({ scope: "https://www.googleapis.com/auth/youtube" });
         console.log("Sign-in successful"); 
         loadClient();
-    },
-        function (err) { console.error("Error signing in", err); });
+    } catch (err) {
+        console.log("Error signing in", err);
+    }
 }
 
-function loadClient() {
+async function loadClient() {
     gapi.client.setApiKey("AIzaSyCjC_Evg4pGy3IELojH3Tm24NcuGrsOKCI");
-    return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
-        .then(function () { 
-            console.log("GAPI client loaded for API");
-            btnAuth.disabled=true;
-            btnCreate.disabled=false;
-        },
-            function (err) { console.error("Error loading GAPI client for API", err); });
+    try {
+        await gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
+        console.log("GAPI client loaded for API");
+        btnAuth.disabled=true;
+        btnCreate.disabled=false;
+    } catch (err) {
+        console.error("Error loading GAPI client for API", err);
+    }
 }
 
-
-
-function createPlaylist() {
-    return gapi.client.youtube.playlists.insert({
-        "part": [
-            "snippet,status"
-        ],
-        "resource": {
-            "snippet": {
-                "title": "Sample playlist created via API" + new Date().getTime(),
-                "description": "This is a sample playlist description.",
-                "tags": [
-                    "sample playlist",
-                    "API call"
-                ],
-                "defaultLanguage": "en"
-            },
-            "status": {
-                "privacyStatus": "private"
+async function createPlaylist() {
+    try {
+        let response = await gapi.client.youtube.playlists.insert({
+            "part": [
+                "snippet,status"
+            ],
+            "resource": {
+                "snippet": {
+                    "title": "Sample playlist created via API" + new Date().getTime(),
+                    "description": "This is a sample playlist description.",
+                    "tags": [
+                        "sample playlist",
+                        "API call"
+                    ],
+                    "defaultLanguage": "en"
+                },
+                "status": {
+                    "privacyStatus": "private"
+                }
             }
-        }
-    })
-        .then(function (response) {
-            // Handle the results here (response.result has the parsed body).
-            console.log("Response", response);
+        });
+        console.log("Response", response);
 
-            plTitle = response.result.snippet.title;
-            plId = response.result.id;
-            console.log("Playlist Title: " + plTitle);
-            console.log("Playlist ID: " + plId);
-            btnCreate.disabled=true;
-            btnUpdate.disabled=false;
-        },
-            function (err) { console.error("Execute error", err); });
+        plTitle = response.result.snippet.title;
+        plId = response.result.id;
+        console.log("Playlist Title: " + plTitle);
+        console.log("Playlist ID: " + plId);
+        btnCreate.disabled=true;
+        btnUpdate.disabled=false;
+    } catch (err) {
+        console.error("Execute error", err);
+    }
 }
 
-// Make sure the client is loaded and sign-in is complete before calling this method.
-function updatePlaylist() {
-    plTitle = "Updated playlist " + new Date().getTime();
-    return gapi.client.youtube.playlists.update({
-        "part": [
-            "snippet,status,contentDetails"
-        ],
-        "resource": {
-            "id": plId,
-            "snippet": {
-                "title": plTitle,
-                "description": "This is the updated playlist description.",
-                "tags": [
-                    "updated playlist",
-                    "API FTW"
-                ]
-            },
-            "status": {
-                "privacyStatus": "private"
+async function updatePlaylist() {
+    try {
+        plTitle = "Updated playlist " + new Date().getTime();
+        let response = await gapi.client.youtube.playlists.update({
+            "part": [
+                "snippet,status,contentDetails"
+            ],
+            "resource": {
+                "id": plId,
+                "snippet": {
+                    "title": plTitle,
+                    "description": "This is the updated playlist description.",
+                    "tags": [
+                        "updated playlist",
+                        "API FTW"
+                    ]
+                },
+                "status": {
+                    "privacyStatus": "private"
+                }
             }
-        }
-    })
-        .then(function (response) {
-            // Handle the results here (response.result has the parsed body).
-            console.log("Response", response);
-            gapi.client.youtube.playlistItems.insert({
-                "part": [
-                    "snippet"
-                ],
-                "resource": {
-                    "snippet": {
-                        "playlistId": plId,
-                        "position": 0,
-                        "resourceId": {
-                            "kind": "youtube#video",
-                            "videoId": ["M7FIvfx5J10","_5aKcpAhTOk"]
-                        }
+        });
+        // Handle the results here (response.result has the parsed body).
+        console.log("Response", response);
+        await insertVideo("M7FIvfx5J10");
+        await insertVideo("_5aKcpAhTOk");
+    } catch (err) {
+        console.error("Execute error", err);
+    }
+}
+
+async function insertVideo(videoId) {
+    try {
+        let response = await gapi.client.youtube.playlistItems.insert({
+            "part": [
+                "snippet"
+            ],
+            "resource": {
+                "snippet": {
+                    "playlistId": plId,
+                    "position": 0,
+                    "resourceId": {
+                        "kind": "youtube#video",
+                        "videoId": videoId
                     }
                 }
-            })
-                .then(function (response) {
-                    // Handle the results here (response.result has the parsed body).
-                    console.log("Response", response);
-                    showPlayListLink();
-                },
-                    function (err) { console.error("Execute error", err); });
-        },
-            function (err) { console.error("Execute error", err); })
+            }
+        })
+        // Handle the results here (response.result has the parsed body).
+        console.log("Response", response);
+        showPlayListLink();
+    } catch (err) {
+        console.error("Execute error", err);
+    }
 }
 
 function showPlayListLink() {
@@ -122,26 +128,21 @@ function showPlayListLink() {
     var plLinkEl = document.createElement("a");
     plLinkEl.href = "https://www.youtube.com/playlist?list=" + plId;
     plLinkEl.innerText = plTitle;
-    console.log(plLinkEl);
     linkEl.appendChild(plLinkEl);
-    console.log(linkEl);
 }
 
-gapi.load("client:auth2", function () {
-    //var localhost = "762278068311-tf0f00kql9cm5hdhu2scjgdfg1mqm822.apps.googleusercontent.com";
-    var github = "762278068311-stoa3fflppk9o9qfdr2cf57mro3s7b4m.apps.googleusercontent.com"
-    let gauth = gapi.auth2.init({ client_id: github });
-    gauth.then(
-        function() {
-            if (gauth.isSignedIn.get()) {
-                console.log("already signed in");
-                btnAuth.disabled=true;
-                loadClient();
-            }
-        }, 
-        function(onError) {
-            console.log(onError);
+gapi.load("client:auth2", async function () {
+    try {
+        //var localhost = "762278068311-tf0f00kql9cm5hdhu2scjgdfg1mqm822.apps.googleusercontent.com";
+        var github = "762278068311-stoa3fflppk9o9qfdr2cf57mro3s7b4m.apps.googleusercontent.com"
+        let gauth = gapi.auth2.init({ client_id: github });
+        await gauth;
+        if (gauth.isSignedIn.get()) {
+            console.log("already signed in");
+            btnAuth.disabled=true;
+            loadClient();
         }
-    );
-
+    } catch (err) {
+        console.error("Error loading GAPI client for API", err);
+    }
 });
