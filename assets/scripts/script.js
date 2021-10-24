@@ -174,13 +174,13 @@ async function insertVideo(videoId) {
 // Shows the link to the newly updated playlist
 function showPlayListLink() {
     var linkEl = document.querySelector("#pl-link");
-    linkEl.empty();
+    linkEl.replaceChildren("");
     var plLinkEl = document.createElement("a");
     plLinkEl.href = "https://www.youtube.com/playlist?list=" + plId;
     plLinkEl.target = "_blank";
     plLinkEl.innerText = plTitle;
     linkEl.appendChild(plLinkEl);
-    searchResultsEl.empty();
+    searchResultsEl.replaceChildren("");
     btnUpdate.disabled=true;
     btnCreate.disabled=false;
 }
