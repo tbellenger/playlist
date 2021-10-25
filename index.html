@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/styles/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -13,46 +15,52 @@
     <title>Playlist</title>
 </head>
 
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>
-                <a href="index.html">
-                </a>
-            </h1>
-
-
-            <div class="nav">
+<body class="grey">
+    <header>
+        <nav class="nav-wrapper grey darken-3">
+            <a class="logo" href="index.html">PL</a>
+            <div class='right hide-on-med-and-down'>
                 <ul>
-                    <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
+            </div>  
+        </nav>
+    </header>
+    <div class="container">
+        <div class="main col s12">
+            <div class="row">
+                <div class="search col s12 m5">
+                    <div class="card-panel grey lighten-2">
+                        <div class="input-field black-text">
+                            <input type="text" name="search-text" id="search-query" class="autocomplete">
+                            <label for="search-text">Festival Search</label>
+                            <button class="btn waves-effect waves-light grey darken-3" type="submit" id="search-btn">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m7" id="search-results">
+    
+                </div>
+            </div>
+            <div class="row">
+                <div class="content col s12" id="pl-link">
 
-                <div class="search">
-                    <form action="">
-                        <input type="text" placeholder="Search" id="search-query">
-                        <button type="submit" id="search-btn">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="controls col s12">
+                    <button class="btn waves-effect waves-light grey darken-3" id="auth-btn">Auth and Load</button>
+                    <button class="btn waves-effect waves-light grey darken-3" id="create-btn" disabled='true'>Create New Playlist</button>
+                    <button class="btn waves-effect waves-light grey darken-3" id="update-btn" disabled='true'>Update Playlist</button>
                 </div>
             </div>
         </div>
-        <div class="main">
-            <div id="search-results">
-
-            </div>
-            <div class="content" id="pl-link">
-
-            </div>
-            <div class="controls">
-                <button id="auth-btn">Auth and Load</button>
-                <button id="create-btn" disabled='true'>Create New Playlist</button>
-                <button id="update-btn" disabled='true'>Update Playlist</button>
-            </div>
-        </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
     <script src="./assets/scripts/script.js"></script>
 </body>
