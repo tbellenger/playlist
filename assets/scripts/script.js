@@ -34,14 +34,23 @@ async function searchVideos(event) {
         videoIds = [];
         for (let i = 0; i < videos.length; i++) {
             videoIds.push(videos[i].id.videoId);
-            let itemEl = document.createElement("div");
-            let titleEl = document.createElement("h3");
-            titleEl.innerText = videos[i].snippet.title;
-            let thumbEl = document.createElement("img");
-            thumbEl.src = videos[i].snippet.thumbnails.default.url;
-            itemEl.appendChild(titleEl);
-            itemEl.appendChild(thumbEl);
-            searchResultsEl.appendChild(itemEl);
+            let cardEl = document.createElement("div");
+            cardEl.classList.add("card small");
+            let cardContentEl = document.createElement("div");
+            cardContentEl.classList.add("card-content");
+            cardContentEl.innerText = videos[i].snippet.description;
+            let spanTitleEl = document.createElement("span");
+            spanTitleEl.classList.add("card-title");
+            spanTitleEl.innerText = videos[i].snippet.title;
+            let imageEl = document.createElement("img");
+            imageEl.src = videos[i].snippet.thumbnails.default.url;
+            let imgDivEl = document.createElement("div");
+            imgDivEl.classList.add("card-image");
+            imgDivEl.appendChild(imageEl);
+            imgDivEl.appendChild(spanTitleEl); 
+            cardEl.appendChild(imgDivEl);
+            cardEl.appendChild(cardContentEl);
+            searchResultsEl.appendChild(cardEl);
         }
     } catch (error) {
         console.log(error);
