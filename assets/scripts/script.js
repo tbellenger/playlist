@@ -35,7 +35,8 @@ async function searchVideos(event) {
         for (let i = 0; i < videos.length; i++) {
             videoIds.push(videos[i].id.videoId);
             let cardEl = document.createElement("div");
-            cardEl.classList.add("card small");
+            cardEl.classList.add("card");
+            cardEl.classList.add("small");
             let cardContentEl = document.createElement("div");
             cardContentEl.classList.add("card-content");
             cardContentEl.innerText = videos[i].snippet.description;
