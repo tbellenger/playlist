@@ -39,7 +39,6 @@ async function searchVideos(event) {
             cardEl.classList.add("col");
             cardEl.classList.add("s12");
             cardEl.classList.add("m6"); 
-            cardEl.classList.add("l4");
             cardEl.classList.add("small");
             let cardContentEl = document.createElement("div");
             cardContentEl.classList.add("card-content");
