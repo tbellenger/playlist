@@ -1,3 +1,5 @@
+let playlist = ['Tame Impala', 'Lizzo', 'The Strokes', 'Tyler, The Creator', 'Vampire Weekend', 'J Balvin', 'RÜFÜS DU SOL', 'Kehlani', 'Glass Animals', 'ZHU', 'Young Thug', 'Kaytranada', 'Khruangbin', 'Lord Huron', 'Nelly', 'Brittany Howard', 'Burna Boy', 'Melanie Martinez', '24kgoldn', 'TroyBoi', 'Angel Olsen', 'Sofi Tukker', 'Earthgang', 'Marc Rebillet', 'Sharon Van Etten', 'SG Lewis', 'A R I Z O N A', 'JPEGMAFIA', 'Drama', 'Dr. Dog', 'Shiba San', 'Boy Pablo', 'Rico Nasty', 'Andrew McMahon in the Wilderness', '070 Shake', 'Trevor Daniel', 'The Midnight', 'Moses Sumney', 'mxmtoon', 'Dijon', 'The Hu', 'Yung Bae', 'Bakar.', 'The Soul Rebels', 'Hinds', 'Caroline Polachek', 'Yves Tumor', 'Crooked Colours', 'Scarypoolparty', 'J. Phlip', 'Marc E. Bassy', 'Julia Jacklin', 'Goth Babe', 'Remi Wolf', 'Cam', 'Neil Frances', 'Rexx Life Raj', 'Cannons', 'Buscabulla', 'Resistance Revival Chorus', 'Odie', 'Claud', 'Madeline Kenney', 'Post Animal', 'Nap Eyes', 'Neal Francis'];
+
 // Called to authenticate the user to access the API 
 // that allows us to modify their youtube playlist
 async function authenticate() {
@@ -91,6 +93,33 @@ async function updatePlaylist() {
         showPlayListLink();
     } catch (err) {
         console.error("Execute error", err);
+    }
+}
+
+async function searchVideos(event) {
+    event.preventDefault();
+    let query = txtSearch.value;
+    try {
+        let response = await gapi.client.youtube.search.list({
+            "part": [
+                "snippet"
+            ],
+            "maxResults": 5,
+            "q": query,
+            "type": "video",
+            "order": "viewCount",
+            "safeSearch": "none"
+        });
+        // Handle the results here (response.result has the parsed body).
+        console.log("Response", response);
+        let videos = response.result.items;
+        videoIds = [];
+        searchResultsEl.replaceChildren();
+        for (let i = 0; i < videos.length; i++) {
+            videoIds.push(videos[i].id.videoId);
+        }
+    } catch (error) {
+        console.log(error);
     }
 }
 
