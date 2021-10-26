@@ -18,14 +18,14 @@ const getPerformersById = async function(ids) {
         data = 'id='+ids;
     }
     let url = STUBHUB_API + STUBHUB_SEARCH_PERFORMERS + data;
+    //let url = "https://api.stubhub.com/partners/search/performers/v3?id=728983";
     console.log(url);
     try {
         const response = await fetch(url, { 
             headers: { 
                 Authorization:`Bearer ${STUBHUB_ACCESS_TOKEN}`, 
                 Accept:"application/json" 
-            },
-            mode: 'cors'
+            }
         });
         const json = await response.json();
         return json;
