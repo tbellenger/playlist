@@ -32,6 +32,7 @@ async function searchVideos(event) {
         console.log("Response", response);
         let videos = response.result.items;
         videoIds = [];
+        searchResultsEl.replaceChildren();
         for (let i = 0; i < videos.length; i++) {
             videoIds.push(videos[i].id.videoId);
             let cardEl = document.createElement("div");
