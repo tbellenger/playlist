@@ -65,6 +65,7 @@ async function createPlaylist() {
 // then calls insert video to add videos to the playlist
 async function updatePlaylist() {
     try {
+        console.log("Updating playlist");
         plTitle = "Updated playlist " + new Date().getTime();
         let response = await gapi.client.youtube.playlists.update({
             "part": [
@@ -86,7 +87,7 @@ async function updatePlaylist() {
             }
         });
         // Handle the results here (response.result has the parsed body).
-        console.log("Response", response);
+        //console.log("Response", response);
         for (let i = 0; i < playlist.length; i++) {
             await searchVideos(playlist[i]);
         }
@@ -101,6 +102,7 @@ async function updatePlaylist() {
 
 async function searchVideos(artist) {
     try {
+        console.log("Searching for " + artist + " video");
         let response = await gapi.client.youtube.search.list({
             "part": [
                 "snippet"
@@ -112,10 +114,10 @@ async function searchVideos(artist) {
             "safeSearch": "none"
         });
         // Handle the results here (response.result has the parsed body).
-        console.log("Response", response);
         let videos = response.result.items;
         videoIds = [];
         for (let i = 0; i < videos.length; i++) {
+            console.log("Adding " + artist + " video ID to list");
             videoIds.push(videos[i].id.videoId);
         }
     } catch (error) {
@@ -128,6 +130,7 @@ async function searchVideos(artist) {
 // Updates the playlist link to YouTube
 async function insertVideo(pos, videoId) {
     try {
+        console.log("Inserting videoID " + videoID + " to position " + pos + "in playlist")
         let response = await gapi.client.youtube.playlistItems.insert({
             "part": [
                 "snippet"
@@ -144,7 +147,7 @@ async function insertVideo(pos, videoId) {
             }
         })
         // Handle the results here (response.result has the parsed body).
-        console.log("Response", response);
+        //console.log("Response", response);
     } catch (err) {
         console.error("Execute error", err);
     }
