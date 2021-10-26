@@ -25,7 +25,8 @@ const getPerformersById = async function(ids) {
             headers: { 
                 Authorization:`Bearer ${STUBHUB_ACCESS_TOKEN}`, 
                 Accept:"application/json" 
-            }
+            }, 
+            mode: 'cors'
         });
         const json = await response.json();
         return json;
