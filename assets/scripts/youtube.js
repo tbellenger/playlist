@@ -87,6 +87,9 @@ async function updatePlaylist() {
         });
         // Handle the results here (response.result has the parsed body).
         console.log("Response", response);
+        for (let i = 0; i < playlist.length; i++) {
+            await searchVideos(playlist[i]);
+        }
         for (let i = 0; i < videoIds.length; i++) {
             await insertVideo(i, videoIds[i]);
         }
@@ -96,16 +99,14 @@ async function updatePlaylist() {
     }
 }
 
-async function searchVideos(event) {
-    event.preventDefault();
-    let query = txtSearch.value;
+async function searchVideos(artist) {
     try {
         let response = await gapi.client.youtube.search.list({
             "part": [
                 "snippet"
             ],
-            "maxResults": 5,
-            "q": query,
+            "maxResults": 1,
+            "q": artist,
             "type": "video",
             "order": "viewCount",
             "safeSearch": "none"
@@ -114,7 +115,6 @@ async function searchVideos(event) {
         console.log("Response", response);
         let videos = response.result.items;
         videoIds = [];
-        searchResultsEl.replaceChildren();
         for (let i = 0; i < videos.length; i++) {
             videoIds.push(videos[i].id.videoId);
         }
