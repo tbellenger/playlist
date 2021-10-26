@@ -35,7 +35,7 @@ const getPerformersById = async function(ids) {
 
 // Search for events by fuzzy logic query. Filter on 
 // Music Festivals and exclude parking tickets. 
-const getPerformersById = async function(query) {
+const getEventByQuery = async function(query) {
     let data = {q: query, categoryName: "Music Festival", parking: "false"};
     let url = STUBHUB_API + STUBHUB_SEARCH_EVENTS;
     try {
