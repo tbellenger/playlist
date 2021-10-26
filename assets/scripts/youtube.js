@@ -59,6 +59,32 @@ async function createPlaylist() {
     }
 }
 
+async function searchVideos(event) {
+    event.preventDefault();
+    let query = txtSearch.value;
+    try {
+        let response = await gapi.client.youtube.search.list({
+            "part": [
+                "snippet"
+            ],
+            "maxResults": 1,
+            "q": query,
+            "type": "video",
+            "order": "viewCount",
+            "safeSearch": "none"
+        });
+        // Handle the results here (response.result has the parsed body).
+        console.log("Response", response);
+        let videos = response.result.items;
+        videoIds = [];
+        for (let i = 0; i < videos.length; i++) {
+            videoIds.push(videos[i].id.videoId);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // Makes updates to the playlist title and tags and 
 // then calls insert video to add videos to the playlist
 async function updatePlaylist() {
