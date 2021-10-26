@@ -3,7 +3,7 @@ const STUBHUB_SEARCH_EVENTS = "sellers/search/events/v3";
 const STUBHUB_SEARCH_PERFORMERS = "partners/search/performers/v3";
 const STUBHUB_ACCESS_TOKEN = "cada2ilygjcINAmIim4OeFsvXQNx";
 
-// pass a performer ID or an array of performer IDs
+// Search a performer ID or an array of performer IDs
 // to get their names returned. Array cannot be greater
 // than 200 IDs.
 const getPerformersById = async function(ids) {
@@ -18,10 +18,37 @@ const getPerformersById = async function(ids) {
         data = {id: ids};
     }
     let url = STUBHUB_API + STUBHUB_SEARCH_PERFORMERS;
-    const response = await fetch(url, { 
-        headers: { 
-            Authorization: `Bearer ${STUBHUB_ACCESS_TOKEN}`, 
-            Accept:"application/json" 
-        },
-        body: JSON.stringify(data) });
+    try {
+        const response = await fetch(url, { 
+            headers: { 
+                Authorization: `Bearer ${STUBHUB_ACCESS_TOKEN}`, 
+                Accept:"application/json" 
+            },
+            body: JSON.stringify(data) 
+        });
+        const json = await response.json();
+        return json;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Search for events by fuzzy logic query. Filter on 
+// Music Festivals and exclude parking tickets. 
+const getPerformersById = async function(query) {
+    let data = {q: query, categoryName: "Music Festival", parking: "false"};
+    let url = STUBHUB_API + STUBHUB_SEARCH_EVENTS;
+    try {
+        const response = await fetch(url, { 
+            headers: { 
+                Authorization: `Bearer ${STUBHUB_ACCESS_TOKEN}`, 
+                Accept:"application/json" 
+            },
+            body: JSON.stringify(data) 
+        });
+        const json = await response.json();
+        return json;
+    } catch (error) {
+        console.log(error);
+    }
 }
