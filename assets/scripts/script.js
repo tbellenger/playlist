@@ -12,7 +12,21 @@ let searchResultsEl = document.querySelector("#search-results");
 btnAuth.addEventListener("click", authenticate);
 btnCreate.addEventListener("click", createPlaylist);
 btnUpdate.addEventListener("click", updatePlaylist);
-btnSearch.addEventListener("click", searchVideos);
+btnSearch.addEventListener("click", searchEvents);
+
+async function searchEvents(event) {
+    event.preventDefault();
+    let query = txtSearch.value;
+    let json = await getEventByQuery(query);
+    console.log(json);
+    let performers = json.events[0].performers;
+    let arrIds = '';
+    for (let i = 0; i < performers.length; i++) {
+        arrIds += performers[i].id + ' |';
+    }
+    json = await getPerformersById(arrIds);
+    console.log(json);
+}
 
 async function searchVideos(event) {
     event.preventDefault();

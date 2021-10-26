@@ -1,6 +1,6 @@
 const STUBHUB_API = "https://api.stubhub.com/";
-const STUBHUB_SEARCH_EVENTS = "sellers/search/events/v3";
-const STUBHUB_SEARCH_PERFORMERS = "partners/search/performers/v3";
+const STUBHUB_SEARCH_EVENTS = "sellers/search/events/v3?";
+const STUBHUB_SEARCH_PERFORMERS = "partners/search/performers/v3?";
 const STUBHUB_ACCESS_TOKEN = "cada2ilygjcINAmIim4OeFsvXQNx";
 
 // Search a performer ID or an array of performer IDs
@@ -13,18 +13,19 @@ const getPerformersById = async function(ids) {
             throw new Error("Array cannot be greater than 200 IDs.");
         }
         let idsString = ids.join(" |");
-        data = {id: idsString};
+        data = 'id='+idsString;
     } else {
-        data = {id: ids};
+        data = 'id='+ids;
     }
-    let url = STUBHUB_API + STUBHUB_SEARCH_PERFORMERS;
+    let url = STUBHUB_API + STUBHUB_SEARCH_PERFORMERS + data;
+    console.log(url);
     try {
         const response = await fetch(url, { 
             headers: { 
-                Authorization: `Bearer ${STUBHUB_ACCESS_TOKEN}`, 
+                Authorization:`Bearer ${STUBHUB_ACCESS_TOKEN}`, 
                 Accept:"application/json" 
             },
-            body: JSON.stringify(data) 
+            mode: 'cors'
         });
         const json = await response.json();
         return json;
@@ -36,17 +37,16 @@ const getPerformersById = async function(ids) {
 // Search for events by fuzzy logic query. Filter on 
 // Music Festivals and exclude parking tickets. 
 const getEventByQuery = async function(query) {
-    let data = {q: query, categoryName: "Music Festival", parking: "false"};
-    let url = STUBHUB_API + STUBHUB_SEARCH_EVENTS;
+    let data = 'q=' + query + '&categoryName="Music Festival"&parking="false"';
+    let url = STUBHUB_API + STUBHUB_SEARCH_EVENTS + data;
     try {
-        const response = await fetch(url, { 
+        let response = await fetch(url, { 
             headers: { 
-                Authorization: `Bearer ${STUBHUB_ACCESS_TOKEN}`, 
+                Authorization:`Bearer ${STUBHUB_ACCESS_TOKEN}`, 
                 Accept:"application/json" 
-            },
-            body: JSON.stringify(data) 
+            }
         });
-        const json = await response.json();
+        let json = await response.json();
         return json;
     } catch (error) {
         console.log(error);
