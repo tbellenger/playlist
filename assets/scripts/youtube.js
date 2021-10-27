@@ -180,8 +180,7 @@ gapi.load("client:auth2", async function () {
 
 // Your client id from your app in the spotify dashboard:
 // https://developer.spotify.com/dashboard/applications
-const client_id = '6a0256e60f084740acaba82df07a21e2';
-const redirect_uri = 'http://127.0.0.1:5500/callback/'; // Your redirect uri
+
 
 // Restore tokens from localStorage
 let access_token = localStorage.getItem('access_token') || null;
