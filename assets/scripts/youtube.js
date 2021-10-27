@@ -35,7 +35,7 @@ async function createPlaylist() {
             ],
             "resource": {
                 "snippet": {
-                    "title": "Playlister " + new Date().getTime(),
+                    "title": "Pregame " + new Date().getTime(),
                     "description": "New playlist",
                     "tags": [
                         "sample playlist",
@@ -67,7 +67,8 @@ async function updatePlaylist() {
     try {
         console.log("Updating playlist");
         videoIds = [];
-        plTitle = "Updated playlist " + new Date().getTime();
+        plTitle = "Pregame Update " + new Date().getTime();
+        let desc = playlist.join();
         let response = await gapi.client.youtube.playlists.update({
             "part": [
                 "snippet,status,contentDetails"
@@ -76,10 +77,10 @@ async function updatePlaylist() {
                 "id": plId,
                 "snippet": {
                     "title": plTitle,
-                    "description": "Updated playlist",
+                    "description": desc,
                     "tags": [
-                        "Songkick API",
-                        "Playlister"
+                        "TicketMaster API",
+                        "Pregame"
                     ]
                 },
                 "status": {
@@ -90,9 +91,11 @@ async function updatePlaylist() {
         // Handle the results here (response.result has the parsed body).
         //console.log("Response", response);
         for (let i = 0; i < playlist.length; i++) {
+            plProgressEl.style.width = (playlist.length / (i+1)) + "%"
             await searchVideos(playlist[i]);
         }
         for (let i = 0; i < videoIds.length; i++) {
+            plProgressEl.style.width = (playlist.length / (i+1)) + "%"
             await insertVideo(i, videoIds[i]);
         }
         showPlayListLink();
@@ -115,7 +118,7 @@ async function searchVideos(artist) {
             "safeSearch": "none"
         });
         // Handle the results here (response.result has the parsed body).
-        let videos = response.result.items;
+        let videos = await response.result.items;
         for (let i = 0; i < videos.length; i++) {
             console.log("Adding " + artist + " video ID to list");
             videoIds.push(videos[i].id.videoId);
@@ -131,7 +134,7 @@ async function searchVideos(artist) {
 async function insertVideo(pos, videoId) {
     try {
         console.log("Inserting videoID " + videoId + " to position " + pos + "in playlist")
-        let response = await gapi.client.youtube.playlistItems.insert({
+        await gapi.client.youtube.playlistItems.insert({
             "part": [
                 "snippet"
             ],
@@ -169,3 +172,56 @@ gapi.load("client:auth2", async function () {
         console.error("Error loading GAPI client for API", err);
     }
 });
+
+const random = (length = 8) => {
+    // Declare all characters
+    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    // Pick characers randomly
+    let str = '';
+    for (let i = 0; i < length; i++) {
+        str += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+
+    return str;
+
+};
+
+var windowObjectReference;
+var windowFeatures = "width=600,height=700,left=150,top=200,toolbar=0,status=0,";
+
+const client_id = "client_id=6a0256e60f084740acaba82df07a21e2";
+const response_type = "&response_type=code";
+const redirect_url = "&redirect_uri=https://tbellenger.github.io/playlist/callback/";
+const scope = "&scope=playlist-modify-private";
+const show_dialog = "&show_dialog=false";
+const code_challenge_method = "&code_challenge_method=S256";
+const verifier = random(64);
+const state = random(16);
+
+async function spotifyReqAuth() {
+    try {
+        console.log('verifier ',verifier);
+        localStorage.setItem('spotState', JSON.stringify(state));
+        localStorage.setItem('spotVerifier', JSON.stringify(verifier));
+        const digest = sha256(verifier);
+        console.log('hash ', digest);
+        console.log('hashb64', atob(digest).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''));
+        const code_challenge = "&code_challenge=" + atob(digest).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+        let url = "https://accounts.spotify.com/authorize?" + 
+        client_id + 
+        response_type + 
+        redirect_url + 
+        scope + 
+        show_dialog +
+        state + 
+        code_challenge_method + 
+        code_challenge;
+        windowObjectReference = window.open(url, "Spotify_WindowName", windowFeatures);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+spotifyReqAuth();
+

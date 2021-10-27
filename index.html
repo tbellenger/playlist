@@ -15,10 +15,10 @@
     <title>Playlist</title>
 </head>
 
-<body class="grey">
+<body>
     <header>
-        <nav class="nav-wrapper grey darken-3">
-            <a class="logo" href="index.html">PL</a>
+        <nav class="nav-wrapper">
+            <a class="logo" href="index.html">PREGAME</a>
             <div class='right hide-on-med-and-down'>
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -42,9 +42,12 @@
                         </div>
                     </div>
                     <div class="controls col s12">
-                        <button class="btn waves-effect waves-light grey darken-3" id="auth-btn">Auth and Load</button>
-                        <button class="btn waves-effect waves-light grey darken-3" id="create-btn" disabled='true'>Create New Playlist</button>
-                        <button class="btn waves-effect waves-light grey darken-3" id="update-btn" disabled='true'>Update Playlist</button>
+                        <button class="col s12 btn waves-effect waves-light grey darken-3" id="auth-btn">Auth and Load</button>
+                        <button class="col s12 btn waves-effect waves-light grey darken-3" id="create-btn" disabled='true'>Create New Playlist</button>
+                        <button class="col s12 btn waves-effect waves-light grey darken-3" id="update-btn" disabled='true'>Update Playlist</button>
+                    </div>
+                    <div class="progress col s12">
+                        <div id="playlist-progress" class="determinate" style="width: 0%"></div>
                     </div>
                     <div class="content col s12" id="pl-link">
 
@@ -60,7 +63,7 @@
     <script src="./assets/scripts/prefix.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
-    <script src="./assets/scripts/stubhub.js"></script>
+    <script src="./assets/scripts/sha256.min.js"></script>
     <script src="./assets/scripts/ticketmaster.js"></script>
     <script src="./assets/scripts/youtube.js"></script>
     <script src="./assets/scripts/script.js"></script>
