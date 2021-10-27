@@ -1,4 +1,4 @@
-let playlist = ['Tame Impala', 'Lizzo', 'The Strokes', 'Tyler, The Creator', 'Vampire Weekend', 'J Balvin', 'RÜFÜS DU SOL', 'Kehlani', 'Glass Animals', 'ZHU', 'Young Thug', 'Kaytranada', 'Khruangbin', 'Lord Huron', 'Nelly', 'Brittany Howard', 'Burna Boy', 'Melanie Martinez', '24kgoldn', 'TroyBoi', 'Angel Olsen', 'Sofi Tukker', 'Earthgang', 'Marc Rebillet', 'Sharon Van Etten', 'SG Lewis', 'A R I Z O N A', 'JPEGMAFIA', 'Drama', 'Dr. Dog', 'Shiba San', 'Boy Pablo', 'Rico Nasty', 'Andrew McMahon in the Wilderness', '070 Shake', 'Trevor Daniel', 'The Midnight', 'Moses Sumney', 'mxmtoon', 'Dijon', 'The Hu', 'Yung Bae', 'Bakar.', 'The Soul Rebels', 'Hinds', 'Caroline Polachek', 'Yves Tumor', 'Crooked Colours', 'Scarypoolparty', 'J. Phlip', 'Marc E. Bassy', 'Julia Jacklin', 'Goth Babe', 'Remi Wolf', 'Cam', 'Neil Frances', 'Rexx Life Raj', 'Cannons', 'Buscabulla', 'Resistance Revival Chorus', 'Odie', 'Claud', 'Madeline Kenney', 'Post Animal', 'Nap Eyes', 'Neal Francis'];
+let playlist = ['Tame Impala', 'Lizzo', 'The Strokes', 'Tyler, The Creator', 'Vampire Weekend', 'J Balvin', 'RÜFÜS DU SOL', 'Kehlani', 'Glass Animals', 'ZHU', 'Young Thug', 'Kaytranada', 'Khruangbin', 'Lord Huron', 'Nelly', 'Brittany Howard', 'Burna Boy', 'Melanie Martinez', '24kgoldn', 'TroyBoi', 'Angel Olsen', 'Sofi Tukker'];
 
 // Called to authenticate the user to access the API 
 // that allows us to modify their youtube playlist
@@ -66,6 +66,7 @@ async function createPlaylist() {
 async function updatePlaylist() {
     try {
         console.log("Updating playlist");
+        videoIds = [];
         plTitle = "Updated playlist " + new Date().getTime();
         let response = await gapi.client.youtube.playlists.update({
             "part": [
@@ -115,7 +116,6 @@ async function searchVideos(artist) {
         });
         // Handle the results here (response.result has the parsed body).
         let videos = response.result.items;
-        videoIds = [];
         for (let i = 0; i < videos.length; i++) {
             console.log("Adding " + artist + " video ID to list");
             videoIds.push(videos[i].id.videoId);
@@ -130,7 +130,7 @@ async function searchVideos(artist) {
 // Updates the playlist link to YouTube
 async function insertVideo(pos, videoId) {
     try {
-        console.log("Inserting videoID " + videoID + " to position " + pos + "in playlist")
+        console.log("Inserting videoID " + videoId + " to position " + pos + "in playlist")
         let response = await gapi.client.youtube.playlistItems.insert({
             "part": [
                 "snippet"
