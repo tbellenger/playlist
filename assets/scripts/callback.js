@@ -27,7 +27,7 @@ async function spotifyReqAccessToken() {
             json = await response.json();
             console.log(json);
         } else {
-            contentEl.innerHTML = response.toString();
+            contentEl.innerHTML = response.status + " " + response.statusText + " " + response.error + " : " + response.error_description;
         }
     } catch(err) {
         console.log(err);
