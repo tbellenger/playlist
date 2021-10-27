@@ -25,15 +25,8 @@ function searchEventsKey(event) {
 async function searchEvents(event) {
     event.preventDefault();
     let query = txtSearch.value;
-    let json = await getEventByQuery(query);
-    console.log(json);
-    let performers = json.events[0].performers;
-    let arrIds = '';
-    for (let i = 0; i < performers.length; i++) {
-        arrIds += performers[i].id + ' |';
-    }
-    json = await getPerformersById(arrIds);
-    console.log(json);
+    // fill array with artists
+    getEvents(query);
 }
 
 // Shows the link to the newly updated playlist

@@ -6,7 +6,7 @@ async function authenticate() {
     try {
         await gapi.auth2.getAuthInstance()
             .signIn({ scope: "https://www.googleapis.com/auth/youtube" });
-        console.log("Sign-in successful"); 
+        console.log("Sign-in successful");
         loadClient();
     } catch (err) {
         console.log("Error signing in", err);
@@ -19,8 +19,8 @@ async function loadClient() {
     try {
         await gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         console.log("GAPI client loaded for API");
-        btnAuth.disabled=true;
-        btnCreate.disabled=false;
+        btnAuth.disabled = true;
+        btnCreate.disabled = false;
     } catch (err) {
         console.error("Error loading GAPI client for API", err);
     }
@@ -54,8 +54,8 @@ async function createPlaylist() {
         plId = response.result.id;
         console.log("Playlist Title: " + plTitle);
         console.log("Playlist ID: " + plId);
-        btnCreate.disabled=true;
-        btnUpdate.disabled=false;
+        btnCreate.disabled = true;
+        btnUpdate.disabled = false;
     } catch (err) {
         console.error("Execute error", err);
     }
@@ -68,7 +68,7 @@ async function updatePlaylist() {
         console.log("Updating playlist");
         videoIds = [];
         plTitle = "Pregame Update " + new Date().getTime();
-        let desc = playlist.join();
+        let desc = artistNameArray.join();
         let response = await gapi.client.youtube.playlists.update({
             "part": [
                 "snippet,status,contentDetails"
@@ -90,12 +90,12 @@ async function updatePlaylist() {
         });
         // Handle the results here (response.result has the parsed body).
         //console.log("Response", response);
-        for (let i = 0; i < playlist.length; i++) {
-            plProgressEl.style.width = (playlist.length / (i+1)) + "%"
-            await searchVideos(playlist[i]);
+        for (let i = 0; i < artistNameArray.length; i++) {
+            plProgressEl.style.width = ((i + 1)/artistNameArray.length)*100 + "%"
+            await searchVideos(artistNameArray[i]);
         }
         for (let i = 0; i < videoIds.length; i++) {
-            plProgressEl.style.width = (playlist.length / (i+1)) + "%"
+            plProgressEl.style.width = ((i + 1)/artistNameArray.length)*100 + "%"
             await insertVideo(i, videoIds[i]);
         }
         showPlayListLink();
@@ -164,7 +164,7 @@ gapi.load("client:auth2", async function () {
         await gauth;
         if (gauth.isSignedIn.get()) {
             console.log("already signed in");
-            btnAuth.disabled=true;
+            btnAuth.disabled = true;
             loadClient();
             // maybe add an option for the user to sign out
         }
@@ -173,55 +173,79 @@ gapi.load("client:auth2", async function () {
     }
 });
 
-const random = (length = 8) => {
-    // Declare all characters
-    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+/****************************************************
+ * Spotify Auth
+ * https://github.com/tobika/spotify-auth-PKCE-example
+ */
 
-    // Pick characers randomly
-    let str = '';
+// Your client id from your app in the spotify dashboard:
+// https://developer.spotify.com/dashboard/applications
+const client_id = '6a0256e60f084740acaba82df07a21e2';
+const redirect_uri = 'http://127.0.0.1:5500/callback/'; // Your redirect uri
+
+// Restore tokens from localStorage
+let access_token = localStorage.getItem('access_token') || null;
+let refresh_token = localStorage.getItem('refresh_token') || null;
+let expires_at = localStorage.getItem('expires_at') || null;
+
+function generateRandomString(length) {
+    let text = '';
+    const possible =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
     for (let i = 0; i < length; i++) {
-        str += chars.charAt(Math.floor(Math.random() * chars.length));
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
-
-    return str;
-
-};
-
-var windowObjectReference;
-var windowFeatures = "width=600,height=700,left=150,top=200,toolbar=0,status=0,";
-
-const client_id = "client_id=6a0256e60f084740acaba82df07a21e2";
-const response_type = "&response_type=code";
-const redirect_url = "&redirect_uri=https://tbellenger.github.io/playlist/callback/";
-const scope = "&scope=playlist-modify-private";
-const show_dialog = "&show_dialog=false";
-const code_challenge_method = "&code_challenge_method=S256";
-const verifier = random(64);
-const state = random(16);
-
-async function spotifyReqAuth() {
-    try {
-        console.log('verifier ',verifier);
-        localStorage.setItem('spotState', JSON.stringify(state));
-        localStorage.setItem('spotVerifier', JSON.stringify(verifier));
-        const digest = sha256(verifier);
-        console.log('hash ', digest);
-        console.log('hashb64', atob(digest).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''));
-        const code_challenge = "&code_challenge=" + atob(digest).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-        let url = "https://accounts.spotify.com/authorize?" + 
-        client_id + 
-        response_type + 
-        redirect_url + 
-        scope + 
-        show_dialog +
-        state + 
-        code_challenge_method + 
-        code_challenge;
-        windowObjectReference = window.open(url, "Spotify_WindowName", windowFeatures);
-    } catch (err) {
-        console.log(err);
-    }
+    return text;
 }
 
-spotifyReqAuth();
+async function generateCodeChallenge(codeVerifier) {
+    const digest = await crypto.subtle.digest(
+        'SHA-256',
+        new TextEncoder().encode(codeVerifier),
+    );
+
+    return btoa(String.fromCharCode(...new Uint8Array(digest)))
+        .replace(/=/g, '')
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_');
+}
+
+function generateUrlWithSearchParams(url, params) {
+    const urlObject = new URL(url);
+    urlObject.search = new URLSearchParams(params).toString();
+
+    return urlObject.toString();
+}
+
+var windowObjectReference;
+var windowFeatures = "width=600,height=700,left=300,top=200,toolbar=0,status=0,";
+function redirectToSpotifyAuthorizeEndpoint() {
+    const codeVerifier = generateRandomString(64);
+
+    generateCodeChallenge(codeVerifier).then((code_challenge) => {
+        localStorage.setItem('code_verifier', codeVerifier);
+
+        // Redirect to example:
+        // GET https://accounts.spotify.com/authorize?response_type=code&client_id=77e602fc63fa4b96acff255ed33428d3&redirect_uri=http%3A%2F%2Flocalhost&scope=user-follow-modify&state=e21392da45dbf4&code_challenge=KADwyz1X~HIdcAG20lnXitK6k51xBP4pEMEZHmCneHD1JhrcHjE1P3yU_NjhBz4TdhV6acGo16PCd10xLwMJJ4uCutQZHw&code_challenge_method=S256
+
+        let popupUrl = generateUrlWithSearchParams(
+            'https://accounts.spotify.com/authorize',
+            {
+                response_type: 'code',
+                client_id,
+                scope: 'playlist-modify-private',
+                code_challenge_method: 'S256',
+                code_challenge,
+                redirect_uri,
+            },
+        );
+        windowObjectReference = window.open(popupUrl, "Spotify_WindowName", windowFeatures);
+
+        // If the user accepts spotify will come back to your application with the code in the response query string
+        // Example: http://127.0.0.1:8080/?code=NApCCg..BkWtQ&state=profile%2Factivity
+    });
+}
+
+redirectToSpotifyAuthorizeEndpoint();
 
