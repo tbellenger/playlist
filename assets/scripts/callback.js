@@ -1,3 +1,5 @@
+let contentEl = document.querySelector("#content");
+
 window.addEventListener('load', function(event) {
     console.log(this.location.search);
     this.localStorage.setItem('spotify', JSON.stringify(this.location.search));
@@ -24,8 +26,11 @@ async function spotifyReqAccessToken() {
         if (response.ok) {
             json = await response.json();
             console.log(json);
+        } else {
+            contentEl.innerHTML = response.toString();
         }
     } catch(err) {
         console.log(err);
+        contentEl.innerHtml = err.toString();
     }
 }
