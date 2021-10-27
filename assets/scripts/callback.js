@@ -3,7 +3,6 @@ let contentEl = document.querySelector("#content");
 
 
 window.addEventListener('load', function (event) {
-    console.log(this.location.search);
     searchParams = new URLSearchParams(this.location.search);
     if (searchParams.get('error') !== null) {
         contentEl.innerHTML = "User cancelled auth";
