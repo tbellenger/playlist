@@ -197,20 +197,24 @@ const scope = "&scope=playlist-modify-private";
 const show_dialog = "&show_dialog=false";
 const code_challenge_method = "&code_challenge_method=S256";
 const verifier = random(64);
+const state = random(16);
 
 async function spotifyReqAuth() {
     try {
         console.log('verifier ',verifier);
+        localStorage.setItem('spotState', JSON.stringify(state));
         localStorage.setItem('spotVerifier', JSON.stringify(verifier));
         const digest = sha256(verifier);
         console.log('hash ', digest);
-        const code_challenge = "&code_challenge=" + digest.toUpperCase();
+        console.log('hashb64', atob(digest));
+        const code_challenge = "&code_challenge=" + atob(digest);
         let url = "https://accounts.spotify.com/authorize?" + 
         client_id + 
         response_type + 
         redirect_url + 
         scope + 
         show_dialog +
+        state + 
         code_challenge_method + 
         code_challenge;
         windowObjectReference = window.open(url, "Spotify_WindowName", windowFeatures);
