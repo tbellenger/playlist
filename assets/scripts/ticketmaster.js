@@ -27,6 +27,20 @@ function getEventList() {
             for (let i = 0; i < attractions.length; i++) {
                 eventListArray.push(attractions[i].name);
             }
+
+            // Sort the array and insert only unique items
+            let tempArray = eventListArray.sort();
+            eventListArray = [];
+
+            // The first item put in the array can't create a conflict.
+            eventListArray.push(tempArray[0]);
+
+            // Loop over the remainder of the array, adding only unique items
+            for (let i = 1; i < tempArray.length; i++) {
+                if (tempArray[i] !== eventListArray[eventListArray.length - 1]) {
+                    eventListArray.push(tempArray[i]);
+                }
+            }
         });
 }
 
