@@ -118,7 +118,7 @@ async function searchVideos(artist) {
             "safeSearch": "none"
         });
         // Handle the results here (response.result has the parsed body).
-        let videos = response.result.items;
+        let videos = await response.result.items;
         for (let i = 0; i < videos.length; i++) {
             console.log("Adding " + artist + " video ID to list");
             videoIds.push(videos[i].id.videoId);
@@ -134,7 +134,7 @@ async function searchVideos(artist) {
 async function insertVideo(pos, videoId) {
     try {
         console.log("Inserting videoID " + videoId + " to position " + pos + "in playlist")
-        let response = await gapi.client.youtube.playlistItems.insert({
+        await gapi.client.youtube.playlistItems.insert({
             "part": [
                 "snippet"
             ],
