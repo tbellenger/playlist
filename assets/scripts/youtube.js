@@ -35,7 +35,7 @@ async function createPlaylist() {
             ],
             "resource": {
                 "snippet": {
-                    "title": "Playlister " + new Date().getTime(),
+                    "title": "Pregame " + new Date().getTime(),
                     "description": "New playlist",
                     "tags": [
                         "sample playlist",
@@ -67,7 +67,8 @@ async function updatePlaylist() {
     try {
         console.log("Updating playlist");
         videoIds = [];
-        plTitle = "Updated playlist " + new Date().getTime();
+        plTitle = "Pregame Update " + new Date().getTime();
+        let desc = playlist.join();
         let response = await gapi.client.youtube.playlists.update({
             "part": [
                 "snippet,status,contentDetails"
@@ -76,10 +77,10 @@ async function updatePlaylist() {
                 "id": plId,
                 "snippet": {
                     "title": plTitle,
-                    "description": "Updated playlist",
+                    "description": desc,
                     "tags": [
-                        "Songkick API",
-                        "Playlister"
+                        "TicketMaster API",
+                        "Pregame"
                     ]
                 },
                 "status": {
@@ -90,9 +91,11 @@ async function updatePlaylist() {
         // Handle the results here (response.result has the parsed body).
         //console.log("Response", response);
         for (let i = 0; i < playlist.length; i++) {
+            plProgressEl.style.width = (playlist.length / (i+1)) + "%"
             await searchVideos(playlist[i]);
         }
         for (let i = 0; i < videoIds.length; i++) {
+            plProgressEl.style.width = (playlist.length / (i+1)) + "%"
             await insertVideo(i, videoIds[i]);
         }
         showPlayListLink();

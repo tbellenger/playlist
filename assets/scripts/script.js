@@ -8,6 +8,7 @@ let btnCreate = document.querySelector("#create-btn");
 let btnUpdate = document.querySelector("#update-btn");
 let txtSearch = document.querySelector("#search-query");
 let searchResultsEl = document.querySelector("#search-results");
+let plProgressEl = document.querySelector("#playlist-progress");
 
 btnAuth.addEventListener("click", authenticate);
 btnCreate.addEventListener("click", createPlaylist);
