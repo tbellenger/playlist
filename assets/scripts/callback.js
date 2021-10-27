@@ -10,7 +10,7 @@ async function spotifyReqAccessToken() {
     let verifier = JSON.parse(localStorage.getItem('spotVerifier'));
     let params = new URLSearchParams(JSON.parse(localStorage.getItem("spotify")));
     params.set('grant_type', 'authorization_code');
-    params.set('redirect_uri','http://tbellenger.github.io/playlist/callback/');
+    params.set('redirect_uri','https://tbellenger.github.io/playlist/callback/');
     params.set('client_id','6a0256e60f084740acaba82df07a21e2');
     params.set('code_verifier', verifier);
     console.log(params.toString());

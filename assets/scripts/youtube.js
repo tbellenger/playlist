@@ -192,7 +192,7 @@ var windowFeatures = "width=600,height=700,left=150,top=200,toolbar=0,status=0,"
 
 const client_id = "client_id=6a0256e60f084740acaba82df07a21e2";
 const response_type = "&response_type=code";
-const redirect_url = "&redirect_uri=http://tbellenger.github.io/playlist/callback/";
+const redirect_url = "&redirect_uri=https://tbellenger.github.io/playlist/callback/";
 const scope = "&scope=playlist-modify-private";
 const show_dialog = "&show_dialog=false";
 const code_challenge_method = "&code_challenge_method=S256";
