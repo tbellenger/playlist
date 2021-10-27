@@ -1,6 +1,5 @@
 var artistNameArray = []; // Array of artists from TicketMaster
 var eventListArray = []; // Array of events from TicketMaster
-var artistNameArray = [];   // Array of artists from TicketMaster
 
 // Spotify Auth Details
 const client_id = '6a0256e60f084740acaba82df07a21e2';
