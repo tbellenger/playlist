@@ -1,45 +1,84 @@
 let contentEl = document.querySelector("#content");
 
-window.addEventListener('load', function(event) {
-    console.log(this.location.search);
+
+
+window.addEventListener('load', function (event) {
     searchParams = new URLSearchParams(this.location.search);
-    if (searchParams.get('error')!==null) {
+    if (searchParams.get('error') !== null) {
         contentEl.innerHTML = "User cancelled auth";
     } else {
         this.localStorage.setItem('spotCode', JSON.stringify(searchParams.get('code')));
-        spotifyReqAccessToken();
+        exchangeToken(searchParams.get('code'));
     }
 });
 
-async function spotifyReqAccessToken() {
-    let verifier = JSON.parse(localStorage.getItem('spotVerifier'));
-    let params = new URLSearchParams();
-    params.set('code',JSON.parse(localStorage.getItem("spotCode")));
-    params.set('grant_type', 'authorization_code');
-    params.set('redirect_uri','https://tbellenger.github.io/playlist/callback/');
-    params.set('client_id','6a0256e60f084740acaba82df07a21e2');
-    params.set('code_verifier', verifier);
-    console.log(params.toString());
+function exchangeToken(code) {
+    const code_verifier = localStorage.getItem('code_verifier');
 
-    let b64 = btoa('6a0256e60f084740acaba82df07a21e2:762717d622df4bdd9b6015cc6cbd03ce');
-    try {
-        let response = await fetch('https://accounts.spotify.com/api/token', {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Basic ' + b64,
-                'Content-Type': 'application/x-www-form-urlencoded'                    
-            },
-            body: params.toString()
-        });
-        if (response.ok) {
-            json = await response.json();
-            console.log(json);
-        } else {
-            json = await response.json();
-            contentEl.innerHTML = response.status + " " + response.statusText + " " + json.error + " : " + json.error_description;
-        }
-    } catch(err) {
-        console.log(err);
-        contentEl.innerHtml = err.toString();
+    fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+        body: new URLSearchParams({
+            client_id,
+            grant_type: 'authorization_code',
+            code,
+            redirect_uri,
+            code_verifier,
+        }),
+    })
+        .then(addThrowErrorToFetch)
+        .then((data) => {
+            processTokenResponse(data);
+
+            // clear search query params in the url
+            window.history.replaceState({}, document.title, '/');
+            window.close();
+        })
+        .catch(handleError);
+}
+
+function handleError(error) {
+    console.error(error);
+    contentEl.innerHTML = errorTemplate({
+        status: error.response.status,
+        message: error.error.error_description,
+    });
+}
+
+function errorTemplate(data) {
+    return `<h2>Error info</h2>
+      <table>
+        <tr>
+            <td>Status</td>
+            <td>${data.status}</td>
+        </tr>
+        <tr>
+            <td>Message</td>
+            <td>${data.message}</td>
+        </tr>
+      </table>`;
+}
+
+async function addThrowErrorToFetch(response) {
+    if (response.ok) {
+        return response.json();
+    } else {
+        throw { response, error: await response.json() };
     }
+}
+
+function processTokenResponse(data) {
+    console.log(data);
+
+    access_token = data.access_token;
+    refresh_token = data.refresh_token;
+
+    const t = new Date();
+    expires_at = t.setSeconds(t.getSeconds() + data.expires_in);
+
+    localStorage.setItem('access_token', access_token);
+    localStorage.setItem('refresh_token', refresh_token);
+    localStorage.setItem('expires_at', expires_at);
 }
