@@ -66,6 +66,7 @@ async function createPlaylist() {
 async function updatePlaylist() {
     try {
         console.log("Updating playlist");
+        videoIds = [];
         plTitle = "Updated playlist " + new Date().getTime();
         let response = await gapi.client.youtube.playlists.update({
             "part": [
@@ -115,7 +116,6 @@ async function searchVideos(artist) {
         });
         // Handle the results here (response.result has the parsed body).
         let videos = response.result.items;
-        videoIds = [];
         for (let i = 0; i < videos.length; i++) {
             console.log("Adding " + artist + " video ID to list");
             videoIds.push(videos[i].id.videoId);
