@@ -1,1 +1,1 @@
-var artistArray = [];   // Array of artists from TicketMaster
+var artistNameArray = [];   // Array of artists from TicketMaster
