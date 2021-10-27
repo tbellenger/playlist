@@ -130,7 +130,7 @@ async function searchVideos(artist) {
 // Updates the playlist link to YouTube
 async function insertVideo(pos, videoId) {
     try {
-        console.log("Inserting videoID " + videoID + " to position " + pos + "in playlist")
+        console.log("Inserting videoID " + videoId + " to position " + pos + "in playlist")
         let response = await gapi.client.youtube.playlistItems.insert({
             "part": [
                 "snippet"
