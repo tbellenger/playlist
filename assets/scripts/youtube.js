@@ -206,8 +206,8 @@ async function spotifyReqAuth() {
         localStorage.setItem('spotVerifier', JSON.stringify(verifier));
         const digest = sha256(verifier);
         console.log('hash ', digest);
-        console.log('hashb64', atob(digest));
-        const code_challenge = "&code_challenge=" + atob(digest);
+        console.log('hashb64', atob(digest).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''));
+        const code_challenge = "&code_challenge=" + atob(digest).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
         let url = "https://accounts.spotify.com/authorize?" + 
         client_id + 
         response_type + 
