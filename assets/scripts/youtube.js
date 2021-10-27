@@ -172,3 +172,52 @@ gapi.load("client:auth2", async function () {
         console.error("Error loading GAPI client for API", err);
     }
 });
+
+const random = (length = 8) => {
+    // Declare all characters
+    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    // Pick characers randomly
+    let str = '';
+    for (let i = 0; i < length; i++) {
+        str += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+
+    return str;
+
+};
+
+var windowObjectReference;
+var windowFeatures = "width=600,height=700,left=150,top=200,toolbar=0,status=0,";
+
+const client_id = "client_id=6a0256e60f084740acaba82df07a21e2";
+const response_type = "&response_type=code";
+const redirect_url = "&redirect_uri=http://127.0.0.1:5500/callback/";
+const scope = "&scope=playlist-modify-private";
+const show_dialog = "&show_dialog=false";
+const code_challenge_method = "&code_challenge_method=S256";
+const verifier = random(64);
+
+async function spotifyReqAuth() {
+    try {
+        console.log('verifier ',verifier);
+        localStorage.setItem('spotVerifier', JSON.stringify(verifier));
+        const digest = sha256(verifier);
+        console.log('hash ', digest);
+        const code_challenge = "&code_challenge=" + digest.toUpperCase();
+        let url = "https://accounts.spotify.com/authorize?" + 
+        client_id + 
+        response_type + 
+        redirect_url + 
+        scope + 
+        show_dialog +
+        code_challenge_method + 
+        code_challenge;
+        windowObjectReference = window.open(url, "Spotify_WindowName", windowFeatures);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+spotifyReqAuth();
+
