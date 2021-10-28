@@ -1,4 +1,5 @@
 var artistNameArray = []; // Array of artists from TicketMaster
+var artistPictureArray = []; //Array of pictures from TicketMaster
 var eventListArray = []; // Array of events from TicketMaster
 
 // Spotify Auth Details
