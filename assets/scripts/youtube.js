@@ -248,3 +248,87 @@ function redirectToSpotifyAuthorizeEndpoint() {
 
 redirectToSpotifyAuthorizeEndpoint();
 
+async function spotifySearchItem(artistName) {
+    let url = 'https://api.spotify.com/v1/search?type=artist&q=';
+    let auth = 'Bearer ' + localStorage.getItem('access_token');
+    try {
+        let response = await fetch(url + artistName,{
+            headers:{
+                'Authorization' : auth,
+                'Content-Type' : 'application/json'
+            }
+        });
+        if (response.ok) {
+            let json = await response.json();
+            console.log(json);
+            console.log(json.artists.items[0].href);
+            spotifySearchArtistTopTracks(json.artists.items[0].href);
+        } else {
+            handleError(response);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function spotifySearchArtist(url) {
+    let auth = 'Bearer ' + localStorage.getItem('access_token');
+    try {
+        let response = await fetch(url,{
+            headers:{
+                'Authorization' : auth,
+                'Content-Type' : 'application/json'
+            }
+        });
+        if (response.ok) {
+            let json = await response.json();
+            console.log(json);
+        } else {
+            handleError(response);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function spotifySearchArtistTopTracks(url) {
+    let auth = 'Bearer ' + localStorage.getItem('access_token');
+    try {
+        let response = await fetch(url + '/top-tracks?market=US',{
+            headers:{
+                'Authorization' : auth,
+                'Content-Type' : 'application/json'
+            }
+        });
+        if (response.ok) {
+            let json = await response.json();
+            console.log(json);
+        } else {
+            handleError(response);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+function handleError(error) {
+    console.error(error);
+    searchResultsEl.innerHTML = errorTemplate({
+        status: error.response.status,
+        message: error.error.error_description,
+    });
+}
+
+function errorTemplate(data) {
+    return `<h2>Error info</h2>
+      <table>
+        <tr>
+            <td>Status</td>
+            <td>${data.status}</td>
+        </tr>
+        <tr>
+            <td>Message</td>
+            <td>${data.message}</td>
+        </tr>
+      </table>`;
+}

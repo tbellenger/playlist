@@ -34,6 +34,7 @@ function exchangeToken(code) {
 
             // clear search query params in the url
             window.history.replaceState({}, document.title, '/');
+            opener.document.querySelector("#spotify-login").innerHTML = "spotify logged in";
             window.close();
         })
         .catch(handleError);
