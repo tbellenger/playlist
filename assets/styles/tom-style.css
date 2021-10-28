@@ -1,0 +1,11 @@
+body { 
+    height: 100vh;
+    background-image: linear-gradient(rgb(155, 33, 236), 80%, rgb(11, 255, 133)) !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.event-panel {
+    padding: 0 10px;
+    margin: 0 10px;
+}
