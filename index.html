@@ -8,18 +8,19 @@
     <link rel="stylesheet" href="./assets/styles/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.17/tailwind.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
-    <title>Playlist</title>
+    <title>Pregame</title>
 </head>
 
 <body>
     <header>
         <nav class="nav-wrapper">
             <a class="logo" href="index.html">PREGAME</a>
-            <div class='right hide-on-med-and-down'>
+            <div class='right'>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
@@ -28,41 +29,76 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <div class="main col s12">
-            <div class="row">
-                <div class="search col s12 m4">
-                    <div class="card-panel grey lighten-2">
-                        <div class="input-field black-text">
-                            <input type="text" name="search-text" id="search-query" class="autocomplete">
-                            <label for="search-text">Festival Search</label>
-                            <button class="btn waves-effect waves-light grey darken-3" type="submit" id="search-btn">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="controls col s12">
-                        <button class="col s12 btn waves-effect waves-light grey darken-3" id="auth-btn">Auth and
-                            Load</button>
-                        <button class="col s12 btn waves-effect waves-light grey darken-3" id="create-btn"
-                            disabled='true'>Create New Playlist</button>
-                        <button class="col s12 btn waves-effect waves-light grey darken-3" id="update-btn"
-                            disabled='true'>Update Playlist</button>
-                    </div>
-                    <div class="progress col s12">
-                        <div id="playlist-progress" class="determinate" style="width: 0%"></div>
-                    </div>
-                    <div class="content col s12" id="pl-link">
-
-                    </div>
-                </div>
-                <div class="col s12 m8" id="search-results">
-
-                </div>
-                <div class="col s12 m8" id="spotify-login"></div>
+      <main class="container flex flex-1 justify-evenly items-center">
+        <div id="left-col" class="col s5 15" class="search m4"><!--Left column start--> 
+          <div id="innerbox1" class="card-panel grey lighten-2"><!--Search box start-->
+            <div class="black-text">
+              <label for="search-text">Festival Search</label>
+              <input type="text" name="search-text" id="search-query" class="autocomplete">
+                
+              <div>
+                <a class='dropdown-trigger btn grey' href='#' data-target='dropdown-event'>Filter by Event Type</a>
+                <ul id='dropdown-event' class='dropdown-content'>
+                  <li><a href="#!">Events By Area</a></li>
+                  <li><a href="#!" id="event">Events By Artist</a></li>
+                </ul>
+                  
+                <button class="btn waves-effect waves-light grey darken-3" type="submit" id="search-btn">
+                    <i class="fa fa-search"></i>
+                </button>
+              </div>
             </div>
-        </div>
-    </div>
+          </div><!--Search box end-->
+
+          <div class="btn-box controls flex flex-wrap flex-1"><!--button-box-->
+                <!-- <button class="btn waves-effect waves-light grey darken-3" id="auth-btn">Auth and
+                  Load</button> -->
+              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="spotify-login"
+                  disabled='true'>Connect To Spotify</button>
+
+              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="status-btn"
+                  disabled='true'>Connection Status</button>
+                  
+              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="auth-btn"
+                  >Connect to Youtube/Auth</button>
+                  
+              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="status2-btn"
+                  disabled='true'>Connection Status</button>
+          </div>
+        </div><!--Left column end-->
+
+        <div id="right-col" class="col s7 17"><!--Right column start-->
+
+          <div class="row card-panel grey lighten-2" id="search-results"><!--Search Result-->
+            <span class="card-title">Search Results</span>
+            <div class="card-content s12 m4"><!--Event Detail-->
+              <div class="card col h-24 m-1">Event Details</div>
+              <div class="card col h-24 m-1">Event Details</div>
+              <div class="card col h-24 m-1">Event Details</div>
+            </div>
+          </div>
+
+          <div  class="row card-panel grey lighten-2"><!--Artists-->
+            <div class="card col h-24 m-1">Artist Details</div>
+            <div class="card col h-24 m-1">Artist Details</div>
+            <div class="card col h-24 m-1">Artist Details</div>
+          </div>
+          <div>
+            <button class="btn btn-wrapper waves-effect waves-light grey darken-3 w-full" id="create-btn"
+            disabled='true'>Create Playlist</button>
+          </div><!--create playlist button-->
+
+          <div class="progress col s12">
+            <div id="playlist-progress" class="determinate" style="width: 0%"></div>
+            <div class="content col s12" id="pl-link"></div>
+          </div>
+        
+
+        </div><!--Right column end-->
+
+    </main>
+    
+              
 
     <script src="./assets/scripts/prefix.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -70,6 +106,7 @@
     <script src="https://apis.google.com/js/api.js"></script>
     <script src="./assets/scripts/ticketmaster.js"></script>
     <script src="./assets/scripts/youtube.js"></script>
+    <script src="./assets/scripts/matcss.js"></script>
     <script src="./assets/scripts/script.js"></script>
 </body>
 
