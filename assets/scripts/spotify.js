@@ -6,7 +6,7 @@
 // Your client id from your app in the spotify dashboard:
 // https://developer.spotify.com/dashboard/applications
 
-let spotifyPlaylist = ['Tame Impala', 'Lizzo', 'The Strokes', 'Tyler, The Creator', 'Vampire Weekend', 'J Balvin', 'RÜFÜS DU SOL', 'Kehlani', 'Glass Animals', 'ZHU', 'Young Thug', 'Kaytranada', 'Khruangbin', 'Lord Huron', 'Nelly', 'Brittany Howard', 'Burna Boy', 'Melanie Martinez', '24kgoldn', 'TroyBoi', 'Angel Olsen', 'Sofi Tukker'];
+let spotifyTestPlaylist = ['Tame Impala', 'Lizzo', 'The Strokes', 'Tyler, The Creator', 'Vampire Weekend', 'J Balvin', 'RÜFÜS DU SOL', 'Kehlani', 'Glass Animals', 'ZHU', 'Young Thug', 'Kaytranada', 'Khruangbin', 'Lord Huron', 'Nelly', 'Brittany Howard', 'Burna Boy', 'Melanie Martinez', '24kgoldn', 'TroyBoi', 'Angel Olsen', 'Sofi Tukker'];
 
 // Restore tokens from localStorage
 let access_token = localStorage.getItem('access_token') || null;
@@ -68,7 +68,11 @@ function redirectToSpotifyAuthorizeEndpoint() {
             },
         );
         windowObjectReference = window.open(popupUrl, "Spotify_WindowName", windowFeatures);
-
+        try {
+            windowObjectReference.focus();
+        } catch(e) {
+            console.log('Popup may have been blocked');
+        }
         // If the user accepts spotify will come back to your application with the code in the response query string
         // Example: http://127.0.0.1:8080/?code=NApCCg..BkWtQ&state=profile%2Factivity
     });
@@ -98,10 +102,12 @@ async function spotifySearchItem(artistName) {
         if (response.ok) {
             let json = await response.json();
             console.log(json);
-            console.log(json.artists.items[0].href);
-            await spotifySearchArtistTopTracks(json.artists.items[0].href);
+            if (json.artists.items.length != 0) {
+                console.log(json.artists.items[0].href);
+                await spotifySearchArtistTopTracks(json.artists.items[0].href);
+            }
         } else {
-            handleError(response);
+            handleError(await response.json());
         }
     } catch (err) {
         console.log(err);
@@ -121,7 +127,7 @@ async function spotifySearchArtist(url) {
             let json = await response.json();
             console.log(json);
         } else {
-            handleError(response);
+            handleError(await response.json());
         }
     } catch (err) {
         console.log(err);
@@ -147,22 +153,35 @@ async function spotifySearchArtistTopTracks(url) {
                 trackHref:'',
                 trackUri:''
             }
-            data.artistName = json.tracks[0].artists[0].name;
-            data.artistHref = json.tracks[0].artists[0].href;
-            data.track = json.tracks[0].name;
-            data.trackHref = json.tracks[0].href;
-            data.trackUri = json.tracks[0].uri;
-            console.log(data);
-            list.push(data);
+            // find track with artist as first listed artist
+            let i = 0;
+            for (let i = 0; i < json.tracks.length; i++) {
+                if (json.tracks[i].artists[0].href == url) {
+                    // match first listed artist so break out
+                    data.artistName = json.tracks[i].artists[0].name;
+                    data.artistHref = json.tracks[i].artists[0].href;
+                    data.track = json.tracks[i].name;
+                    data.trackHref = json.tracks[i].href;
+                    data.trackUri = json.tracks[i].uri;
+                    console.log(data);
+                    list.push(data);
+                    break;
+                }
+            }
         } else {
-            handleError(response);
+            handleError(await response.json());
         }
     } catch (err) {
         console.log(err);
     }
 }
 
-async function spotifySearchEachArtist(artistArray) {
+async function spotifyCreatePlaylistFromArtists() {
+    let artistArray = artistNameArray;
+    if (artistArray.length === 0) {
+        console.log('artist array was empty - using test data');
+        artistArray = spotifyTestPlaylist;
+    }
     for (let i = 0; i < artistArray.length; i++) {
         await spotifySearchItem(artistArray[i]);
     }
@@ -197,7 +216,7 @@ async function spotifyGetCurrentUser() {
             console.log(json);
             
         } else {
-            handleError(response);
+            handleError(await response.json());
         }
     } catch (err) {
         console.log(err);
@@ -226,7 +245,7 @@ async function spotifyCreatePlaylist() {
             listUrl = json.href;
             console.log(json);
         } else {
-            handleError(response);
+            handleError(await response.json());
         }
     } catch (err) {
         console.log(err);

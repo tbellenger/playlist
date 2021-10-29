@@ -57,6 +57,7 @@ function getArtistNameList(name) {
         )
         .then(function (response) {
             if (response.ok) {
+                console.log('search on ' + name + ' successful');
                 return response.json();
             }
             return null;

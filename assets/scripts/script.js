@@ -13,8 +13,8 @@ let plProgressEl = document.querySelector("#playlist-progress");
 
 btnConnectSpotify.addEventListener("click", redirectToSpotifyAuthorizeEndpoint);
 btnAuth.addEventListener("click", authenticate);
-btnCreate.addEventListener("click", createPlaylist);
-btnUpdate.addEventListener("click", updatePlaylist);
+btnCreate.addEventListener("click", spotifyCreatePlaylistFromArtists);
+//btnUpdate.addEventListener("click", updatePlaylist);
 btnSearch.addEventListener("click", searchEvents);
 btnSearch.addEventListener("keypress", searchEventsKey);
 
@@ -24,11 +24,12 @@ function searchEventsKey(event) {
     }
 }
 
-async function searchEvents(event) {
+function searchEvents(event) {
+    console.log('searching ' + txtSearch.value);
     event.preventDefault();
     let query = txtSearch.value;
     // fill array with artists
-    getEvents(query);
+    getArtistNameList(query);
 }
 
 // Shows the link to the newly updated playlist
