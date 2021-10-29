@@ -6,12 +6,14 @@
 // Your client id from your app in the spotify dashboard:
 // https://developer.spotify.com/dashboard/applications
 
+let spotifyPlaylist = ['Tame Impala', 'Lizzo', 'The Strokes', 'Tyler, The Creator', 'Vampire Weekend', 'J Balvin', 'RÜFÜS DU SOL', 'Kehlani', 'Glass Animals', 'ZHU', 'Young Thug', 'Kaytranada', 'Khruangbin', 'Lord Huron', 'Nelly', 'Brittany Howard', 'Burna Boy', 'Melanie Martinez', '24kgoldn', 'TroyBoi', 'Angel Olsen', 'Sofi Tukker'];
 
 // Restore tokens from localStorage
 let access_token = localStorage.getItem('access_token') || null;
 let refresh_token = localStorage.getItem('refresh_token') || null;
 let expires_at = localStorage.getItem('expires_at') || null;
 
+// Auth functions
 function generateRandomString(length) {
     let text = '';
     const possible =
@@ -42,6 +44,7 @@ function generateUrlWithSearchParams(url, params) {
     return urlObject.toString();
 }
 
+// Auth popup
 var windowObjectReference;
 var windowFeatures = "width=600,height=700,left=300,top=200,toolbar=0,status=0,";
 function redirectToSpotifyAuthorizeEndpoint() {
@@ -71,6 +74,17 @@ function redirectToSpotifyAuthorizeEndpoint() {
     });
 }
 
+
+/*
+* SPOTIFY API CALLS - ONLY USE ONCE AUTH COMPLETE
+*/
+
+let list = [];
+let listUrl = '';
+let userId = '';
+
+
+// Search for artist and retrieve id - then use url returned to search top tracks
 async function spotifySearchItem(artistName) {
     let url = 'https://api.spotify.com/v1/search?type=artist&q=';
     let auth = 'Bearer ' + localStorage.getItem('access_token');
@@ -85,7 +99,7 @@ async function spotifySearchItem(artistName) {
             let json = await response.json();
             console.log(json);
             console.log(json.artists.items[0].href);
-            spotifySearchArtistTopTracks(json.artists.items[0].href);
+            await spotifySearchArtistTopTracks(json.artists.items[0].href);
         } else {
             handleError(response);
         }
@@ -126,8 +140,121 @@ async function spotifySearchArtistTopTracks(url) {
         if (response.ok) {
             let json = await response.json();
             console.log(json);
+            let data = {
+                artistName:'',
+                artistHref:'',
+                track:'',
+                trackHref:'',
+                trackUri:''
+            }
+            data.artistName = json.tracks[0].artists[0].name;
+            data.artistHref = json.tracks[0].artists[0].href;
+            data.track = json.tracks[0].name;
+            data.trackHref = json.tracks[0].href;
+            data.trackUri = json.tracks[0].uri;
+            console.log(data);
+            list.push(data);
         } else {
             handleError(response);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function spotifySearchEachArtist(artistArray) {
+    for (let i = 0; i < artistArray.length; i++) {
+        await spotifySearchItem(artistArray[i]);
+    }
+    // list should now contain an array of artist objects
+
+    // get current user
+    await spotifyGetCurrentUser();
+    await spotifyCreatePlaylist();
+
+    // create array of uris
+    let uriArray = [];
+    for (let i = 0; i < list.length; i++) {
+        uriArray.push(list[i].trackUri);
+    }
+    await spotifyAddItemsPlaylist(uriArray);
+
+}
+
+async function spotifyGetCurrentUser() {
+    let auth = 'Bearer ' + localStorage.getItem('access_token');
+
+    try {
+        let response = await fetch('https://api.spotify.com/v1/me',{
+            headers:{
+                'Authorization' : auth,
+                'Content-Type' : 'application/json'
+            }
+        });
+        if (response.ok) {
+            let json = await response.json();
+            userId = json.id;
+            console.log(json);
+            
+        } else {
+            handleError(response);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function spotifyCreatePlaylist() {
+    let auth = 'Bearer ' + localStorage.getItem('access_token');
+    const data = {
+        name: 'Pregame' + new Date().getTime(),
+        description: 'Pregame Festival Playlist',
+        public: false
+    }
+
+    try {
+        let response = await fetch('https://api.spotify.com/v1/users/'+userId+'/playlists',{
+            headers:{
+                'Authorization' : auth,
+                'Content-Type' : 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
+        if (response.ok) {
+            let json = await response.json();
+            listUrl = json.href;
+            console.log(json);
+        } else {
+            handleError(response);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function spotifyAddItemsPlaylist(uriArray) {
+    let auth = 'Bearer ' + localStorage.getItem('access_token');
+    const data = {
+        uris : uriArray,
+        position: 0
+    }
+
+    try {
+        let response = await fetch(listUrl + '/tracks',{
+            headers:{
+                'Authorization' : auth,
+                'Content-Type' : 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
+        if (response.ok) {
+            let json = await response.json();
+            listUrl = json.href;
+            console.log(json);
+        } else {
+            handleError(await response.json());
         }
     } catch (err) {
         console.log(err);
@@ -137,8 +264,8 @@ async function spotifySearchArtistTopTracks(url) {
 function handleError(error) {
     console.error(error);
     searchResultsEl.innerHTML = errorTemplate({
-        status: error.response.status,
-        message: error.error.error_description,
+        status: error.error.status,
+        message: error.error.message,
     });
 }
 
