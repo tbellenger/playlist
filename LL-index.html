@@ -23,59 +23,44 @@
     <nav class="nav-wrapper">
       <a class="logo" href="index.html">PREGAME</a>
       <div class='right'>
-        <ul>
+        <!-- <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
-        </ul>
+        </ul> -->
       </div>
     </nav>
   </header>
   <main class="container  justify-evenly items-center">
-
     <div class="row">
-      <div class="col-1 s3"></div>
       <div id="left-col" class="col s4 15" class="search m4">
-
         <div id="innerbox1" class="card-panel grey lighten-2">
-
           <div class="black-text">
             <label for="search-text">Festival Search</label>
             <input type="text" name="search-text" id="search-query" class="autocomplete">
-
             <button class="btn waves-effect waves-light grey darken-3" type="submit" id="search-btn">
               <i class="fa fa-search"></i>
             </button>
           </div>
         </div>
       </div>
-
       <div class="btn-box controls flex flex-wrap flex-1 m-10">
-        <!--button-box-->
-        <!-- <button class="btn waves-effect waves-light grey darken-3" id="auth-btn">Auth and
-                  Load</button> -->
-        <div class="row col-1 s3">
+        <div class="row col s3">
           <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-3" id="status-btn"
             disabled='true'>Connect To Spotify</button>
-
           <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-3" id="status2-btn"
             disabled='true'>Connection Status</button>
         </div>
       </div>
     </div>
-    </div>
-    <div class="col s3"></div>
-    </div>
-    <!-- event and artists -->
-    <div class="row">
-      <div id="right-col" class="col s12 17">
 
+    <!-- Search Results -->
+    <!-- <div class="row"> -->
+      <div id="right-col" class="row col s8 17">
         <div class="row card-panel grey lighten-2" id="search-results">
-
           <span class="card-title">Search Results</span>
-          <div class="card-content row-2 s12 m1">
-            <div class="col s3">
-
+          <div class="card-content s12 m1">
+            <div class="col s8">
               <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                   <img class="activator" src="./assets/image/sam-moqadam-0wFVLpANoYc-unsplash.jpg">
@@ -83,70 +68,17 @@
                 <div class="card-content">
                   <span class="card-title activator grey-text text-darken-4">Event Details<i
                       class="material-icons right">more_vert</i></span>
-                  <p><a href="#">This is a link</a></p>
+                  <p><a href="#">Festival Lineup Listing</a></p>
                 </div>
                 <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">Event Details<i
+                  <span class="card-title grey-text text-darken-4">Festival Lineup Listing<i
                       class="material-icons right">close</i></span>
-                  <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                  <ul>
+                    <li class="artist"></li>
+                  </ul>
                 </div>
               </div>
-            </div>
 
-            <!--Artists-->
-            <div class="col s3">
-              <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src="./assets/image/sam-moqadam-7l8b8bBVQbM-unsplash.jpg">
-                </div>
-                <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">Artist<i
-                      class="material-icons right">more_vert</i></span>
-                  <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">Artist<i
-                      class="material-icons right">close</i></span>
-                  <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col s3">
-              <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src="./assets/image/sam-moqadam-7l8b8bBVQbM-unsplash.jpg">
-                </div>
-                <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">Artist<i
-                      class="material-icons right">more_vert</i></span>
-                  <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">Artist<i
-                      class="material-icons right">close</i></span>
-                  <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col s3">
-              <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src="./assets/image/sam-moqadam-7l8b8bBVQbM-unsplash.jpg">
-                </div>
-                <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">Artist<i
-                      class="material-icons right">more_vert</i></span>
-                  <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">Artist<i
-                      class="material-icons right">close</i></span>
-                  <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
             <button class="btn btn-wrapper waves-effect waves-light grey darken-3 w-full" id="create-btn"
               disabled='true'>Create Playlist</button>
           </div>
