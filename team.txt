@@ -1,5 +1,6 @@
-youtube.js: Tom
-script.js: Tom
+youtube.js: 
+script.js: 
 ticketmaster.js: Joe, David
-prefix.js: Tom
+prefix.js: 
 index.html:Tom
+spotify.js: Tom
