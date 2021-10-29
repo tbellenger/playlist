@@ -1,11 +1,12 @@
 nav {
-    background-color: #252422;
+
+    background-color: #EB5E28;
     width: 100%;
-    height: 90px;
+    height: 100px;
     line-height: 100px;
 }
 nav a {
-    color: #EB5E28;
+    color: #CCC5B9;
     padding: 20px;
     font-size: 2rem;
 }
@@ -13,7 +14,7 @@ nav ul a {
     -webkit-transition: background-color .3s;
     transition: background-color .3s;
     font-size: 1.5rem;
-    color: #EB5E28;
+    color: #CCC5B9;
     display: block;
     padding: 0 15px;
     cursor: pointer;
@@ -24,6 +25,5 @@ body {
     font-family: 'Poiret One', cursive;;
     margin: 0;
     border: 0;
-    background-image: url(../image/esther-tuttle-V1_7RfnZ-w4-unsplash.jpg);
-    background-size: cover;
+    background-image: url(./);
 }
