@@ -21,7 +21,7 @@ nav ul a {
 body {
     font-family: inherit;
     line-height: inherit;
-    font-family: 'Poiret One', cursive;;
+    font-family: 'Poiret One', cursive;
     margin: 0;
     border: 0;
     background-image: url(../image/esther-tuttle-V1_7RfnZ-w4-unsplash.jpg);
@@ -106,4 +106,12 @@ label {
     display: flex;
     flew-wrap: wrap;
     justify-content: center;
+  }
+
+  footer {
+      font-size: 18px;
+      font-family: 'Poiret One', cursive;
+      text-align: center;
+      color:#FFFCF2;
+      padding:15px;
   }
