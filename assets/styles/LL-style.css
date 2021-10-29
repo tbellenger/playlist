@@ -101,3 +101,10 @@ label {
     color:#FFFCF2;
     font-size: 20px;
 }
+
+.left-col {
+    align-items: center;
+    display: flex;
+    flew-wrap: wrap;
+    justify-content: center;
+  }
