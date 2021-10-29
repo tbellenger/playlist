@@ -67,46 +67,114 @@
     </div>
     <!--Left column end-->
 
-    <div id="right-col" class="col s12 m8">
+    <div id="right-col" class="section main col s12 m6 L8">
       <!--Right column start-->
 
-      <div class="card-panel grey lighten-2 row" id="search-results">
+      <div class="" id="search-results">
         <!--Search Result-->
-        <div class="col s12">
-          <h4 class="">Search Results</h4>
+        
+          <!--Event Detail-->
+          <div class="event-container row">
+            <div class="col s12 l6 p-top">
+              <div class="card">
+                  <div class="card-image">
+                      <img src="https://via.placeholder.com/150" alt="">
+                      <span class="card-title">Event Title 1</span>
+                  </div>
+                  <div class="card-content">
+                      <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, amet?</p>
+                  </div>
+                  <div class="card-action">
+                      <input type="checkbox" name="" id="">
+                  </div>
+              </div>
+            </div>
+
+            <div class="col s12 l6 p-top">
+              <div class="card">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/150" alt="">
+                        <span class="card-title">Event Title 2</span>
+                    </div>
+                    <div class="card-content">
+                        <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, amet?</p>
+                    </div>
+                    <div class="card-action">
+                        <input type="checkbox" name="" id="">
+                    </div>
+              </div>
+            </div>
+            <div class="col s12 l6 p-top">
+              <div class="card">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/150" alt="">
+                        <span class="card-title">Event Title 3</span>
+                    </div>
+                    <div class="card-content">
+                        <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, amet?</p>
+                    </div>
+                    <div class="card-action">
+                        <input type="checkbox" name="" id="">
+                    </div>
+              </div>
+            </div>
+            <div class="col s12 l6 p-top">
+              <div class="card">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/150" alt="">
+                        <span class="card-title">Event Title 4</span>
+                    </div>
+                    <div class="card-content">
+                        <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, amet?</p>
+                    </div>
+                    <div class="card-action">
+                        <input type="checkbox" name="" id="">
+                    </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      
+
+      <div class="card-panel grey lighten-2">
+        <!--Artists-->
+        <div class="row">
           <div class="card-content">
-            <!--Event Detail-->
-            <div class="card col s12">Event Details 1</div>
-            <div class="card col s12">Event Details 2</div>
-            <div class="card col s12">Event Details 3</div>
+            <div class="row">
+              <div class="card col s10 push-s1 m10 push-m1">Artist Details 1</div>
+            </div>
+
+            <div class="row">
+              <div class="card col s10 push-s1 m10 push-m1">Artist Details 2</div>
+            </div>
+
+            <div class="row">
+              <div class="card col s10 push-s1 m10 push-m1">
+                <img src="https://via.placeholder.com/150" alt="">
+              </div>
+            </div>
+
           </div>
+            <div>
+              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 w-full" id="create-btn">Create Playlist</button>
+            </div>
         </div>
       </div>
 
-      <div class="card-panel grey lighten-2 row">
-        <!--Artists-->
-        <div class="card-content">
-          <div class="card col s12 m4">Artist Details 1</div>
-          <div class="card col s12 m4">Artist Details 2</div>
-          <div class="card col s12 m4">Artist Details 3</div>
-        </div>
-      </div>
-      <div>
-        <button class="btn btn-wrapper waves-effect waves-light grey darken-3 w-full" id="create-btn">Create Playlist</button>
-      </div>
       <!--create playlist button-->
 
       <div class="progress col s12">
         <div id="playlist-progress" class="determinate" style="width: 0%"></div>
         <div class="content col s12" id="pl-link"></div>
       </div>
-
-
     </div>
     <!--Right column end-->
-
   </div>
-
+  <footer class="d-toggle">
+    <div class="card-panel grey lighten-2">
+      <button class="btn btn-wrapper waves-effect waves-light grey darken-3 s12" id="create-btn">Create Playlist</button>
+    </div>
+  </footer>
 
 
   <script src="./assets/scripts/prefix.js"></script>
