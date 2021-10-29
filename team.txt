@@ -3,4 +3,4 @@ script.js:
 ticketmaster.js: Joe, David
 prefix.js: 
 index.html:
-spotify.js: 
+spotify.js: Joe
