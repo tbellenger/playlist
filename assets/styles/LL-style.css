@@ -38,8 +38,7 @@ body {
     transition: box-shadow .25s, -webkit-box-shadow .25s;
     padding: 24px;
     margin: 0.5rem 0 1rem 0;
-    border-radius: 2
-px
+    border-radius: 2px
 ;
     background-color: #FFFCF2;
 }

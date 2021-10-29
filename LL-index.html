@@ -33,109 +33,108 @@
   </header>
   <main class="container  justify-evenly items-center">
 
-    <div class="row  ">
-      <div class="col s5"></div>
-      <div id="left-col" class="col s2 15" class="search m4">
-        <!--Left column start-->
+    <div class="row">
+      <div class="col s3"></div>
+      <div id="left-col" class="col s6 15" class="search m4">
+
         <div id="innerbox1" class="card-panel grey lighten-2">
-          <!--Search box start-->
+
           <div class="black-text">
             <label for="search-text">Festival Search</label>
             <input type="text" name="search-text" id="search-query" class="autocomplete">
 
-            <div class="row-1">
-              <a class='dropdown-trigger btn grey' href='#' data-target='dropdown-event'>Filter by Event Type</a>
-              <ul id='dropdown-event' class='dropdown-content'>
-                <li><a href="#!">Events By Area</a></li>
-                <li><a href="#!" id="event">Events By Artist</a></li>
-              </ul>
+            <a class='dropdown-trigger btn grey' href='#' data-target='dropdown-event'>Filter by Event Type</a>
+            <ul id='dropdown-event' class='dropdown-content'>
+              <li><a href="#!">Events By Area</a></li>
+              <li><a href="#!" id="event">Events By Artist</a></li>
+            </ul>
 
-              <button class="btn waves-effect waves-light grey darken-3" type="submit" id="search-btn">
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
+            <button class="btn waves-effect waves-light grey darken-3" type="submit" id="search-btn">
+              <i class="fa fa-search"></i>
+            </button>
           </div>
         </div>
-        <!--Search box end-->
-        <div class="row-2">
-          <div class="btn-box controls flex flex-wrap flex-1">
-            <!--button-box-->
-            <!-- <button class="btn waves-effect waves-light grey darken-3" id="auth-btn">Auth and
-                  Load</button> -->
-            <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="spotify-login"
-              disabled='true'>Connect To Spotify</button>
-
-            <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="status-btn"
-              disabled='true'>Connection Status</button>
-
-            <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="auth-btn">Connect to
-              Youtube/Auth</button>
-
-            <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="status2-btn"
-              disabled='true'>Connection Status</button>
-          </div>
-        </div>
-        <!--Left column end-->
       </div>
-      <div class="col s5"></div>
+
+      <div class="btn-box controls flex flex-wrap flex-1 m-10">
+        <!--button-box-->
+        <!-- <button class="btn waves-effect waves-light grey darken-3" id="auth-btn">Auth and
+                  Load</button> -->
+        <div class="row">
+          <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="spotify-login"
+            disabled='true'>Connect To Spotify</button>
+
+          <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="status-btn"
+            disabled='true'>Connection Status</button>
+
+          <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="auth-btn">Connect to
+            Youtube/Auth</button>
+
+          <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="status2-btn"
+            disabled='true'>Connection Status</button>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col s3"></div>
     </div>
 
     <div class="row">
       <div id="right-col" class="col s12 17">
 
         <div class="row card-panel grey lighten-2" id="search-results">
-          <!--Search Result-->
+
           <span class="card-title">Search Results</span>
           <div class="card-content row-2 s12 m4">
             <div class="col s4">
-              <!--Event Detail-->
-              <div class="card  ">
+
+              <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                   <img class="activator" src="./assets/image/sam-moqadam-0wFVLpANoYc-unsplash.jpg">
                 </div>
                 <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">Card Title<i
+                  <span class="card-title activator grey-text text-darken-4">Event Details<i
                       class="material-icons right">more_vert</i></span>
                   <p><a href="#">This is a link</a></p>
                 </div>
                 <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">Card Title<i
+                  <span class="card-title grey-text text-darken-4">Event Details<i
                       class="material-icons right">close</i></span>
                   <p>Here is some more information about this product that is only revealed once clicked on.</p>
                 </div>
               </div>
             </div>
             <div class="col s4">
-              <!--Event Detail-->
+
               <div class="card  ">
                 <div class="card-image waves-effect waves-block waves-light">
                   <img class="activator" src="./assets/image/sam-moqadam-0wFVLpANoYc-unsplash.jpg">
                 </div>
                 <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">Card Title<i
+                  <span class="card-title activator grey-text text-darken-4">Event Details<i
                       class="material-icons right">more_vert</i></span>
                   <p><a href="#">This is a link</a></p>
                 </div>
                 <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">Card Title<i
+                  <span class="card-title grey-text text-darken-4">Event Details<i
                       class="material-icons right">close</i></span>
                   <p>Here is some more information about this product that is only revealed once clicked on.</p>
                 </div>
               </div>
             </div>
             <div class="col s4">
-              <!--Event Detail-->
+
               <div class="card  ">
                 <div class="card-image waves-effect waves-block waves-light">
                   <img class="activator" src="./assets/image/sam-moqadam-0wFVLpANoYc-unsplash.jpg">
                 </div>
                 <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">Card Title<i
+                  <span class="card-title activator grey-text text-darken-4">Event Details<i
                       class="material-icons right">more_vert</i></span>
                   <p><a href="#">This is a link</a></p>
                 </div>
                 <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">Card Title<i
+                  <span class="card-title grey-text text-darken-4">Event Details<i
                       class="material-icons right">close</i></span>
                   <p>Here is some more information about this product that is only revealed once clicked on.</p>
                 </div>
@@ -150,15 +149,15 @@
             <!--Event Detail-->
             <div class="card  ">
               <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="./assets/image/sam-moqadam-0wFVLpANoYc-unsplash.jpg">
+                <img class="activator" src="./assets/image/sam-moqadam-7l8b8bBVQbM-unsplash.jpg">
               </div>
               <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title<i
+                <span class="card-title activator grey-text text-darken-4">Musician information<i
                     class="material-icons right">more_vert</i></span>
                 <p><a href="#">This is a link</a></p>
               </div>
               <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title<i
+                <span class="card-title grey-text text-darken-4">Musician information<i
                     class="material-icons right">close</i></span>
                 <p>Here is some more information about this product that is only revealed once clicked on.</p>
               </div>
@@ -168,15 +167,15 @@
             <!--Event Detail-->
             <div class="card  ">
               <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="./assets/image/sam-moqadam-0wFVLpANoYc-unsplash.jpg">
+                <img class="activator" src="./assets/image/sam-moqadam-7l8b8bBVQbM-unsplash.jpg">
               </div>
               <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title<i
+                <span class="card-title activator grey-text text-darken-4">Musician information<i
                     class="material-icons right">more_vert</i></span>
                 <p><a href="#">This is a link</a></p>
               </div>
               <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title<i
+                <span class="card-title grey-text text-darken-4">Musician information<i
                     class="material-icons right">close</i></span>
                 <p>Here is some more information about this product that is only revealed once clicked on.</p>
               </div>
@@ -186,15 +185,15 @@
             <!--Event Detail-->
             <div class="card  ">
               <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="./assets/image/sam-moqadam-0wFVLpANoYc-unsplash.jpg">
+                <img class="activator" src="./assets/image/sam-moqadam-7l8b8bBVQbM-unsplash.jpg">
               </div>
               <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title<i
+                <span class="card-title activator grey-text text-darken-4">Musician information<i
                     class="material-icons right">more_vert</i></span>
                 <p><a href="#">This is a link</a></p>
               </div>
               <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title<i
+                <span class="card-title grey-text text-darken-4">Musician information<i
                     class="material-icons right">close</i></span>
                 <p>Here is some more information about this product that is only revealed once clicked on.</p>
               </div>
