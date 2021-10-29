@@ -79,7 +79,7 @@ label {
 
 .btn.disabled, .disabled.btn-large, .disabled.btn-small, .btn-floating.disabled, .btn-large.disabled, .btn-small.disabled, .btn-flat.disabled, .btn:disabled, .btn-large:disabled, .btn-small:disabled, .btn-floating:disabled, .btn-large:disabled, .btn-small:disabled, .btn-flat:disabled, .btn[disabled], .btn-large[disabled], .btn-small[disabled], .btn-floating[disabled], .btn-large[disabled], .btn-small[disabled], .btn-flat[disabled] {
     pointer-events: none;
-    background-color: #FFFCF2 !important;
+    background-color: #EB5E28 !important;
     -webkit-box-shadow: none;
     box-shadow: none;
     color: #252422 !important;
