@@ -23,17 +23,17 @@
     <nav class="nav-wrapper">
       <a class="logo" href="index.html">PREGAME</a>
       <div class='right'>
-        <!-- <ul>
+        <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
-        </ul> -->
+        </ul>
       </div>
     </nav>
   </header>
-  <main class="container  justify-evenly items-center">
+  <main class="container  justify-evenly">
     <div class="row">
-      <div id="left-col" class="col s4 15" class="search m4">
+      <div id="left-col" class="col s5 17" class="search m4">
         <div id="innerbox1" class="card-panel grey lighten-2">
           <div class="black-text">
             <label for="search-text">Festival Search</label>
@@ -43,24 +43,24 @@
             </button>
           </div>
         </div>
-      </div>
-      <div class="btn-box controls flex flex-wrap flex-1 m-10">
-        <div class="row col s3">
-          <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-3" id="status-btn"
+      <div class="row">
+      <div class="btn-box controls flex flex-wrap flex-1 m-4">
+        <div class="col s6 m-1">
+          <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="status-btn"
             disabled='true'>Connect To Spotify</button>
-          <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-3" id="status2-btn"
+          <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="status2-btn"
             disabled='true'>Connection Status</button>
         </div>
       </div>
     </div>
+    </div>
 
     <!-- Search Results -->
-    <!-- <div class="row"> -->
-      <div id="right-col" class="row col s8 17">
+      <div id="right-col" class="row col s7 17">
         <div class="row card-panel grey lighten-2" id="search-results">
           <span class="card-title">Search Results</span>
           <div class="card-content s12 m1">
-            <div class="col s8">
+            <div class="col s12">
               <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                   <img class="activator" src="./assets/image/sam-moqadam-0wFVLpANoYc-unsplash.jpg">
@@ -79,18 +79,17 @@
                 </div>
               </div>
 
-            <button class="btn btn-wrapper waves-effect waves-light grey darken-3 w-full" id="create-btn"
+            <button class="btn btn-wrapper waves-effect waves-light grey darken-3 w-200" id="create-btn"
               disabled='true'>Create Playlist</button>
           </div>
-          <!--create playlist button-->
 
-          <div class="progress col s12">
+          <!-- <div class="progress col s8">
             <div id="playlist-progress" class="determinate" style="width: 0%"></div>
             <div class="content col s10" id="pl-link"></div>
-          </div>
+          </div> -->
         </div>
-        <!--Right column end-->
       </div>
+    </div>
   </main>
 
   <footer>
