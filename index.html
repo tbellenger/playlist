@@ -39,8 +39,8 @@
               <div>
                 <a class='dropdown-trigger btn grey' href='#' data-target='dropdown-event'>Filter by Event Type</a>
                 <ul id='dropdown-event' class='dropdown-content'>
-                  <li><a href="#!">Events By Area</a></li>
-                  <li><a href="#!" id="event">Events By Artist</a></li>
+                  <li><a href="#!" class="grey-text">Events By Area</a></li>
+                  <li><a href="#!" class="grey-text" id="event">Events By Artist</a></li>
                 </ul>
                   
                 <button class="btn waves-effect waves-light grey darken-3" type="submit" id="search-btn">
@@ -53,17 +53,13 @@
           <div class="btn-box controls flex flex-wrap flex-1"><!--button-box-->
                 <!-- <button class="btn waves-effect waves-light grey darken-3" id="auth-btn">Auth and
                   Load</button> -->
-              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="spotify-login"
-                  disabled='true'>Connect To Spotify</button>
+              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="connect-spotify">Connect To Spotify<img src="./assets/images/spotify.jpg" width="30px"></button>
 
-              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="status-btn"
-                  disabled='true'>Connection Status</button>
+              <button class="grey darken-3 m-1" id="spotify-login">Connection Status</button>
                   
-              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="auth-btn"
-                  >Connect to Youtube/Auth</button>
+              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="auth-btn">Connect to Youtube<img src="./assets/images/youtube.jpg" width="30px"></button>
                   
-              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="status2-btn"
-                  disabled='true'>Connection Status</button>
+              <span class="grey darken-3 m-1" id="status2-btn">Connection Status</button>
           </div>
         </div><!--Left column end-->
 

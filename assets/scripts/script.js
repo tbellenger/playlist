@@ -4,12 +4,14 @@ let videoIds = [];
 
 let btnSearch = document.querySelector("#search-btn");
 let btnAuth = document.querySelector("#auth-btn");
+let btnConnectSpotify = document.querySelector("#connect-spotify");
 let btnCreate = document.querySelector("#create-btn");
 let btnUpdate = document.querySelector("#update-btn");
 let txtSearch = document.querySelector("#search-query");
 let searchResultsEl = document.querySelector("#search-results");
 let plProgressEl = document.querySelector("#playlist-progress");
 
+btnConnectSpotify.addEventListener("click", redirectToSpotifyAuthorizeEndpoint);
 btnAuth.addEventListener("click", authenticate);
 btnCreate.addEventListener("click", createPlaylist);
 btnUpdate.addEventListener("click", updatePlaylist);
