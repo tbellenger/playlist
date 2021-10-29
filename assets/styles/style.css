@@ -9,7 +9,6 @@ body {
     background-color: rgb(155, 33, 236);
 }
 
-.btn-box .btn-wrapper{
-  width: 49%;
-  height: inherit;
+.card {
+  margin: 0 .25rem;
 }
