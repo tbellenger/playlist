@@ -1,8 +1,19 @@
 nav {
-    color: #fff;
+
     background-color: #EB5E28;
     width: 100%;
-    height: 56px
-;
-    line-height: 56px;
+    height: 100px;
+    line-height: 100px;
+}
+nav a {
+    color: #CCC5B9;
+}
+nav ul a {
+    -webkit-transition: background-color .3s;
+    transition: background-color .3s;
+    font-size: 1rem;
+    color: #CCC5B9;
+    display: block;
+    padding: 0 15px;
+    cursor: pointer;
 }
