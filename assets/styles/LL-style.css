@@ -7,13 +7,28 @@ nav {
 }
 nav a {
     color: #CCC5B9;
+    padding: 20px;
+    font-size: 2rem;
 }
 nav ul a {
     -webkit-transition: background-color .3s;
     transition: background-color .3s;
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: #CCC5B9;
     display: block;
     padding: 0 15px;
     cursor: pointer;
+}
+body {
+    font-family: inherit;
+    line-height: inherit;
+}
+body {
+    font-family: 'Poiret One', cursive;;
+}
+body {
+    margin: 0;
+}
+body {
+    margin: 0;
 }
