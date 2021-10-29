@@ -1,10 +1,12 @@
+let playlist = ['Tame Impala', 'Lizzo', 'The Strokes', 'Tyler, The Creator', 'Vampire Weekend', 'J Balvin', 'RÜFÜS DU SOL', 'Kehlani', 'Glass Animals', 'ZHU', 'Young Thug', 'Kaytranada', 'Khruangbin', 'Lord Huron', 'Nelly', 'Brittany Howard', 'Burna Boy', 'Melanie Martinez', '24kgoldn', 'TroyBoi', 'Angel Olsen', 'Sofi Tukker'];
+
 // Called to authenticate the user to access the API 
 // that allows us to modify their youtube playlist
 async function authenticate() {
     try {
         await gapi.auth2.getAuthInstance()
             .signIn({ scope: "https://www.googleapis.com/auth/youtube" });
-        console.log("Sign-in successful"); 
+        console.log("Sign-in successful");
         loadClient();
     } catch (err) {
         console.log("Error signing in", err);
@@ -17,8 +19,8 @@ async function loadClient() {
     try {
         await gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         console.log("GAPI client loaded for API");
-        btnAuth.disabled=true;
-        btnCreate.disabled=false;
+        btnAuth.disabled = true;
+        btnCreate.disabled = false;
     } catch (err) {
         console.error("Error loading GAPI client for API", err);
     }
@@ -33,7 +35,7 @@ async function createPlaylist() {
             ],
             "resource": {
                 "snippet": {
-                    "title": "Playlister " + new Date().getTime(),
+                    "title": "Pregame " + new Date().getTime(),
                     "description": "New playlist",
                     "tags": [
                         "sample playlist",
@@ -52,8 +54,8 @@ async function createPlaylist() {
         plId = response.result.id;
         console.log("Playlist Title: " + plTitle);
         console.log("Playlist ID: " + plId);
-        btnCreate.disabled=true;
-        btnUpdate.disabled=false;
+        btnCreate.disabled = true;
+        btnUpdate.disabled = false;
     } catch (err) {
         console.error("Execute error", err);
     }
@@ -89,7 +91,10 @@ async function searchVideos(event) {
 // then calls insert video to add videos to the playlist
 async function updatePlaylist() {
     try {
-        plTitle = "Updated playlist " + new Date().getTime();
+        console.log("Updating playlist");
+        videoIds = [];
+        plTitle = "Pregame Update " + new Date().getTime();
+        let desc = artistNameArray.join();
         let response = await gapi.client.youtube.playlists.update({
             "part": [
                 "snippet,status,contentDetails"
@@ -98,10 +103,10 @@ async function updatePlaylist() {
                 "id": plId,
                 "snippet": {
                     "title": plTitle,
-                    "description": "Updated playlist",
+                    "description": desc,
                     "tags": [
-                        "Songkick API",
-                        "Playlister"
+                        "TicketMaster API",
+                        "Pregame"
                     ]
                 },
                 "status": {
@@ -110,8 +115,13 @@ async function updatePlaylist() {
             }
         });
         // Handle the results here (response.result has the parsed body).
-        console.log("Response", response);
+        //console.log("Response", response);
+        for (let i = 0; i < artistNameArray.length; i++) {
+            plProgressEl.style.width = ((i + 1)/artistNameArray.length)*100 + "%"
+            await searchVideos(artistNameArray[i]);
+        }
         for (let i = 0; i < videoIds.length; i++) {
+            plProgressEl.style.width = ((i + 1)/artistNameArray.length)*100 + "%"
             await insertVideo(i, videoIds[i]);
         }
         showPlayListLink();
@@ -120,12 +130,37 @@ async function updatePlaylist() {
     }
 }
 
+async function searchVideos(artist) {
+    try {
+        console.log("Searching for " + artist + " video");
+        let response = await gapi.client.youtube.search.list({
+            "part": [
+                "snippet"
+            ],
+            "maxResults": 1,
+            "q": artist,
+            "type": "video",
+            "order": "viewCount",
+            "safeSearch": "none"
+        });
+        // Handle the results here (response.result has the parsed body).
+        let videos = await response.result.items;
+        for (let i = 0; i < videos.length; i++) {
+            console.log("Adding " + artist + " video ID to list");
+            videoIds.push(videos[i].id.videoId);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // Adds videos to the playlist at position 0
 // This will push existing videos to the end of the playlist
 // Updates the playlist link to YouTube
 async function insertVideo(pos, videoId) {
     try {
-        let response = await gapi.client.youtube.playlistItems.insert({
+        console.log("Inserting videoID " + videoId + " to position " + pos + "in playlist")
+        await gapi.client.youtube.playlistItems.insert({
             "part": [
                 "snippet"
             ],
@@ -141,7 +176,7 @@ async function insertVideo(pos, videoId) {
             }
         })
         // Handle the results here (response.result has the parsed body).
-        console.log("Response", response);
+        //console.log("Response", response);
     } catch (err) {
         console.error("Execute error", err);
     }
@@ -155,7 +190,7 @@ gapi.load("client:auth2", async function () {
         await gauth;
         if (gauth.isSignedIn.get()) {
             console.log("already signed in");
-            btnAuth.disabled=true;
+            btnAuth.disabled = true;
             loadClient();
             // maybe add an option for the user to sign out
         }
