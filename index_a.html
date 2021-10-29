@@ -7,12 +7,15 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/styles/tom-style.css">
     <title>Pregame</title>
 </head>
 <body>
     <header class="">
-        <nav class="nav-wrapper teal accent-4 purple-text darken-4">
+        <nav class="nav-wrapper purple accent-4">
             <a class="logo" href='#'>Pregame</a>
             <div class="menu right">
                 <ul>
@@ -23,96 +26,117 @@
             </div>
         </nav>
     </header>
-    <div class="content section">
-        <div class="section row">
-            <div class="section left_bar col s12 m4 card-panel teal darken-1">
+    <div class="container">
+        <div class="row">
+            <div class="left_bar col s12 m6 l4">
                 <div class="section search col s12">
-                    <div class="search-panel">
+                    <div class="search-panel card-panel">
                         <div class="input-field">
                             <input type="text" name="search" id="input-search">
                             <label for="search">Search Event</label>
-                            <button class="btn col s12">Search</button>
+                            <a class="btn grey darken-2 col s12">Search</a>
                         </div>
                     </div>
                 </div>
                 <div class="section app-connect col s12">
-                    <div class="spotify-connect">
+                    <div class="spotify-connect card-panel">
                         <div class="input-field">
-                            <button class="btn col s12">Connect to Spotify</button>
+                            <a class="btn grey darken-2 col s12">Spotify Connect</a>
                             <div class="spotify-connect-status">Not Connected</div>
                         </div>
                     </div>
-                    <div class="youtube-connect">
+                    <div class="youtube-connect card-panel">
                         <div class="input-field">
-                            <button class="btn col s12">Connect to YouTube</button>
+                            <a class="btn grey darken-2 col s12">YouTube Connect</a>
                             <div class="youtube-connect-status">Not Connected</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="section main col s12 m8">
-                <div class="search-results col s12">
+            <div class="section main col s12 m6 l8">
+                <div class="search-results">
                     <div class="events-container row">
-                        <div class="col s12 m6 card-panel teal darken-2 event">
-                            <div class="event-panel">
-                                <h3 class="event-title">
-                                    Event Title 1
-                                </h3>
-                                <img src="https://via.placeholder.com/150" alt="" class="event-img circle">
-                                <p class="event-details flow-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, facere?</p>
+                        <div class="col s12 l6">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="https://via.placeholder.com/150" alt="">
+                                    <span class="card-title">Event Title 1</span>
+                                </div>
+                                <div class="card-content">
+                                    <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, amet?</p>
+                                </div>
+                                <div class="card-action">
+                                    <input type="checkbox" name="" id="">
+                                </div>
                             </div>
+                            <!-- <div class="card-panel grey event">
+                                <div class="event-panel">
+                                    <h3 class="event-title">
+                                        Event Title 1
+                                    </h3>
+                                    <img src="https://via.placeholder.com/150" alt="" class="event-img responsive-img circle">
+                                    <p class="event-details flow-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, facere?</p>
+                                </div>
+                            </div> -->
                         </div>
-                        <div class="col s12 m6 card-panel teal darken-2 event">
-                            <div class="event-panel">
-                                <h3 class="event-title">
-                                    Event Title 2
-                                </h3>
-                                <img src="https://via.placeholder.com/150" alt="" class="event-img circle">
-                                <p class="event-details flow-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, facere?</p>
+                        <div class="col s12 l6">
+                            <div class="card-panel grey event">
+                                <div class="event-panel">
+                                    <h3 class="event-title">
+                                        Event Title 2
+                                    </h3>
+                                    <img src="https://via.placeholder.com/150" alt="" class="event-img responsive-img circle">
+                                    <p class="event-details flow-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, facere?</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="artist-container row">
-                        <div class="artist-panel col s12 m6 card-panel teal darken-1">
+                        <div class="col s12 l6">
+                        <div class="artist-panel card-panel grey">
                             <h3 class="artist-title">Artist Title 1</h3>
-                            <img src="https://via.placeholder.com/150" alt="" class="artist-img circle">
+                            <img src="https://via.placeholder.com/150" alt="" class="artist-img responsive-img circle">
                             <p class="artist-details flow-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, facere?</p>
-                        </div>
-                        <div class="artist-panel col s12 m6 card-panel teal darken-1">
+                        </div></div>
+                        <div class="col s12 l6">
+                        <div class="artist-panel card-panel grey">
                             <h3 class="artist-title">Artist Title 2</h3>
-                            <img src="https://via.placeholder.com/150" alt="" class="artist-img circle">
+                            <img src="https://via.placeholder.com/150" alt="" class="artist-img responsive-img circle">
                             <input type="checkbox" name="" id="artist-2">
                             <p class="artist-details flow-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, facere?</p>
-                        </div>
-                        <div class="artist-panel col s12 m6 card-panel teal darken-1">
+                        </div></div>
+                        <div class="col s12 l6">
+                        <div class="artist-panel card-panel grey">
                             <h3 class="artist-title">Artist Title 3</h3>
-                            <img src="https://via.placeholder.com/150" alt="" class="artist-img circle">
+                            <img src="https://via.placeholder.com/150" alt="" class="artist-img responsive-img circle">
                             <input type="checkbox" name="" id="artist-2">
                             <p class="artist-details flow-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, facere?</p>
-                        </div>
-                        <div class="artist-panel col s12 m6 card-panel teal darken-1">
+                        </div></div>
+                        <div class="col s12 l6">
+                        <div class="artist-panel card-panel grey">
                             <h3 class="artist-title">Artist Title 4</h3>
-                            <img src="https://via.placeholder.com/150" alt="" class="artist-img circle">
+                            <img src="https://via.placeholder.com/150" alt="" class="artist-img responsive-img circle">
                             <input type="checkbox" name="" id="artist-2">
                             <p class="artist-details flow-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, facere?</p>
-                        </div>
-                        <div class="artist-panel col s12 m6 card-panel teal darken-1">
+                        </div></div>
+                        <div class="col s12 l6">
+                        <div class="artist-panel card-panel grey">
                             <h3 class="artist-title">Artist Title 5</h3>
-                            <img src="https://via.placeholder.com/150" alt="" class="artist-img circle">
+                            <img src="https://via.placeholder.com/150" alt="" class="artist-img responsive-img circle">
                             <input type="checkbox" name="" id="artist-2">
                             <p class="artist-details flow-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, facere?</p>
-                        </div>
+                        </div></div>
                     </div>
                 </div>
                 <div class="playlist-container col s12">
-                    <button class="btn">Create Playlist</button>
+                    <a class="btn grey darken-2">Create Playlist</a>
                     <div class="progress">
                         <div class="determinate" style="width: 70%"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="page-footer">Made with love</footer>
+        <footer class="page-footer grey darken-2">Made with love</footer>
     </div>
 </body>
 </html>
