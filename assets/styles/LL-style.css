@@ -41,10 +41,10 @@ body {
     border-radius: 2
 px
 ;
-    background-color: #CCC5B9;
+    background-color: #FFFCF2;
 }
 .grey {
-    background-color: #CCC5B9 !important;
+    background-color: #FFFCF2 !important;
 }
 .progress {
     position: relative;
@@ -57,9 +57,47 @@ px
     overflow: hidden;
 }
 label {
-    font-size: 1rem;
+    font-size: 20px;
     color: #FFFCF2;
 }
 #search-btn {
-    color:#EB5E28;
+    color:#252422;
+}
+
+.btn, .btn-large, .btn-small {
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+    color: #EB5E28 important!;
+}
+
+.grey.darken-3 {
+    background-color: #EB5E28 !important;
+}
+
+.btn.disabled, .disabled.btn-large, .disabled.btn-small, .btn-floating.disabled, .btn-large.disabled, .btn-small.disabled, .btn-flat.disabled, .btn:disabled, .btn-large:disabled, .btn-small:disabled, .btn-floating:disabled, .btn-large:disabled, .btn-small:disabled, .btn-flat:disabled, .btn[disabled], .btn-large[disabled], .btn-small[disabled], .btn-floating[disabled], .btn-large[disabled], .btn-small[disabled], .btn-flat[disabled] {
+    pointer-events: none;
+    background-color: #FFFCF2 !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #252422 !important;
+    cursor: default;
+}
+
+.btn, .btn-large, .btn-small {
+    text-decoration: none;
+    color: #252422;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+}
+
+.card-title {
+    color:#FFFCF2;
+    font-size: 20px;
 }
