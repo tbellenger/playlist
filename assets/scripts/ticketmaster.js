@@ -76,54 +76,6 @@ function getArtistNameList(name) {
             for (let i = 0; i < attractArray.length; i++) {
                 artistNameArray.push(attractArray[i].name);
                 artistPictureArray.push(attractArray[i].images[0].url);
-                // getArtistPicture(attractArray[i].id);
             }
-        });
-}
-
-var url = "";
-var urls = [];
-
-function getArtistPicture(id) {
-    url = tmBaseUrl + "/attractions/" + id + "?apikey=" + tmApiKey;
-    urls.push(url);
-    console.log(url)
-    setTimeout(function (url) {
-        console.log(url);
-        sendAsyncRequests();
-    }, 0.25 * 1000);
-}
-
-var index = 0;
-
-function sendAsyncRequests() {
-    for (index = 0; index < urls.length; index++) {
-        setTimeout(function () {
-            sendAsyncReq(urls[index]);
-        }, 0.23 * 1000);
-    }
-}
-
-async function sendAsyncReq(url) {
-    await fetch(url,
-            /* {
-                          mode: "no-cors"
-                      }*/
-        )
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            }
-            return null;
-        })
-        .then(function (data) {
-            if (data) {
-                artistPictureArray.push(data.images[0].url);
-            } else {
-                artistPictureArray.push("");
-            }
-        })
-        .catch(function (error) {
-            artistPictureArray.push("");
         });
 }
