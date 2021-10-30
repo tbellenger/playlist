@@ -12,7 +12,7 @@ let searchResultsEl = document.querySelector("#search-results");
 let plProgressEl = document.querySelector("#playlist-progress");
 
 btnConnectSpotify.addEventListener("click", redirectToSpotifyAuthorizeEndpoint);
-btnAuth.addEventListener("click", authenticate);
+// btnAuth.addEventListener("click", authenticate);
 btnCreate.addEventListener("click", spotifyCreatePlaylistFromArtists);
 //btnUpdate.addEventListener("click", updatePlaylist);
 btnSearch.addEventListener("click", searchEvents);

@@ -77,5 +77,12 @@ function getArtistNameList(name) {
                 artistNameArray.push(attractArray[i].name);
                 artistPictureArray.push(attractArray[i].images[0].url);
             }
+
+          var cardImageEl = document.querySelector(".activator")
+cardImageEl.setAttribute("src",attractArray[0].images[9].url)
+
+
+     //  console.log(artistPictureArray)
+
         });
 }
