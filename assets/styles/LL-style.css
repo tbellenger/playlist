@@ -60,6 +60,15 @@ label {
 #search-btn {
     color:#252422;
 }
+.autocomplete{
+    color:#FFFCF2;
+    font-size: 16pt !important;
+    border-color: #EB5E28 !important;
+}
+.swal-button.swal-button--confirm{
+    background-color: #EB5E28 !important;
+    color:#FFFCF2 !important;
+}
 .btn, .btn-large, .btn-small {
     text-decoration: none;
     text-align: center;
