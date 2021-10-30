@@ -1,7 +1,12 @@
 var artistNameArray = []; // Array of artists from TicketMaster
 var artistPictureArray = []; //Array of pictures from TicketMaster
 var eventListArray = []; // Array of events from TicketMaster
-let searchResult;
+let searchResult = {
+    startDate: "",
+    endDate: "",
+    venue: "",
+    artistInfo: []
+};
 
 // Spotify Auth Details
 const client_id = '6a0256e60f084740acaba82df07a21e2';
