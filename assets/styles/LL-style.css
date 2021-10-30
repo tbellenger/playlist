@@ -59,6 +59,7 @@ label {
 }
 #search-btn {
     color:#252422;
+    margin-top: 5px !important;
 }
 .autocomplete{
     color:#FFFCF2;
@@ -114,4 +115,7 @@ label {
       text-align: center;
       color:#FFFCF2;
       padding:15px;
+  }
+  #innerbox1{
+      margin-top: 20px;
   }

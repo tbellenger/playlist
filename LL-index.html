@@ -38,24 +38,26 @@
           <div class="black-text">
             <label for="search-text">Festival Search</label>
             <input type="text" name="search-text" id="search-query" class="autocomplete">
-            <button class="btn waves-effect waves-light grey darken-3" type="submit" id="search-btn">
-              <i class="fa fa-search"></i>
-            </button>
+            <div class="btn-box controls row  ">
+              <div class="col s2"> <button class="btn waves-effect waves-light grey darken-3" type="submit"
+                  id="search-btn">
+                  <i class="fa fa-search"></i>
+                </button></div>
+              <div class="col s4  ">
+                <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="connect-spotify">Connect
+                  To Spotify</button>
+
+              </div>
+              <div class="col s4">
+                <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="status2-btn">Connection
+                  Status</button>
+              </div>
+            </div>
           </div>
         </div>
-      <div class="row">
-      <div class="btn-box controls flex flex-wrap flex-1 m-4">
-        <div class="col s6 m-1">
-          <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="connect-spotify"
-            disabled='true'>Connect To Spotify</button>
-          <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="status2-btn"
-            disabled='true'>Connection Status</button>
-        </div>
       </div>
-    </div>
-    </div>
 
-    <!-- Search Results -->
+      <!-- Search Results -->
       <div id="right-col" class="row col s7 17">
         <div class="row card-panel grey lighten-2" id="search-results">
           <span class="card-title">Search Results</span>
@@ -68,7 +70,6 @@
                 <div class="card-content">
                   <span class="card-title activator grey-text text-darken-4">Event Details<i
                       class="material-icons right">more_vert</i></span>
-                      <p><a href="#">Festival Lineup Listing</a></p>
                   <p><a href="#">Festival Lineup Listing</a></p>
                 </div>
                 <div class="card-reveal">
@@ -83,17 +84,17 @@
                 </div>
               </div>
 
-            <button class="btn btn-wrapper waves-effect waves-light grey darken-3 w-200" id="create-btn"
-              disabled='true'>Create Playlist</button>
-          </div>
+              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 w-200" id="create-btn"
+                disabled='true'>Create Playlist</button>
+            </div>
 
-          <!-- <div class="progress col s8">
+            <!-- <div class="progress col s8">
             <div id="playlist-progress" class="determinate" style="width: 0%"></div>
             <div class="content col s10" id="pl-link"></div>
           </div> -->
+          </div>
         </div>
       </div>
-    </div>
   </main>
 
   <footer>
