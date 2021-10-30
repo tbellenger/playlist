@@ -93,22 +93,7 @@ function getArtistNameList(name) {
                 }
                 searchResult.artistInfo.push(nextObj);
             }
-        });
-}
 
-function getEventDescription(id) {
-    var url = tmBaseUrl + "/events.json?id=" + id + "&apikey=" + tmApiKey;
-    console.log(url);
-    fetch(url)
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            }
-            return null;
-        })
-        .then(function (data) {
-            if (data) {
-                console.log(data)
-            }
+            updateSearchContents();
         });
 }
