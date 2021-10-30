@@ -57,12 +57,14 @@ function getArtistNameList(name) {
         )
         .then(function (response) {
             if (response.ok) {
+                console.log('search on ' + name + ' successful');
                 return response.json();
             }
             return null;
         })
         .then(function (data) {
             artistNameArray = [];
+            artistPictureArray = [];
 
             if (!data._embedded) {
                 swal("Error", "Could not find \"" + name + "\".", "error");
@@ -70,8 +72,10 @@ function getArtistNameList(name) {
             }
 
             let attractArray = data._embedded.events[0]._embedded.attractions;
+            console.log(attractArray);
             for (let i = 0; i < attractArray.length; i++) {
                 artistNameArray.push(attractArray[i].name);
+                artistPictureArray.push(attractArray[i].images[0].url);
             }
         });
 }

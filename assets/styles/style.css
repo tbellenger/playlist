@@ -9,7 +9,23 @@ body {
     background-color: rgb(155, 33, 236);
 }
 
-.btn-box .btn-wrapper{
-  width: 49%;
-  height: inherit;
+.card {
+  margin: 0 .25rem;
+}
+.d-toggle{
+  display:none;
+}
+.p-top{
+  padding-top: 2% !important;
+}
+/* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
+@media screen and (max-width: 575px) {
+  .d-toggle{
+    display:block;
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    z-index: 9990;
+  }
+
 }
