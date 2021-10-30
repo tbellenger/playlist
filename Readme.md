@@ -2,7 +2,7 @@
 
 ## Description
 
-Pregame is a webpage designed for music lovers to have a preview about the bands/artists' performance of the festivals through Spotify videos. The search engine will automatically generate a spotify playlist with the top track from each of the artists in the lineup based on the corresponding search result.
+Pregame is a webpage designed for music lovers to have a preview about the bands/artists' performance of the festivals through Spotify tracks. The search engine will automatically generate a spotify playlist with the top track from each of the artists in the lineup based on the corresponding search result.
  
 
 ## Table of Contents
@@ -29,7 +29,8 @@ The following image demonstrates the web application's appearance and functional
 
   (Links to an external site.)
 
-https://github.com/
+* [Repository](https://github.com/)
+* [Live Site](https://tbellenger.github.io/playlist/)
 
 
 ## Credits
