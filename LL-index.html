@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.17/tailwind.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
@@ -17,33 +16,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
   <title>Pregame</title>
 </head>
-
 <body>
   <header>
     <nav class="nav-wrapper">
-      <a class="logo" href="LL-index.html">PREGAME</a>
-      <div class='right'>
-        <ul>
-          <li><a href="LL-index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
+      <a class="logo" href="#">PREGAME</a>
     </nav>
   </header>
-  <main class="container  justify-evenly">
+  <main class="container">
     <div class="row">
-      <div id="left-col" class="col s5 17" class="search m4">
-        <div id="innerbox1" class="card-panel grey lighten-2">
+      <div class="col s12 m6 l4">
+        <div class="search col s12">
           <div class="black-text">
             <label for="search-text">Festival Search</label>
             <input type="text" name="search-text" id="search-query" class="autocomplete">
-            <div class="btn-box controls row  ">
+            <div class="btn-box controls row">
               <div class="col s2"> <button class="btn waves-effect waves-light grey darken-3" type="submit"
                   id="search-btn">
                   <i class="fa fa-search"></i>
                 </button></div>
-              <div class="col s4  ">
+              <div class="col s4">
                 <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="connect-spotify">Connect
                   To Spotify</button>
 
@@ -58,10 +49,10 @@
       </div>
 
       <!-- Search Results -->
-      <div id="right-col" class="row col s7 17">
+      <div id="right-col" class="col s7">
         <div class="row card-panel grey lighten-2" id="search-results">
           <span class="card-title">Search Results</span>
-          <div class="card-content s12 m1">
+          <div class="card-content m1">
             <div class="col s12">
               <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
