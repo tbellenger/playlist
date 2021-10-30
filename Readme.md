@@ -34,8 +34,8 @@ https://github.com/
 
 ## Credits
  
-David Barron,
 Tom Bellenger,
+David Barron,
 Joe Moganam,
 Jose Rivera,
 Lydia Loy
