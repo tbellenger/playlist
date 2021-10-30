@@ -1,6 +1,7 @@
 youtube.js: 
 script.js: 
-ticketmaster.js: Joe, David
+ticketmaster.js: David
 prefix.js: 
 index.html: Tom
-spotify.js: Joe
+spotify.js: 
+Readme.md
