@@ -17,7 +17,6 @@ btnSearch.addEventListener("click", searchEvents);
 txtSearch.addEventListener("keypress", searchEventsKey);
 
 function searchEventsKey(event) {
-    console.log(event.which)
     if (event.which == 13) {
         searchEvents(event);
     }
