@@ -34,10 +34,16 @@ function connectAndCreate() {
     if (localStorage.getItem('spotConnected')) {
         // check if access token is expired
         // if expired do popup again
-        if (localStorage.getItem('expires_at') > new Date().getTime()) {
+        console.log('already connected to spotify');
+        let expiry = localStorage.getItem('expires_at');
+        let now = new Date().getTime();
+        console.log('expire', expiry);
+        console.log('now   ',now);
+        if (expiry == null || now > expiry) {
             redirectToSpotifyAuthorizeEndpoint();
+        } else {
+            spotifyCreatePlaylistFromArtists();
         }
-        spotifyCreatePlaylistFromArtists();
     } else {
         redirectToSpotifyAuthorizeEndpoint();
     }
