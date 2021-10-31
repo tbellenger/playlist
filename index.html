@@ -25,9 +25,10 @@
                 <div class="search col s12">
                     <div class="search-panel card-panel">
                         <div class="input-field">
-                            <input type="text" name="search" id="search-query">
-                            <label for="search">Search Event</label>
-                            <a id="search-btn" class="btn grey darken-2 col s12">Search</a>
+                            <input type="text" id="search-query">
+                            <a id="search-btn" class="btn grey darken-2">Search</a>
+                            <label for="search-query">Search Event</label>
+                            
                         </div>
                     </div>
                 </div>
@@ -49,20 +50,33 @@
                                 </div>
                                 <div class="card-reveal">
                                     <span id="event-detail" class="card-title grey-text text-darken-4">Event Detail<i class="material-icons right">close</i></span>
-                                    <div class="input-field">
+                                    <div class="card-action">
+                                        <a id="create-btn" class="btn grey darken-2">Create Playlist</a>
                                         <a id="connect-spotify" class="btn grey darken-2">Spotify Connect</a>
                                         <div class="spotify-connect-status">
                                             <p id="spotify-login">Not Connected</p>
                                         </div>
-                                    </div>
-                                    <p id="event-long-desc">Longer event description</p>
-                                    <p id="event-lineup" class="flow-text">Line-up for the event here</p>
-                                    <div class="card-action">
-                                        <a id="create-btn" class="btn grey darken-2">Create Playlist</a>
                                         <div class="progress">
                                             <div class="determinate" style="width: 70%"></div>
                                         </div>
                                     </div>
+                                    <p id="event-long-desc">Longer event description</p>
+                                    <p id="event-lineup" class="flow-text">Line-up for the event here</p>
+
+                                    <div class="pg-card">
+                                        <img class="pg-artist-img" src="https://s1.ticketm.net/dam/a/1b7/c0772882-2b60-4206-adea-2d13ac3181b7_1461061_TABLET_LANDSCAPE_16_9.jpg">
+                                        <span class="pg-card-title">Tame Impala</span>
+                                    </div>
+                                    <div class="pg-card">
+                                        <img class="pg-artist-img" src="https://s1.ticketm.net/dam/a/87c/bf775ca2-e6cd-463a-9ff6-60459f33d87c_1094781_RETINA_PORTRAIT_3_2.jpg">
+                                        <span class="pg-card-title">Lizzo</span>
+                                    </div>
+                                    
+                                    <div class="pg-card">
+                                        <img class="pg-artist-img" src="https://s1.ticketm.net/dam/a/84e/4d1720db-9677-413c-b844-2cd22f1f484e_1313551_TABLET_LANDSCAPE_3_2.jpg">
+                                        <span class="pg-card-title">The Strokes</span>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

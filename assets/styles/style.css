@@ -14,6 +14,58 @@ body {
   font-size: 2rem;
 }
 
-.d-toggle {
-  display:none;
+  /* label color */
+  .input-field label {
+    color: #000;
+  }
+  /* label focus color */
+  .input-field input[type=text]:focus + label {
+    color: #000;
+  }
+  /* label underline focus color */
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+  }
+  /* valid color */
+  .input-field input[type=text].valid {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+  }
+  /* invalid color */
+  .input-field input[type=text].invalid {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+  }
+  /* icon prefix focus color */
+  .input-field .prefix.active {
+    color: #000;
+  }
+
+.pg-card {
+  display: flex;
+  position: relative;
+  margin: 0.75rem 0;
+  border-radius: 3px;
+  max-height: 200px;
+  box-shadow: rgb(0 0 0 / 14%) 0px 2px 2px 0px, 
+            rgb(0 0 0 / 12%) 0px 3px 1px -2px, 
+            rgb(0 0 0 / 20%) 0px 1px 5px 0px;
+
+}
+
+.pg-artist-img {
+  max-width: 100%;
+  border-radius: 3px;
+  object-fit: cover;
+  position:top;
+  object-position: top;
+}
+
+.pg-card-title {
+  color: white;
+  font-size: 4rem;
+  position:absolute;
+  bottom: 8px;
+  left: 16px;
 }

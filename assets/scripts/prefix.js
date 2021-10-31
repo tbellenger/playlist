@@ -80,3 +80,7 @@ function updateSearchContents() {
     }
 
 }
+
+function artistTemplate(name, img) {
+
+}
