@@ -87,6 +87,8 @@ function getArtistNameList(name) {
             for (let i = 0; i < attractArray.length; i++) {
                 artistNameArray.push(attractArray[i].name);
                 let lastImageIndex = attractArray[i].images.length-1
+                if(lastImageIndex < 0)
+                    lastImageIndex = 0
                 artistPictureArray.push(attractArray[i].images[0].url);
                 let nextObj = {
                     name: attractArray[i].name,
