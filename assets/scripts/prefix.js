@@ -81,6 +81,13 @@ function updateSearchContents() {
 
 }
 
+function spotConnectionCallback(isConnected) {
+    console.log('spot connected');
+    if (isConnected) {
+        spotifyCreatePlaylistFromArtists()
+    }
+}
+
 function artistTemplate(eventArtist) {
     return `<div class="pg-card">
     <img class="pg-artist-img" src="${eventArtist.picture}">
