@@ -16,7 +16,8 @@ const redirect_uri = 'http://127.0.0.1:5500/callback/'; // Your redirect uri
 
 function updateSearchContents() {
     console.log("searchResult \n \t\t", searchResult)
-    
+    let mainContentEl = document.querySelector('.main');
+    mainContentEl.style.display = 'inherit';
     if(searchResult.artistInfo.length != null ) {
         let aEvent = searchResult.artistInfo[0]; // grab the event name and event image
         let eventTitleId = "event-title"

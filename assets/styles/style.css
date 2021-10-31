@@ -11,6 +11,10 @@ body {
   height:80px;
 }
 
+.main {
+  display:none;
+}
+
 .orange-text {
   color:#EB5E28 !important;
 }
