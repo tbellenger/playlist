@@ -1,12 +1,13 @@
-body { 
+body {
     height: 100vh;
-    background-image: linear-gradient(rgb(155, 33, 236), 80%, rgb(11, 255, 133)) !important;
+    font-family: 'Poiret One', cursive;
+    background-image: url(../images/esther-tuttle-V1_7RfnZ-w4-unsplash.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .nav-wrapper {
-    background-color: rgb(155, 33, 236);
+  background-color: #252422;
 }
 
 .d-toggle {
