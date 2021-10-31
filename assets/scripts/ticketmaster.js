@@ -46,15 +46,11 @@ function getEventList() {
 
 function getArtistNameList(name) {
 
-    // Get all events that match the name
-    var url = tmBaseUrl + "/events.json?keyword=" + name + "&apikey=" + tmApiKey;
+    // Get a music event that matches the name
+    var url = tmBaseUrl + "/events.json?keyword=" + name + "&classificationName=music&apikey=" + tmApiKey;
     url = url.replace(" ", "%20");
 
-    fetch(url,
-        /*{
-               mode: "no-cors"
-           }*/
-    )
+    fetch(url)
         .then(function (response) {
             if (response.ok) {
                 return response.json();
@@ -76,7 +72,6 @@ function getArtistNameList(name) {
             }
 
             let dateBase = data._embedded.events[0];
-            console.log(dateBase);
             searchResult.startDate = dateBase.dates.start.localDate;
             if (dateBase.dates.end) {
                 searchResult.endDate = dateBase.dates.end.localDate;
@@ -86,17 +81,17 @@ function getArtistNameList(name) {
             let attractArray = data._embedded.events[0]._embedded.attractions;
             for (let i = 0; i < attractArray.length; i++) {
                 artistNameArray.push(attractArray[i].name);
-                let lastImageIndex = attractArray[i].images.length-1
-                if(lastImageIndex < 0)
-                    lastImageIndex = 0
-                artistPictureArray.push(attractArray[i].images[0].url);
+                let lastImageIndex = attractArray[i].images.length - 1;
+                if (lastImageIndex < 0)
+                    lastImageIndex = 0;
+                artistPictureArray.push(attractArray[i].images[lastImageIndex].url);
                 let nextObj = {
                     name: attractArray[i].name,
                     picture: attractArray[i].images[lastImageIndex].url
-                }
+                };
                 searchResult.artistInfo.push(nextObj);
             }
-            
+
             updateSearchContents();
         });
 }
