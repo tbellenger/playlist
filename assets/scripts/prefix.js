@@ -42,7 +42,7 @@ function updateSearchContents() {
         let pShortDescEl = document.querySelector("#" + eventShortDescID)
         // set the description to Location & date
         pShortDescEl.innerHTML = eventLocation + ': ' + eventStartDate
-        if(eventEndDate != null) // some events do not list an end date, but if it does update the description
+        if(eventEndDate.length > 1) // some events do not list an end date, but if it does update the description
             pShortDescEl.innerHTML = eventLocation + ': (' + eventStartDate + ' to ' + eventEndDate + ')';
         // for the event grab all the artists info
 
