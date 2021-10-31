@@ -61,19 +61,19 @@ function updateSearchContents() {
             //grab the container that will hold the list of artists
             let pEventLineUpEl = document.querySelector("#" + eventLineUpId)
             pEventLineUpEl.innerHTML = "" // clear out the old Lineup
-            let ulLineUpEl = document.createElement("ul") // make an Unordered list to hold the lineup
-
+            //let ulLineUpEl = document.createElement("ul") // make an Unordered list to hold the lineup
+            let inner = '';
             // update the event list with the latest artist names & artist data
             // the first index in the artist array, at index = 0, is always the venue info, so we skip that index
             for (let index = 1; index < eventArtistArray.length; index++) {
                 // starting at index 1, loop over the array of artist objects
-                let liElement = document.createElement("li")
-                let artistName = eventArtistArray[index].name;
-                liElement.setAttribute("id", eventTitleId + artistName)
-                liElement.innerHTML = artistName
-                ulLineUpEl.append(liElement)
+                //let liElement = document.createElement("li")
+                //let artistName = eventArtistArray[index].name;
+                //liElement.setAttribute("id", eventTitleId + artistName)
+                //liElement.innerHTML = artistName
+                inner += artistTemplate(eventArtistArray[index]);
             }
-            pEventLineUpEl.append(ulLineUpEl)
+            pEventLineUpEl.innerHTML = inner;
 
             //console.log(spanTitleEl, childElementMaterialIcon)
         }
@@ -81,6 +81,9 @@ function updateSearchContents() {
 
 }
 
-function artistTemplate(name, img) {
-
+function artistTemplate(eventArtist) {
+    return `<div class="pg-card">
+    <img class="pg-artist-img" src="${eventArtist.picture}">
+    <span class="pg-card-title">${eventArtist.name}</span>
+    </div>`
 }
