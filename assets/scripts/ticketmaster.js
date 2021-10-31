@@ -3,8 +3,8 @@ var tmApiKey = "YfcjW3gno5AAWiEVx4skuvK2AMDhLXmT"; // Ticketmaster API key
 var tmBaseUrl = "https://app.ticketmaster.com/discovery/v2"; // Base URL
 
 function getEventList() {
-    // pick all events that are music in the greater Sacramento area (dma ID = 374)
-    var url = tmBaseUrl + "/events.json?classificationName=music&dmaId=374&apikey=" + tmApiKey;
+    // pick all events that are music
+    var url = tmBaseUrl + "/events.json?classificationName=music&apikey=" + tmApiKey;
     // url = url.replace(" ", "%20");
 
     fetch(url)
@@ -51,31 +51,52 @@ function getArtistNameList(name) {
     url = url.replace(" ", "%20");
 
     fetch(url,
-            /*{
-                   mode: "no-cors"
-               }*/
-        )
+        /*{
+               mode: "no-cors"
+           }*/
+    )
         .then(function (response) {
             if (response.ok) {
-                console.log('search on ' + name + ' successful');
                 return response.json();
             }
             return null;
         })
         .then(function (data) {
+            // Clear out the old global data
             artistNameArray = [];
             artistPictureArray = [];
+            searchResult.startDate = "";
+            searchResult.endDate = "";
+            searchResult.venue = "";
+            searchResult.artistInfo = [];
 
             if (!data._embedded) {
                 swal("Error", "Could not find \"" + name + "\".", "error");
                 return;
             }
 
+            let dateBase = data._embedded.events[0];
+            console.log(dateBase);
+            searchResult.startDate = dateBase.dates.start.localDate;
+            if (dateBase.dates.end) {
+                searchResult.endDate = dateBase.dates.end.localDate;
+            }
+            searchResult.venue = data._embedded.events[0]._embedded.venues[0].name;
+
             let attractArray = data._embedded.events[0]._embedded.attractions;
-            console.log(attractArray);
             for (let i = 0; i < attractArray.length; i++) {
                 artistNameArray.push(attractArray[i].name);
+                let lastImageIndex = attractArray[i].images.length-1
+                if(lastImageIndex < 0)
+                    lastImageIndex = 0
                 artistPictureArray.push(attractArray[i].images[0].url);
+                let nextObj = {
+                    name: attractArray[i].name,
+                    picture: attractArray[i].images[lastImageIndex].url
+                }
+                searchResult.artistInfo.push(nextObj);
             }
+            
+            updateSearchContents();
         });
 }
