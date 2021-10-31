@@ -31,11 +31,12 @@ function searchEvents(event) {
 }
 
 function connectAndCreate() {
-    if (localStorage.getItem('spotConnected')) {
+    let conn = JSON.parse(localStorage.getItem('spotConnected'));
+    if (conn) {
         // check if access token is expired
         // if expired do popup again
         console.log('already connected to spotify');
-        let expiry = localStorage.getItem('expires_at');
+        let expiry = JSON.parse(localStorage.getItem('expires_at'));
         let now = new Date().getTime();
         console.log('expire', expiry);
         console.log('now   ',now);
