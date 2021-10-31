@@ -178,6 +178,8 @@ async function spotifySearchArtistTopTracks(url) {
 
 async function spotifyCreatePlaylistFromArtists() {
     let artistArray = artistNameArray;
+    let progressBarEl = document.querySelector('#progress-bar');
+    progressBarEl.style.width = '0%'
     if (artistArray.length === 0) {
         console.log('artist array was empty - using test data');
         artistArray = spotifyTestPlaylist;
