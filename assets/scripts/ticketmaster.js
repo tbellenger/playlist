@@ -86,14 +86,15 @@ function getArtistNameList(name) {
             let attractArray = data._embedded.events[0]._embedded.attractions;
             for (let i = 0; i < attractArray.length; i++) {
                 artistNameArray.push(attractArray[i].name);
+                let lastImageIndex = attractArray[i].images.length-1
                 artistPictureArray.push(attractArray[i].images[0].url);
                 let nextObj = {
                     name: attractArray[i].name,
-                    picture: attractArray[i].images[0].url
+                    picture: attractArray[i].images[lastImageIndex].url
                 }
                 searchResult.artistInfo.push(nextObj);
             }
-
+            
             updateSearchContents();
         });
 }
