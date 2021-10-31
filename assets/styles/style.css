@@ -8,6 +8,11 @@ body {
 
 .nav-wrapper {
   background-color: #252422;
+  height:80px;
+}
+
+.orange-text {
+  color:#EB5E28 !important;
 }
 
 .logo {
@@ -16,36 +21,70 @@ body {
 
   /* label color */
   .input-field label {
-    color: #000;
+    color: #252422;
+    font-size: 16px !important;
   }
   /* label focus color */
   .input-field input[type=text]:focus + label {
-    color: #000;
+    color: #252422;
   }
   /* label underline focus color */
   .input-field input[type=text]:focus {
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
+    border-bottom: 1px solid #EB5E28 !important;
+    box-shadow: 0 1px 0 0 #252422;
   }
+
+  input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: .5px solid #EB5E28;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    padding: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    -webkit-transition: border .3s, -webkit-box-shadow .3s;
+    transition: border .3s, -webkit-box-shadow .3s;
+    transition: box-shadow .3s, border .3s;
+    transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s;
+}
+
   /* valid color */
   .input-field input[type=text].valid {
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
+    border-bottom: .5px solid #EB5E28;
+    box-shadow: 0 1px 0 0 #252422;
   }
   /* invalid color */
   .input-field input[type=text].invalid {
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
+    border-bottom: .5px solid #EB5E28;
+    box-shadow: 0 1px 0 0 #252422;
   }
   /* icon prefix focus color */
   .input-field .prefix.active {
-    color: #000;
+    color: #252422;
   }
+
+  button, input, optgroup, select, textarea {
+    font-family:;
+}
+
+  .card-panel {
+    transition: box-shadow 0.25s ease 0s, -webkit-box-shadow 0.25s ease 0s;
+    margin: 1.5rem 0px !important;
+    border-radius: 10px !important;
+    background-color: #FFFCF2;
+}
 
 .pg-card {
   display: flex;
   position: relative;
-  margin: 0.75rem 0;
+  margin: 0.2rem;
   border-radius: 3px;
   /* max-height: 200px; */
   aspect-ratio: 16/9;
@@ -58,16 +97,83 @@ body {
 .pg-artist-img {
   width:100%;
   max-width: 100%;
-  border-radius: 3px;
+  border-radius: 5px;
   object-fit: cover;
   position:top;
   object-position: top;
 }
 
 .pg-card-title {
-  color: white;
-  font-size: 4rem;
+  color: #FFFCF2;
+  font-size: 24px;
   position:absolute;
   bottom: 8px;
   left: 16px;
+}
+
+.card {
+  margin: 1.5rem 0px !important;
+  display: block;
+  border-radius:10px;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.card .card-reveal {
+  padding: 24px;
+  position: absolute;
+  background-color: #FFFCF2;
+  width: 100%;
+  overflow-y: auto;
+  left: 0;
+  top: 100%;
+  height: 100%;
+  z-index: 3;
+  display: none;
+}
+
+
+.card-panel {
+    -webkit-transition: -webkit-box-shadow .25s;
+    transition: -webkit-box-shadow .25s;
+    transition: box-shadow .25s;
+    transition: box-shadow .25s, -webkit-box-shadow .25s;
+    padding: 24px;
+    margin: 0.5rem 0 1rem 0;
+    border-radius: 2px;
+    background-color: #FFFCF2;
+}
+
+.grey.darken-2 {
+  background-color: #EB5E28 !important;
+}
+
+.progress {
+  position: relative;
+  height: 4px;
+  display: block;
+  width: 100%;
+  background-color: #403D39;
+  border-radius: 2px;
+  margin: 0.5rem 0 1rem 0;
+  overflow: hidden;
+}
+
+.progress .determinate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #EB5E28;
+  -webkit-transition: width .3s linear;
+  transition: width .3s linear;
+}
+
+#search-query {
+  font-family: Poiret One;
+  font-size: 20px;
 }
