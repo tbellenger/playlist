@@ -85,6 +85,7 @@ function redirectToSpotifyAuthorizeEndpoint() {
 
 let list = [];
 let listUrl = '';
+let listExternalUrl = '';
 let userId = '';
 
 
@@ -179,6 +180,7 @@ async function spotifySearchArtistTopTracks(url) {
 async function spotifyCreatePlaylistFromArtists() {
     let artistArray = artistNameArray;
     let progressBarEl = document.querySelector('#progress-bar');
+    let playlistLinkEl = documnet.querySelector("#playlist-link");
     progressBarEl.style.width = '0%'
     if (artistArray.length === 0) {
         console.log('artist array was empty - using test data');
@@ -186,6 +188,7 @@ async function spotifyCreatePlaylistFromArtists() {
     }
     for (let i = 0; i < artistArray.length; i++) {
         await spotifySearchItem(artistArray[i]);
+        progressBarEl.style.width = ((100/artistArray.length)*i) + "%";
     }
     // list should now contain an array of artist objects
 
@@ -199,6 +202,8 @@ async function spotifyCreatePlaylistFromArtists() {
         uriArray.push(list[i].trackUri);
     }
     await spotifyAddItemsPlaylist(uriArray);
+    playlistLinkEl.innerHTML = "<a href='" + listExternalUrl + "'>Spotify Playlist</a>";
+    progressBarEl.style.width = '100%';
 
 }
 
@@ -245,6 +250,7 @@ async function spotifyCreatePlaylist() {
         if (response.ok) {
             let json = await response.json();
             listUrl = json.href;
+            listExternalUrl = json.external_urls.spotify;
             console.log(json);
         } else {
             handleError(await response.json());
