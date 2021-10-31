@@ -47,7 +47,7 @@ Jose Rivera,
 Lydia Loy
 
 ## Resources
-The project leverages many third party APIs and libraries, so we can focus on what we do best, coding. Ticketmaster and spotify are used in conjunction with eachother to pull the latest info about each event and artist in realtime. Leveraging the sweetalerts library allows us to create a unnique user experience to provide feedback to the end user, without having to recreate the wheel, aka JS window.alerts(). Lastly, materialize is a developer friendly front end framework providing modern CSS themes.
+The project leverages many third party APIs and libraries, so we can focus on what we do best, coding. Ticketmaster and spotify are used in conjunction with eachother to pull the latest info about each event and artist in realtime. Leveraging the sweetalerts library allows us to create a unique user experience to provide feedback to the end user, without having to recreate the wheel, aka JS window.alerts(). Lastly, materialize is a developer friendly front end framework providing modern CSS themes.
 * https://developer.ticketmaster.com/
 * https://developer.spotify.com/
 * https://sweetalert.js.org/
