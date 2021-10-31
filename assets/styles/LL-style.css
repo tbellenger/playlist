@@ -27,7 +27,6 @@ body {
     background-image: url(../image/esther-tuttle-V1_7RfnZ-w4-unsplash.jpg);
     background-size: cover;
 }
-
 .grey.lighten-2 {
     background-color: #403D39 !important;
 }
@@ -38,8 +37,7 @@ body {
     transition: box-shadow .25s, -webkit-box-shadow .25s;
     padding: 24px;
     margin: 0.5rem 0 1rem 0;
-    border-radius: 2px
-;
+    border-radius: 2px;
     background-color: #FFFCF2;
 }
 .grey {
@@ -47,7 +45,7 @@ body {
 }
 .progress {
     position: relative;
-    height: 20px;
+    height: 10px;
     display: block;
     width: 100%;
     background-color: #EB5E28;
@@ -61,8 +59,17 @@ label {
 }
 #search-btn {
     color:#252422;
+    margin-top: 5px !important;
 }
-
+.autocomplete{
+    color:#FFFCF2;
+    font-size: 16pt !important;
+    border-color: #EB5E28 !important;
+}
+.swal-button.swal-button--confirm{
+    background-color: #EB5E28 !important;
+    color:#FFFCF2 !important;
+}
 .btn, .btn-large, .btn-small {
     text-decoration: none;
     text-align: center;
@@ -72,20 +79,17 @@ label {
     cursor: pointer;
     color: #EB5E28 important!;
 }
-
 .grey.darken-3 {
     background-color: #EB5E28 !important;
 }
-
 .btn.disabled, .disabled.btn-large, .disabled.btn-small, .btn-floating.disabled, .btn-large.disabled, .btn-small.disabled, .btn-flat.disabled, .btn:disabled, .btn-large:disabled, .btn-small:disabled, .btn-floating:disabled, .btn-large:disabled, .btn-small:disabled, .btn-flat:disabled, .btn[disabled], .btn-large[disabled], .btn-small[disabled], .btn-floating[disabled], .btn-large[disabled], .btn-small[disabled], .btn-flat[disabled] {
     pointer-events: none;
-    background-color: #EB5E28 !important;
+    background-color: #FFFCF2 !important;
     -webkit-box-shadow: none;
     box-shadow: none;
     color: #252422 !important;
     cursor: default;
 }
-
 .btn, .btn-large, .btn-small {
     text-decoration: none;
     color: #252422;
@@ -95,23 +99,23 @@ label {
     transition: background-color .2s ease-out;
     cursor: pointer;
 }
-
 .card-title {
     color:#FFFCF2;
     font-size: 20px;
 }
-
 .left-col {
     align-items: center;
     display: flex;
     flew-wrap: wrap;
     justify-content: center;
   }
-
   footer {
       font-size: 18px;
       font-family: 'Poiret One', cursive;
       text-align: center;
       color:#FFFCF2;
       padding:15px;
+  }
+  #innerbox1{
+      margin-top: 20px;
   }

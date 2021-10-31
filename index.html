@@ -1,186 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.17/tailwind.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-        <link rel="stylesheet" href="./assets/styles/LL-style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/styles/style.css">
     <title>Pregame</title>
 </head>
-
 <body>
-  <header>
-    <nav class="nav-wrapper ">
-      <a class="logo" href="index.html">PREGAME</a>
-      <div class='right'>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <div class="row">
-    <div class="search section col s12 m4">
-      <!--Left column start-->
-      <div class="section card-panel grey lighten-2">
-        <!--Search box start-->
-          <div class="input-field">
-            <input type="text" name="search-text" id="search-query" class="autocomplete">
-            <label for="search-text">Festival Search</label>
-            
-            <a class='dropdown-trigger btn grey' href='#' data-target='dropdown-event'>Filter by Event Type</a>
-            <ul id='dropdown-event' class='dropdown-content'>
-              <li><a href="#!" class="grey-text" id="filter-event-area">Events By Area</a></li>
-              <li><a href="#!" class="grey-text" id="filter-event-artist">Events By Artist</a></li>
-            </ul>
-
-            <button class="btn waves-effect waves-light grey darken-3" type="submit" id="search-btn">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
-      </div>
-      <!--Search box end-->
-
-      <div class="section">
-        <!--button-box-->
-        <button class="btn waves-effect waves-light grey darken-3" id="connect-spotify">Connect To
-          Spotify<img src="./assets/images/spotify.jpg" width="30px"></button>
-
-        <span class="grey darken-3" id="spotify-login">Connection Status</span>
-
-        <button class="btn waves-effect waves-light grey darken-3" id="auth-btn">Connect to Youtube<img
-            src="./assets/images/youtube.jpg" width="30px"></button>
-
-        <span class="grey darken-3" id="youtube-login">Connection Status</span>
-      </div>
-    </div>
-    <!--Left column end-->
-
-    <div id="right-col" class="section main col s12 m6 L8">
-      <!--Right column start-->
-
-      <div class="" id="search-results">
-        <!--Search Result-->
-        
-          <!--Event Detail-->
-          <div class="event-container row">
-            <div class="col s12 l6 p-top">
-              <div class="card">
-                  <div class="card-image">
-                      <img src="https://via.placeholder.com/150" alt="">
-                      <span class="card-title">Event Title 1</span>
-                  </div>
-                  <div class="card-content">
-                      <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, amet?</p>
-                  </div>
-                  <div class="card-action">
-                      <input type="checkbox" name="" id="">
-                  </div>
-              </div>
-            </div>
+    <header class="">
+        <nav class="nav-wrapper center">
+            <a class="logo orange-text" href='#'>PREGAME</a>
         </nav>
     </header>
-      <main class="container flex flex-1 justify-evenly items-center">
-        <div id="left-col" class="col s5 15" class="search m4"><!--Left column start--> 
-          <div id="innerbox1" class="card-panel grey lighten-2"><!--Search box start-->
-            <div class="black-text">
-              <label for="search-text">Festival Search</label>
-              <input type="text" name="search-text" id="search-query" class="autocomplete">
+    <div class="container">
+        <div class="row">
+            <div class="left_bar col s12 m6 l4">
+                <div class="search col s12">
+                    <div class="search-panel card-panel">
+                        <div class="input-field">
+                            <input type="text" id="search-query">
+                            <a id="search-btn" class="btn grey darken-2">Search</a>
+                            <label for="search-query">Search Event</label>
+                            
+                        </div>
+                    </div>
+                </div>
                 
-              <div class="row-1">
-                <a class='dropdown-trigger btn grey' href='#' data-target='dropdown-event'>Filter by Event Type</a>
-                <ul id='dropdown-event' class='dropdown-content'>
-                  <li><a href="#!">Events By Area</a></li>
-                  <li><a href="#!" id="event">Events By Artist</a></li>
-                </ul>
-                  
-                <button class="btn waves-effect waves-light grey darken-3" type="submit" id="search-btn">
-                    <i class="fa fa-search"></i>
-                </button>
-              </div>
+                <div class="playlist-container col s12">
+                </div>
             </div>
-          </div><!--Search box end-->
-<div class="row-2">
-          <div class="btn-box controls flex flex-wrap flex-1"><!--button-box-->
-                <!-- <button class="btn waves-effect waves-light grey darken-3" id="auth-btn">Auth and
-                  Load</button> -->
-              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="spotify-login"
-                  disabled='true'>Connect To Spotify</button>
-
-              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="status-btn"
-                  disabled='true'>Connection Status</button>
-                  
-              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="auth-btn"
-                  >Connect to Youtube/Auth</button>
-                  
-              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 m-1" id="status2-btn"
-                  disabled='true'>Connection Status</button>
-          </div>
-        </div><!--Left column end-->
-      </div>
-     
-        <div id="right-col" class="col s7 17">
-
-          <div class="row card-panel grey lighten-2" id="search-results"><!--Search Result-->
-            <span class="card-title">Search Results</span>
-            <div class="card-content row-2 s12 m4"><!--Event Detail-->
-              <div class="card col h-24 m-1">Event Details</div>
-              <div class="card col h-24 m-1">Event Details</div>
-              <div class="card col h-24 m-1">Event Details</div>
-            </div>
-
-          </div>
-            <div>
-              <button class="btn btn-wrapper waves-effect waves-light grey darken-3 w-full" id="create-btn">Create Playlist</button>
+            <div class="main col s12 m6 l8">
+                <div class="search-results">
+                    <div class="events-container">
+                        <div class="col s12">
+                            <div class="card sticky-action" id="search-results">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img id="event-img" class="activator" src="./assets/images/sam-moqadam-0wFVLpANoYc-unsplash.jpg" alt="">
+                                </div>
+                                <div class="card-content">
+                                    <span id="event-title" class="card-title activator">Event Title<i class="material-icons right">arrow_upward</i></span>
+                                    <p id="event-short-desc" class="">Short event description with ending with an elipsis...</p>
+                                </div>
+                                <div class="card-reveal">
+                                    <span id="event-detail" class="card-title grey-text text-darken-4">Event Detail<i class="material-icons right">close</i></span>
+                                    <div class="card-action">
+                                        <!-- <a id="create-btn" class="btn grey darken-2">Create Playlist</a> -->
+                                        <a id="connect-spotify" class="btn grey darken-2">Create Playlist</a>
+                                        <!-- <div class="spotify-connect-status">
+                                            <p id="spotify-login">Not Connected</p>
+                                        </div> -->
+                                        <div class="progress">
+                                            <div id="progress-bar" class="determinate" style="width: 0%"></div>
+                                        </div>
+                                        <div id="playlist-link">
+                                            
+                                        </div>
+                                    </div>
+                                    <p id="event-long-desc"></p>
+                                    <div id="event-lineup" class="flow-text">
+                                        <div class="pg-card">
+                                            <img class="pg-artist-img" src="https://s1.ticketm.net/dam/a/1b7/c0772882-2b60-4206-adea-2d13ac3181b7_1461061_TABLET_LANDSCAPE_16_9.jpg">
+                                            <span class="pg-card-title">Tame Impala</span>
+                                        </div>
+                                        <div class="pg-card">
+                                            <img class="pg-artist-img" src="https://s1.ticketm.net/dam/a/87c/bf775ca2-e6cd-463a-9ff6-60459f33d87c_1094781_RETINA_PORTRAIT_3_2.jpg">
+                                            <span class="pg-card-title">Lizzo</span>
+                                        </div>
+                                        
+                                        <div class="pg-card">
+                                            <img class="pg-artist-img" src="https://s1.ticketm.net/dam/a/84e/4d1720db-9677-413c-b844-2cd22f1f484e_1313551_TABLET_LANDSCAPE_3_2.jpg">
+                                            <span class="pg-card-title">The Strokes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-      </div>
-
-      <!--create playlist button-->
-
-      <div class="progress col s12">
-        <div id="playlist-progress" class="determinate" style="width: 0%"></div>
-        <div class="content col s12" id="pl-link"></div>
-      </div>
     </div>
-    <!--Right column end-->
-  </div>
-  <footer class="d-toggle">
-    <div class="card-panel grey lighten-2">
-      <button class="btn btn-wrapper waves-effect waves-light grey darken-3 s12" id="create-btn">Create Playlist</button>
-    </div>
-  </footer>
-
-<<<<<<< HEAD
-=======
-    </main>
-    
-        <footer>
-          © Team six 
-        </footer>      
->>>>>>> LL/style
-
-  <script src="./assets/scripts/prefix.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="https://apis.google.com/js/api.js"></script>
-  <script src="./assets/scripts/ticketmaster.js"></script>
-  <script src="./assets/scripts/youtube.js"></script>
-  <script src="./assets/scripts/spotify.js"></script>
-  <script src="./assets/scripts/matcss.js"></script>
-  <script src="./assets/scripts/script.js"></script>
+    <script src="./assets/scripts/prefix.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./assets/scripts/ticketmaster.js"></script>
+    <script src="./assets/scripts/spotify.js"></script>
+    <script src="./assets/scripts/script.js"></script>
 </body>
-
 </html>

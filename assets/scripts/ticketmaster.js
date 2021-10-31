@@ -3,8 +3,8 @@ var tmApiKey = "YfcjW3gno5AAWiEVx4skuvK2AMDhLXmT"; // Ticketmaster API key
 var tmBaseUrl = "https://app.ticketmaster.com/discovery/v2"; // Base URL
 
 function getEventList() {
-    // pick all events that are music in the greater Sacramento area (dma ID = 374)
-    var url = tmBaseUrl + "/events.json?classificationName=music&dmaId=374&apikey=" + tmApiKey;
+    // pick all events that are music
+    var url = tmBaseUrl + "/events.json?classificationName=music&apikey=" + tmApiKey;
     // url = url.replace(" ", "%20");
 
     fetch(url)
@@ -46,84 +46,79 @@ function getEventList() {
 
 function getArtistNameList(name) {
 
-    // Get all events that match the name
-    var url = tmBaseUrl + "/events.json?keyword=" + name + "&apikey=" + tmApiKey;
+    // Get a music event that matches the name
+    var url = tmBaseUrl + "/events.json?keyword=" + name + "&classificationName=music&apikey=" + tmApiKey;
     url = url.replace(" ", "%20");
 
-    fetch(url,
-            /*{
-                   mode: "no-cors"
-               }*/
-        )
+    fetch(url)
         .then(function (response) {
             if (response.ok) {
-                console.log('search on ' + name + ' successful');
                 return response.json();
             }
             return null;
         })
         .then(function (data) {
+            // Clear out the old global data
             artistNameArray = [];
             artistPictureArray = [];
+            searchResult.startDate = "";
+            searchResult.endDate = "";
+            searchResult.venue = "";
+            searchResult.artistInfo = [];
 
             if (!data._embedded) {
                 swal("Error", "Could not find \"" + name + "\".", "error");
                 return;
             }
 
+            let dateBase = data._embedded.events[0];
+            searchResult.startDate = dateBase.dates.start.localDate;
+            if (dateBase.dates.end) {
+                searchResult.endDate = dateBase.dates.end.localDate;
+            }
+            searchResult.venue = data._embedded.events[0]._embedded.venues[0].name;
+
             let attractArray = data._embedded.events[0]._embedded.attractions;
-            console.log(attractArray);
             for (let i = 0; i < attractArray.length; i++) {
                 artistNameArray.push(attractArray[i].name);
-                artistPictureArray.push(attractArray[i].images[0].url);
-                // getArtistPicture(attractArray[i].id);
+                
+                let lastImageIndex = attractArray[i].images.length - 1;
+                if (lastImageIndex < 0)
+                    lastImageIndex = 0;
+                
+                let images = attractArray[i].images;
+                let currImage = getRequiredImage(images);
+                if (currImage !== "") {
+                    artistPictureArray.push(currImage);
+                } else {
+                    artistPictureArray.push(attractArray[i].images[lastImageIndex].url);
+                    currImage = attractArray[i].images[lastImageIndex].url;
+                }
+                let nextObj = {
+                    name: attractArray[i].name,
+                    picture: currImage
+                };
+                searchResult.artistInfo.push(nextObj);
             }
+
+            updateSearchContents();
         });
 }
 
-var url = "";
-var urls = [];
-
-function getArtistPicture(id) {
-    url = tmBaseUrl + "/attractions/" + id + "?apikey=" + tmApiKey;
-    urls.push(url);
-    console.log(url)
-    setTimeout(function (url) {
-        console.log(url);
-        sendAsyncRequests();
-    }, 0.25 * 1000);
-}
-
-var index = 0;
-
-function sendAsyncRequests() {
-    for (index = 0; index < urls.length; index++) {
-        setTimeout(function () {
-            sendAsyncReq(urls[index]);
-        }, 0.23 * 1000);
-    }
-}
-
-async function sendAsyncReq(url) {
-    await fetch(url,
-            /* {
-                          mode: "no-cors"
-                      }*/
-        )
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            }
-            return null;
-        })
-        .then(function (data) {
-            if (data) {
-                artistPictureArray.push(data.images[0].url);
+function getRequiredImage(images) {
+    let selectedImage = "";
+    for (let i = 0; i < images.length; i++) {
+        if (images[i].ratio === "16_9") {
+            if (images[i].width === 640) {
+                selectedImage = images[i].url;
+                break;
             } else {
-                artistPictureArray.push("");
+                if (selectedImage === "") {
+                    selectedImage = images[i].url;
+                }
             }
-        })
-        .catch(function (error) {
-            artistPictureArray.push("");
-        });
+        }
+    }
+
+    return selectedImage;
 }
