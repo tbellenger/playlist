@@ -81,6 +81,10 @@ function updateSearchContents() {
 
 }
 
+function spotConnectionCallback() {
+    console.log('spot connected');
+}
+
 function artistTemplate(eventArtist) {
     return `<div class="pg-card">
     <img class="pg-artist-img" src="${eventArtist.picture}">
