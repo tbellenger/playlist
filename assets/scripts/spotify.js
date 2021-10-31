@@ -178,9 +178,13 @@ async function spotifySearchArtistTopTracks(url) {
 }
 
 async function spotifyCreatePlaylistFromArtists() {
+    list = [];
+    listUrl = '';
+    listExternalUrl = '';
+    userId = '';
     let artistArray = artistNameArray;
     let progressBarEl = document.querySelector('#progress-bar');
-    let playlistLinkEl = documnet.querySelector("#playlist-link");
+    let playlistLinkEl = document.querySelector("#playlist-link");
     progressBarEl.style.width = '0%'
     if (artistArray.length === 0) {
         console.log('artist array was empty - using test data');
@@ -201,6 +205,7 @@ async function spotifyCreatePlaylistFromArtists() {
     for (let i = 0; i < list.length; i++) {
         uriArray.push(list[i].trackUri);
     }
+    console.log(uriArray.length);
     await spotifyAddItemsPlaylist(uriArray);
     playlistLinkEl.innerHTML = "<a href='" + listExternalUrl + "'>Spotify Playlist</a>";
     progressBarEl.style.width = '100%';
