@@ -9,9 +9,9 @@ let txtSearch = document.querySelector("#search-query");
 let searchResultsEl = document.querySelector("#search-results");
 let plProgressEl = document.querySelector("#playlist-progress");
 
-btnConnectSpotify.addEventListener("click", redirectToSpotifyAuthorizeEndpoint);
+btnConnectSpotify.addEventListener("click", connectAndCreate);
 //btnAuth.addEventListener("click", authenticate);
-btnCreate.addEventListener("click", spotifyCreatePlaylistFromArtists);
+//btnCreate.addEventListener("click", spotifyCreatePlaylistFromArtists);
 //btnUpdate.addEventListener("click", updatePlaylist);
 btnSearch.addEventListener("click", searchEvents);
 btnSearch.addEventListener("keypress", searchEventsKey);
@@ -28,4 +28,12 @@ function searchEvents(event) {
     let query = txtSearch.value;
     // fill array with artists
     getArtistNameList(query);
+}
+
+function connectAndCreate() {
+    if (localStorage.getItem('spotConnected')) {
+        spotifyCreatePlaylistFromArtists();
+    } else {
+        redirectToSpotifyAuthorizeEndpoint();
+    }
 }

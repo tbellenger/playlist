@@ -34,6 +34,7 @@ function exchangeToken(code) {
 
             // clear search query params in the url
             window.history.replaceState({}, document.title, '/');
+            localStorage.setItem('spotConnected', true);
             opener.spotConnectionCallback(true);
             window.close();
         })
@@ -46,6 +47,7 @@ function handleError(error) {
         status: error.response.status,
         message: error.error.error_description,
     });
+    localStorage.setItem('spotConnected', false);
     opener.spotConnectionCallback(false);
 }
 

@@ -81,8 +81,11 @@ function updateSearchContents() {
 
 }
 
-function spotConnectionCallback() {
+function spotConnectionCallback(isConnected) {
     console.log('spot connected');
+    if (isConnected) {
+        spotifyCreatePlaylistFromArtists()
+    }
 }
 
 function artistTemplate(eventArtist) {
