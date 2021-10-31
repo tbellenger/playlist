@@ -81,17 +81,44 @@ function getArtistNameList(name) {
             let attractArray = data._embedded.events[0]._embedded.attractions;
             for (let i = 0; i < attractArray.length; i++) {
                 artistNameArray.push(attractArray[i].name);
+                
                 let lastImageIndex = attractArray[i].images.length - 1;
                 if (lastImageIndex < 0)
                     lastImageIndex = 0;
-                artistPictureArray.push(attractArray[i].images[lastImageIndex].url);
+                
+                let images = attractArray[i].images;
+                let currImage = getRequiredImage(images);
+                if (currImage !== "") {
+                    artistPictureArray.push(currImage);
+                } else {
+                    artistPictureArray.push(attractArray[i].images[lastImageIndex].url);
+                    currImage = attractArray[i].images[lastImageIndex].url;
+                }
                 let nextObj = {
                     name: attractArray[i].name,
-                    picture: attractArray[i].images[lastImageIndex].url
+                    picture: currImage
                 };
                 searchResult.artistInfo.push(nextObj);
             }
 
             updateSearchContents();
         });
+}
+
+function getRequiredImage(images) {
+    let selectedImage = "";
+    for (let i = 0; i < images.length; i++) {
+        if (images[i].ratio === "16_9") {
+            if (images[i].width === 640) {
+                selectedImage = images[i].url;
+                break;
+            } else {
+                if (selectedImage === "") {
+                    selectedImage = images[i].url;
+                }
+            }
+        }
+    }
+
+    return selectedImage;
 }
