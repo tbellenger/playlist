@@ -10,6 +10,10 @@ body {
   background-color: #252422;
 }
 
+.logo {
+  font-size: 2rem;
+}
+
 .d-toggle {
   display:none;
 }
