@@ -66,14 +66,14 @@ body {
   border-radius: 5px;
 }
 
-.card .card-content {
+/* .card .card-content {
   padding: 24px;
   border-radius: 15px 15px 15px 15px !important;
 }
 
 .card .card-image img {
   border-radius: 15px 15px 0 0 !important;
-}
+} */
 
 .card {
   margin: 1.5rem 0px !important;
