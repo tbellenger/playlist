@@ -1,0 +1,118 @@
+nav {
+    background-color: #252422;
+    width: 100%;
+    height: 90px;
+    line-height: 100px;
+}
+nav a {
+    color: #EB5E28;
+    padding: 20px;
+    font-size: 2rem;
+}
+nav ul a {
+    -webkit-transition: background-color .3s;
+    transition: background-color .3s;
+    font-size: 1.5rem;
+    color: #EB5E28;
+    display: block;
+    padding: 0 15px;
+    cursor: pointer;
+}
+body {
+    font-family: inherit;
+    line-height: inherit;
+    font-family: 'Poiret One', cursive;
+    margin: 0;
+    border: 0;
+    background-image: url(../image/esther-tuttle-V1_7RfnZ-w4-unsplash.jpg);
+    background-size: cover;
+}
+
+.grey.lighten-2 {
+    background-color: #403D39 !important;
+}
+.card-panel {
+    -webkit-transition: -webkit-box-shadow .25s;
+    transition: -webkit-box-shadow .25s;
+    transition: box-shadow .25s;
+    transition: box-shadow .25s, -webkit-box-shadow .25s;
+    padding: 24px;
+    margin: 0.5rem 0 1rem 0;
+    border-radius: 2px
+;
+    background-color: #FFFCF2;
+}
+.grey {
+    background-color: #FFFCF2 !important;
+}
+.progress {
+    position: relative;
+    height: 20px;
+    display: block;
+    width: 100%;
+    background-color: #EB5E28;
+    border-radius: 2px;
+    margin: 0.5rem 0 1rem 0;
+    overflow: hidden;
+}
+label {
+    font-size: 20px;
+    color: #FFFCF2;
+}
+#search-btn {
+    color:#252422;
+}
+
+.btn, .btn-large, .btn-small {
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+    color: #EB5E28 important!;
+}
+
+.grey.darken-3 {
+    background-color: #EB5E28 !important;
+}
+
+.btn.disabled, .disabled.btn-large, .disabled.btn-small, .btn-floating.disabled, .btn-large.disabled, .btn-small.disabled, .btn-flat.disabled, .btn:disabled, .btn-large:disabled, .btn-small:disabled, .btn-floating:disabled, .btn-large:disabled, .btn-small:disabled, .btn-flat:disabled, .btn[disabled], .btn-large[disabled], .btn-small[disabled], .btn-floating[disabled], .btn-large[disabled], .btn-small[disabled], .btn-flat[disabled] {
+    pointer-events: none;
+    background-color: #EB5E28 !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #252422 !important;
+    cursor: default;
+}
+
+.btn, .btn-large, .btn-small {
+    text-decoration: none;
+    color: #252422;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+}
+
+.card-title {
+    /* color:#FFFCF2; */
+    font-size: 20px;
+}
+
+.left-col {
+    align-items: center;
+    display: flex;
+    flew-wrap: wrap;
+    justify-content: center;
+  }
+
+  footer {
+      font-size: 18px;
+      font-family: 'Poiret One', cursive;
+      text-align: center;
+      color:#FFFCF2;
+      padding:15px;
+  }
+

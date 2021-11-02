@@ -32,18 +32,11 @@ body {
   box-shadow: 0 1px 0 0 #252422;
 }
 
-input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
-  background-color: transparent;
-  border-bottom: .5px solid #EB5E28;
-}
-
-/* valid color */
 .input-field input[type=text].valid {
   border-bottom: .5px solid #EB5E28;
   box-shadow: 0 1px 0 0 ;
 }
 
-/* invalid color */
 .input-field input[type=text].invalid {
   border-bottom: .5px solid #EB5E28;
   box-shadow: 0 1px 0 0 #252422;
@@ -62,7 +55,7 @@ input:not([type]), input[type=text]:not(.browser-default), input[type=password]:
 
 .pg-card-title {
   color:#FFFCF2;
-  text-shadow: 1px 2px 2px #252422;;
+  text-shadow: 1px 2px 2px #252422;
   font-size: 28px;
   position:absolute;
   bottom: 10px;
@@ -70,6 +63,7 @@ input:not([type]), input[type=text]:not(.browser-default), input[type=password]:
 }
 
 .pg-artist-img {
+  width:100%;
   max-width: 100%;
   border-radius: 5px;
 }

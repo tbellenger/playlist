@@ -13,7 +13,7 @@ window.addEventListener('load', function (event) {
 });
 
 function exchangeToken(code) {
-    const code_verifier = localStorage.getItem('code_verifier');
+    const code_verifier = JSON.parse(localStorage.getItem('code_verifier'));
 
     fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
@@ -34,7 +34,8 @@ function exchangeToken(code) {
 
             // clear search query params in the url
             window.history.replaceState({}, document.title, '/');
-            opener.document.querySelector("#spotify-login").innerHTML = "spotify logged in";
+            localStorage.setItem('spotConnected', JSON.stringify(true));
+            opener.spotConnectionCallback();
             window.close();
         })
         .catch(handleError);
@@ -46,6 +47,8 @@ function handleError(error) {
         status: error.response.status,
         message: error.error.error_description,
     });
+    localStorage.setItem('spotConnected', false);
+    opener.spotConnectionCallback();
 }
 
 function errorTemplate(data) {
@@ -79,7 +82,7 @@ function processTokenResponse(data) {
     const t = new Date();
     expires_at = t.setSeconds(t.getSeconds() + data.expires_in);
 
-    localStorage.setItem('access_token', access_token);
-    localStorage.setItem('refresh_token', refresh_token);
-    localStorage.setItem('expires_at', expires_at);
+    localStorage.setItem('access_token', JSON.stringify(access_token));
+    localStorage.setItem('refresh_token', JSON.stringify(refresh_token));
+    localStorage.setItem('expires_at', JSON.stringify(expires_at));
 }

@@ -9,9 +9,9 @@
 let spotifyTestPlaylist = ['Tame Impala', 'Lizzo', 'The Strokes', 'Tyler, The Creator', 'Vampire Weekend', 'J Balvin', 'RÜFÜS DU SOL', 'Kehlani', 'Glass Animals', 'ZHU', 'Young Thug', 'Kaytranada', 'Khruangbin', 'Lord Huron', 'Nelly', 'Brittany Howard', 'Burna Boy', 'Melanie Martinez', '24kgoldn', 'TroyBoi', 'Angel Olsen', 'Sofi Tukker'];
 
 // Restore tokens from localStorage
-let access_token = localStorage.getItem('access_token') || null;
-let refresh_token = localStorage.getItem('refresh_token') || null;
-let expires_at = localStorage.getItem('expires_at') || null;
+let access_token = JSON.parse(localStorage.getItem('access_token')) || null;
+let refresh_token = JSON.parse(localStorage.getItem('refresh_token')) || null;
+let expires_at = JSON.parse(localStorage.getItem('expires_at')) || null;
 
 // Auth functions
 function generateRandomString(length) {
@@ -51,7 +51,7 @@ function redirectToSpotifyAuthorizeEndpoint() {
     const codeVerifier = generateRandomString(64);
 
     generateCodeChallenge(codeVerifier).then((code_challenge) => {
-        localStorage.setItem('code_verifier', codeVerifier);
+        localStorage.setItem('code_verifier', JSON.stringify(codeVerifier));
 
         // Redirect to example:
         // GET https://accounts.spotify.com/authorize?response_type=code&client_id=77e602fc63fa4b96acff255ed33428d3&redirect_uri=http%3A%2F%2Flocalhost&scope=user-follow-modify&state=e21392da45dbf4&code_challenge=KADwyz1X~HIdcAG20lnXitK6k51xBP4pEMEZHmCneHD1JhrcHjE1P3yU_NjhBz4TdhV6acGo16PCd10xLwMJJ4uCutQZHw&code_challenge_method=S256
@@ -71,7 +71,7 @@ function redirectToSpotifyAuthorizeEndpoint() {
         try {
             windowObjectReference.focus();
         } catch(e) {
-            console.log('Popup may have been blocked');
+            alert("Popup is blocked");
         }
         // If the user accepts spotify will come back to your application with the code in the response query string
         // Example: http://127.0.0.1:8080/?code=NApCCg..BkWtQ&state=profile%2Factivity
@@ -85,13 +85,14 @@ function redirectToSpotifyAuthorizeEndpoint() {
 
 let list = [];
 let listUrl = '';
+let listExternalUrl = '';
 let userId = '';
 
 
 // Search for artist and retrieve id - then use url returned to search top tracks
 async function spotifySearchItem(artistName) {
     let url = 'https://api.spotify.com/v1/search?type=artist&q=';
-    let auth = 'Bearer ' + localStorage.getItem('access_token');
+    let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
     try {
         let response = await fetch(url + artistName,{
             headers:{
@@ -115,7 +116,7 @@ async function spotifySearchItem(artistName) {
 }
 
 async function spotifySearchArtist(url) {
-    let auth = 'Bearer ' + localStorage.getItem('access_token');
+    let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
     try {
         let response = await fetch(url,{
             headers:{
@@ -135,7 +136,7 @@ async function spotifySearchArtist(url) {
 }
 
 async function spotifySearchArtistTopTracks(url) {
-    let auth = 'Bearer ' + localStorage.getItem('access_token');
+    let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
     try {
         let response = await fetch(url + '/top-tracks?market=US',{
             headers:{
@@ -177,13 +178,21 @@ async function spotifySearchArtistTopTracks(url) {
 }
 
 async function spotifyCreatePlaylistFromArtists() {
+    list = [];
+    listUrl = '';
+    listExternalUrl = '';
+    userId = '';
     let artistArray = artistNameArray;
+    let progressBarEl = document.querySelector('#progress-bar');
+    let playlistLinkEl = document.querySelector("#playlist-link");
+    progressBarEl.style.width = '0%'
     if (artistArray.length === 0) {
         console.log('artist array was empty - using test data');
         artistArray = spotifyTestPlaylist;
     }
     for (let i = 0; i < artistArray.length; i++) {
         await spotifySearchItem(artistArray[i]);
+        progressBarEl.style.width = ((100/artistArray.length)*i) + "%";
     }
     // list should now contain an array of artist objects
 
@@ -196,12 +205,15 @@ async function spotifyCreatePlaylistFromArtists() {
     for (let i = 0; i < list.length; i++) {
         uriArray.push(list[i].trackUri);
     }
+    console.log(uriArray.length);
     await spotifyAddItemsPlaylist(uriArray);
+    playlistLinkEl.innerHTML = "<a href='" + listExternalUrl + "'>Spotify Playlist</a>";
+    progressBarEl.style.width = '100%';
 
 }
 
 async function spotifyGetCurrentUser() {
-    let auth = 'Bearer ' + localStorage.getItem('access_token');
+    let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
 
     try {
         let response = await fetch('https://api.spotify.com/v1/me',{
@@ -224,7 +236,7 @@ async function spotifyGetCurrentUser() {
 }
 
 async function spotifyCreatePlaylist() {
-    let auth = 'Bearer ' + localStorage.getItem('access_token');
+    let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
     const data = {
         name: 'Pregame' + new Date().getTime(),
         description: 'Pregame Festival Playlist',
@@ -243,6 +255,7 @@ async function spotifyCreatePlaylist() {
         if (response.ok) {
             let json = await response.json();
             listUrl = json.href;
+            listExternalUrl = json.external_urls.spotify;
             console.log(json);
         } else {
             handleError(await response.json());
@@ -253,7 +266,7 @@ async function spotifyCreatePlaylist() {
 }
 
 async function spotifyAddItemsPlaylist(uriArray) {
-    let auth = 'Bearer ' + localStorage.getItem('access_token');
+    let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
     const data = {
         uris : uriArray,
         position: 0

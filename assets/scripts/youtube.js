@@ -6,7 +6,6 @@ async function authenticate() {
     try {
         await gapi.auth2.getAuthInstance()
             .signIn({ scope: "https://www.googleapis.com/auth/youtube" });
-        console.log("Sign-in successful");
         loadClient();
     } catch (err) {
         console.log("Error signing in", err);
@@ -58,6 +57,32 @@ async function createPlaylist() {
         btnUpdate.disabled = false;
     } catch (err) {
         console.error("Execute error", err);
+    }
+}
+
+async function searchVideos(event) {
+    event.preventDefault();
+    let query = txtSearch.value;
+    try {
+        let response = await gapi.client.youtube.search.list({
+            "part": [
+                "snippet"
+            ],
+            "maxResults": 1,
+            "q": query,
+            "type": "video",
+            "order": "viewCount",
+            "safeSearch": "none"
+        });
+        // Handle the results here (response.result has the parsed body).
+        console.log("Response", response);
+        let videos = response.result.items;
+        videoIds = [];
+        for (let i = 0; i < videos.length; i++) {
+            videoIds.push(videos[i].id.videoId);
+        }
+    } catch (error) {
+        console.log(error);
     }
 }
 

@@ -10,13 +10,14 @@ let searchResult = {
 
 // Spotify Auth Details
 const client_id = '6a0256e60f084740acaba82df07a21e2';
-//const redirect_uri = 'https://tbellenger.github.io/playlist/callback/'; // Your redirect uri
+const redirect_uri = 'https://tbellenger.github.io/playlist/callback/'; // Your redirect uri
 // testing url
-const redirect_uri = 'http://127.0.0.1:5500/callback/'; // Your redirect uri
+//const redirect_uri = 'http://127.0.0.1:5500/callback/'; // Your redirect uri
 
 function updateSearchContents() {
     console.log("searchResult \n \t\t", searchResult)
-    
+    let mainContentEl = document.querySelector('.main');
+    mainContentEl.style.display = 'inherit';
     if(searchResult.artistInfo.length != null ) {
         let aEvent = searchResult.artistInfo[0]; // grab the event name and event image
         let eventTitleId = "event-title"
@@ -61,19 +62,19 @@ function updateSearchContents() {
             //grab the container that will hold the list of artists
             let pEventLineUpEl = document.querySelector("#" + eventLineUpId)
             pEventLineUpEl.innerHTML = "" // clear out the old Lineup
-            let ulLineUpEl = document.createElement("ul") // make an Unordered list to hold the lineup
-
+            //let ulLineUpEl = document.createElement("ul") // make an Unordered list to hold the lineup
+            let inner = '';
             // update the event list with the latest artist names & artist data
             // the first index in the artist array, at index = 0, is always the venue info, so we skip that index
             for (let index = 1; index < eventArtistArray.length; index++) {
                 // starting at index 1, loop over the array of artist objects
-                let liElement = document.createElement("li")
-                let artistName = eventArtistArray[index].name;
-                liElement.setAttribute("id", eventTitleId + artistName)
-                liElement.innerHTML = artistName
-                ulLineUpEl.append(liElement)
+                //let liElement = document.createElement("li")
+                //let artistName = eventArtistArray[index].name;
+                //liElement.setAttribute("id", eventTitleId + artistName)
+                //liElement.innerHTML = artistName
+                inner += artistTemplate(eventArtistArray[index]);
             }
-            pEventLineUpEl.append(ulLineUpEl)
+            pEventLineUpEl.innerHTML = inner;
 
             //console.log(spanTitleEl, childElementMaterialIcon)
         }
@@ -81,6 +82,13 @@ function updateSearchContents() {
 
 }
 
-function artistTemplate(name, img) {
+function spotConnectionCallback() {
+    connectAndCreate();
+}
 
+function artistTemplate(eventArtist) {
+    return `<div class="pg-card">
+    <img class="pg-artist-img" src="${eventArtist.picture}">
+    <span class="pg-card-title">${eventArtist.name}</span>
+    </div>`
 }
