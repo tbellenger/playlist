@@ -1,4 +1,3 @@
-
 * {
   font-family: Poiret One;
 }
@@ -9,7 +8,6 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
-
 
 .nav-wrapper {
   height:80px;
@@ -23,38 +21,38 @@ body {
 }
 
   /* label color */
-  .input-field label.input-field input[type=text]:focus + label {
-    color: deep-grey;
-    font-size: 16px !important;
-  }
+.input-field label.input-field input[type=text]:focus + label {
+  color: deep-grey;
+  font-size: 16px !important;
+}
  
-  /* label underline focus color */
-  .input-field input[type=text]:focus {
-    border-bottom: .5px solid #EB5E28 !important;
-    box-shadow: 0 1px 0 0 #252422;
-  }
-
-  input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
-    background-color: transparent;
-    border-bottom: .5px solid #EB5E28;
-  
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: .5px solid #EB5E28 !important;
+  box-shadow: 0 1px 0 0 #252422;
 }
 
-  /* valid color */
-  .input-field input[type=text].valid {
-    border-bottom: .5px solid #EB5E28;
-    box-shadow: 0 1px 0 0 ;
-  }
-  /* invalid color */
-  .input-field input[type=text].invalid {
-    border-bottom: .5px solid #EB5E28;
-    box-shadow: 0 1px 0 0 #252422;
-  }
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+  background-color: transparent;
+  border-bottom: .5px solid #EB5E28;
+}
 
-  .card-panel {
-    transition: box-shadow 0.25s ease 0s, -webkit-box-shadow 0.25s ease 0s;
-    margin: 1.5rem 0px !important;
-    border-radius: 10px !important;
+/* valid color */
+.input-field input[type=text].valid {
+  border-bottom: .5px solid #EB5E28;
+  box-shadow: 0 1px 0 0 ;
+}
+
+/* invalid color */
+.input-field input[type=text].invalid {
+  border-bottom: .5px solid #EB5E28;
+  box-shadow: 0 1px 0 0 #252422;
+}
+
+.card-panel {
+  transition: box-shadow 0.25s ease 0s, -webkit-box-shadow 0.25s ease 0s;
+  margin: 1.5rem 0px !important;
+  border-radius: 10px !important;
 }
 
 .pg-card {
