@@ -102,7 +102,7 @@ async function spotifySearchItem(artistName) {
         });
         if (response.ok) {
             let json = await response.json();
-            console.log(json);
+            
             if (json.artists.items.length != 0) {
                 console.log(json.artists.items[0].href);
                 await spotifySearchArtistTopTracks(json.artists.items[0].href);
@@ -126,7 +126,7 @@ async function spotifySearchArtist(url) {
         });
         if (response.ok) {
             let json = await response.json();
-            console.log(json);
+            
         } else {
             handleError(await response.json());
         }
@@ -146,7 +146,7 @@ async function spotifySearchArtistTopTracks(url) {
         });
         if (response.ok) {
             let json = await response.json();
-            console.log(json);
+            
             let data = {
                 artistName:'',
                 artistHref:'',
@@ -164,7 +164,7 @@ async function spotifySearchArtistTopTracks(url) {
                     data.track = json.tracks[i].name;
                     data.trackHref = json.tracks[i].href;
                     data.trackUri = json.tracks[i].uri;
-                    console.log(data);
+                    
                     list.push(data);
                     break;
                 }
@@ -225,7 +225,7 @@ async function spotifyGetCurrentUser() {
         if (response.ok) {
             let json = await response.json();
             userId = json.id;
-            console.log(json);
+            
             
         } else {
             handleError(await response.json());
@@ -284,7 +284,7 @@ async function spotifyAddItemsPlaylist(uriArray) {
         if (response.ok) {
             let json = await response.json();
             listUrl = json.href;
-            console.log(json);
+            
         } else {
             handleError(await response.json());
         }
