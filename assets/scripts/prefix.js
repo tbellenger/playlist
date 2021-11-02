@@ -15,7 +15,7 @@ const client_id = '6a0256e60f084740acaba82df07a21e2';
 const redirect_uri = 'http://127.0.0.1:5500/callback/'; // Your redirect uri
 
 function updateSearchContents() {
-    console.log("searchResult \n \t\t", searchResult)
+    //console.log("searchResult \n \t\t", searchResult)
     let mainContentEl = document.querySelector('.main');
     mainContentEl.style.display = 'inherit';
     if(searchResult.artistInfo.length != null ) {
