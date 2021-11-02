@@ -1,31 +1,107 @@
-body { 
+
+* {
+  font-family: Poiret One;
+}
+
+body {
     height: 100vh;
-    background-image: linear-gradient(rgb(155, 33, 236), 80%, rgb(11, 255, 133)) !important;
+    background-image: url(../images/esther-tuttle-V1_7RfnZ-w4-unsplash.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+
 .nav-wrapper {
-    background-color: rgb(155, 33, 236);
+  height:80px;
 }
 
-.card {
-  margin: 0 .25rem;
+.logo.orange-text {
+  font-size: 32px;
+  position: absolute;
+  margin-top: 8px;
+  color: #EB5E28 !important;
 }
-.d-toggle{
-  display:none;
-}
-.p-top{
-  padding-top: 2% !important;
-}
-/* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
-@media screen and (max-width: 575px) {
-  .d-toggle{
-    display:block;
-    position: -webkit-sticky;
-    position: sticky;
-    bottom: 0;
-    z-index: 9990;
+
+  /* label color */
+  .input-field label.input-field input[type=text]:focus + label {
+    color: deep-grey;
+    font-size: 16px !important;
+  }
+ 
+  /* label underline focus color */
+  .input-field input[type=text]:focus {
+    border-bottom: .5px solid #EB5E28 !important;
+    box-shadow: 0 1px 0 0 #252422;
   }
 
+  input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+    background-color: transparent;
+    border-bottom: .5px solid #EB5E28;
+  
+}
+
+  /* valid color */
+  .input-field input[type=text].valid {
+    border-bottom: .5px solid #EB5E28;
+    box-shadow: 0 1px 0 0 ;
+  }
+  /* invalid color */
+  .input-field input[type=text].invalid {
+    border-bottom: .5px solid #EB5E28;
+    box-shadow: 0 1px 0 0 #252422;
+  }
+
+  .card-panel {
+    transition: box-shadow 0.25s ease 0s, -webkit-box-shadow 0.25s ease 0s;
+    margin: 1.5rem 0px !important;
+    border-radius: 10px !important;
+}
+
+.pg-card {
+  border-radius: 5px;
+}
+
+.pg-artist-img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+/* .card .card-content {
+  padding: 24px;
+  border-radius: 15px 15px 15px 15px !important;
+}
+
+.card .card-image img {
+  border-radius: 15px 15px 0 0 !important;
+} */
+
+.card {
+  margin: 1.5rem 0px !important;
+}
+
+#search-query {
+  font-size: 20px;
+}
+
+.deep-grey {
+  color:#252422 !important;
+}
+
+.grey-background{
+  background-color: #252422 !important;
+}
+
+.red-orange {
+  background-color: #EB5E28 !important;
+}
+.orange-red {
+  color: #eb5e28 !important;
+}
+
+.white-background {
+  background-color: #FFFCF2!important;
+}
+
+.white {
+  color: #FFFCF2 !important;
 }
