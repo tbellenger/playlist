@@ -42,7 +42,7 @@ The following image demonstrates the web application's appearance and functional
  
 Tom Bellenger,
 David Barron,
-Joe Moganam,
+Joe Mogannam,
 Jose Rivera,
 Lydia Loy
 
