@@ -238,11 +238,11 @@ async function spotifyGetCurrentUser() {
 async function spotifyCreatePlaylist() {
     let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
     const data = {
-        name: 'Pregame' + new Date().getTime(),
+        name: 'Pregame x ' + localStorage.getItem('festival_name'),
         description: 'Pregame Festival Playlist',
         public: false
     }
-
+    new Date().getTime()
     try {
         let response = await fetch('https://api.spotify.com/v1/users/'+userId+'/playlists',{
             headers:{

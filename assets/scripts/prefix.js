@@ -33,7 +33,7 @@ function updateSearchContents() {
 
         let eventImgElement = document.querySelector("#"+eventImgId)
         eventImgElement.setAttribute("src", eventPictureUrl)
-
+        localStorage.setItem('festival_name', searchResult.artistInfo[0].name);
         //make an empty Icon element, just in case we need to add a new event to the list
         // for the scope of the project it may not be used
         let childElementMaterialIcon = document.createElement("i")
