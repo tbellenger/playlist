@@ -102,9 +102,9 @@ async function spotifySearchItem(artistName) {
         });
         if (response.ok) {
             let json = await response.json();
-            console.log(json);
+            
             if (json.artists.items.length != 0) {
-                console.log(json.artists.items[0].href);
+                
                 await spotifySearchArtistTopTracks(json.artists.items[0].href);
             }
         } else {
@@ -126,7 +126,7 @@ async function spotifySearchArtist(url) {
         });
         if (response.ok) {
             let json = await response.json();
-            console.log(json);
+            
         } else {
             handleError(await response.json());
         }
@@ -146,7 +146,7 @@ async function spotifySearchArtistTopTracks(url) {
         });
         if (response.ok) {
             let json = await response.json();
-            console.log(json);
+            
             let data = {
                 artistName:'',
                 artistHref:'',
@@ -164,7 +164,7 @@ async function spotifySearchArtistTopTracks(url) {
                     data.track = json.tracks[i].name;
                     data.trackHref = json.tracks[i].href;
                     data.trackUri = json.tracks[i].uri;
-                    console.log(data);
+                    
                     list.push(data);
                     break;
                 }
@@ -205,7 +205,7 @@ async function spotifyCreatePlaylistFromArtists() {
     for (let i = 0; i < list.length; i++) {
         uriArray.push(list[i].trackUri);
     }
-    console.log(uriArray.length);
+    
     await spotifyAddItemsPlaylist(uriArray);
     playlistLinkEl.innerHTML = "<a href='" + listExternalUrl + "'>Spotify Playlist</a>";
     progressBarEl.style.width = '100%';
@@ -225,7 +225,7 @@ async function spotifyGetCurrentUser() {
         if (response.ok) {
             let json = await response.json();
             userId = json.id;
-            console.log(json);
+            
             
         } else {
             handleError(await response.json());
@@ -238,11 +238,11 @@ async function spotifyGetCurrentUser() {
 async function spotifyCreatePlaylist() {
     let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
     const data = {
-        name: 'Pregame' + new Date().getTime(),
+        name: 'Pregame x ' + localStorage.getItem('festival_name'),
         description: 'Pregame Festival Playlist',
         public: false
     }
-
+    new Date().getTime()
     try {
         let response = await fetch('https://api.spotify.com/v1/users/'+userId+'/playlists',{
             headers:{
@@ -256,7 +256,7 @@ async function spotifyCreatePlaylist() {
             let json = await response.json();
             listUrl = json.href;
             listExternalUrl = json.external_urls.spotify;
-            console.log(json);
+            
         } else {
             handleError(await response.json());
         }
@@ -284,7 +284,7 @@ async function spotifyAddItemsPlaylist(uriArray) {
         if (response.ok) {
             let json = await response.json();
             listUrl = json.href;
-            console.log(json);
+            
         } else {
             handleError(await response.json());
         }

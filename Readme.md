@@ -27,7 +27,7 @@ Pregame is a webpage designed for music lovers to have a preview about the bands
 ## Usage
 
 The following image demonstrates the web application's appearance and functionality:
-<img src="./assets/images/pregame-mockup-01.png" alt="Pregame"/>
+<img src="./assets/images/Pregame.gif" alt="Pregame"/>
 
 
 ## Websites

@@ -24,7 +24,7 @@ function searchEventsKey(event) {
 }
 
 function searchEvents(event) {
-    console.log('searching ' + txtSearch.value);
+    //console.log('searching ' + txtSearch.value);
     event.preventDefault();
     let query = txtSearch.value;
     // fill array with artists

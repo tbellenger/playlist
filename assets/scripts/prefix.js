@@ -15,7 +15,7 @@ const redirect_uri = 'https://tbellenger.github.io/playlist/callback/'; // Your 
 //const redirect_uri = 'http://127.0.0.1:5500/callback/'; // Your redirect uri
 
 function updateSearchContents() {
-    console.log("searchResult \n \t\t", searchResult)
+    //console.log("searchResult \n \t\t", searchResult)
     let mainContentEl = document.querySelector('.main');
     mainContentEl.style.display = 'inherit';
     if(searchResult.artistInfo.length != null ) {
@@ -33,7 +33,7 @@ function updateSearchContents() {
 
         let eventImgElement = document.querySelector("#"+eventImgId)
         eventImgElement.setAttribute("src", eventPictureUrl)
-
+        localStorage.setItem('festival_name', searchResult.artistInfo[0].name);
         //make an empty Icon element, just in case we need to add a new event to the list
         // for the scope of the project it may not be used
         let childElementMaterialIcon = document.createElement("i")
