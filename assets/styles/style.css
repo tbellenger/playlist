@@ -57,6 +57,16 @@ input:not([type]), input[type=text]:not(.browser-default), input[type=password]:
 
 .pg-card {
   border-radius: 5px;
+  position:relative;
+}
+
+.pg-card-title {
+  color:#FFFCF2;
+  text-shadow: 1px 2px 2px #252422;;
+  font-size: 28px;
+  position:absolute;
+  bottom: 10px;
+  left:10px;
 }
 
 .pg-artist-img {
@@ -64,14 +74,13 @@ input:not([type]), input[type=text]:not(.browser-default), input[type=password]:
   border-radius: 5px;
 }
 
-/* .card .card-content {
-  padding: 24px;
+.card, .card-content {
   border-radius: 15px 15px 15px 15px !important;
 }
 
 .card .card-image img {
   border-radius: 15px 15px 0 0 !important;
-} */
+}
 
 .card {
   margin: 1.5rem 0px !important;
