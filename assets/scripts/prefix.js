@@ -20,6 +20,8 @@ function updateSearchContents() {
     mainContentEl.style.display = 'inherit';
     if(searchResult.artistInfo.length != null ) {
         let aEvent = searchResult.artistInfo[0]; // grab the event name and event image
+        let progressBarEl = document.querySelector('#progress-bar');
+        let playlistLinkEl = document.querySelector('#playlist-link');
         let eventTitleId = "event-title"
         let eventLineUpId = "event-lineup"
         let eventShortDescID = "event-short-desc"; 
@@ -30,6 +32,9 @@ function updateSearchContents() {
         let eventStartDate = searchResult.startDate;
         let eventEndDate = searchResult.endDate;
         let eventArtistArray = searchResult.artistInfo
+
+        playlistLinkEl.innerHTML = "";
+        progressBarEl.style.width = "0%";
 
         let eventImgElement = document.querySelector("#"+eventImgId)
         eventImgElement.setAttribute("src", eventPictureUrl)
