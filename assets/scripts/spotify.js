@@ -72,6 +72,7 @@ function redirectToSpotifyAuthorizeEndpoint() {
             windowObjectReference.focus();
         } catch(e) {
             console.log('Popup may have been blocked');
+            swal('Please allow popups in order to authorize Spotify playlist creation');
         }
         // If the user accepts spotify will come back to your application with the code in the response query string
         // Example: http://127.0.0.1:8080/?code=NApCCg..BkWtQ&state=profile%2Factivity
