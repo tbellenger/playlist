@@ -53,29 +53,32 @@ body {
   color: #252422 !important;
 }
 
+/* each artist image and name on these cards */
 .pg-card {
   display: flex;
   position: relative;
   margin: 0.2rem;
   border-radius: 3px;
-  /* max-height: 200px; */
   aspect-ratio: 16/9;
   box-shadow: rgb(0 0 0 / 14%) 0px 2px 2px 0px,
     rgb(0 0 0 / 12%) 0px 3px 1px -2px, rgb(0 0 0 / 20%) 0px 1px 5px 0px;
 }
 
+/* show the artist image */
 .pg-artist-img {
   width: 100%;
   max-width: 100%;
-  border-radius: 5px;
+  border-radius: 3px;
   object-fit: cover;
   position: top;
   object-position: top;
 }
 
+/* Transparent grey box in white text 
+   is on a white background. Just to 
+   make it readable */
 .pg-card-title {
-  background-color: rgba(128, 128, 128, 0.25);
-  border: 0px solid rgba(128, 128, 128, 0.25);
+  background-color: rgba(128, 128, 128, 0.4);
   border-radius: 10px;
   padding: 0 10px;
   color: #fffcf2;
@@ -85,21 +88,25 @@ body {
   left: 16px;
 }
 
+/* Add a margin to separate from the nav at top */
 .card,
 .card-panel {
   margin: 1.5rem 0px !important;
 }
 
+/* Add a bigger radius to all the cards */
 .card,
 .card-panel,
 .card-content {
   border-radius: 10px !important;
 }
 
+/* card image only has radius on top left and top right */
 .card-image {
   border-radius: 10px 10px 0 0;
 }
 
+/* set background color on panels */
 .card,
 .card-reveal,
 .card-content,
@@ -112,6 +119,7 @@ body {
   background-color: #eb5e28 !important;
 }
 
+/* style progress bar */
 .progress {
   height: 4px;
   background-color: #403d39;
@@ -119,6 +127,7 @@ body {
   margin: 0.5rem 0 1rem 0;
 }
 
+/* style progress bar */
 .progress .determinate {
   background-color: #eb5e28;
 }
