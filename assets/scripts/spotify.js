@@ -70,7 +70,7 @@ function redirectToSpotifyAuthorizeEndpoint() {
         windowObjectReference = window.open(popupUrl, "Spotify_WindowName", windowFeatures);
         try {
             windowObjectReference.focus();
-        } catch(e) {
+        } catch (e) {
             console.log('Popup may have been blocked');
             swal('Please allow popups in order to authorize Spotify playlist creation');
         }
@@ -95,17 +95,17 @@ async function spotifySearchItem(artistName) {
     let url = 'https://api.spotify.com/v1/search?type=artist&q=';
     let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
     try {
-        let response = await fetch(url + artistName,{
-            headers:{
-                'Authorization' : auth,
-                'Content-Type' : 'application/json'
+        let response = await fetch(url + artistName, {
+            headers: {
+                'Authorization': auth,
+                'Content-Type': 'application/json'
             }
         });
         if (response.ok) {
             let json = await response.json();
-            
+
             if (json.artists.items.length != 0) {
-                
+
                 await spotifySearchArtistTopTracks(json.artists.items[0].href);
             }
         } else {
@@ -119,15 +119,15 @@ async function spotifySearchItem(artistName) {
 async function spotifySearchArtist(url) {
     let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
     try {
-        let response = await fetch(url,{
-            headers:{
-                'Authorization' : auth,
-                'Content-Type' : 'application/json'
+        let response = await fetch(url, {
+            headers: {
+                'Authorization': auth,
+                'Content-Type': 'application/json'
             }
         });
         if (response.ok) {
             let json = await response.json();
-            
+
         } else {
             handleError(await response.json());
         }
@@ -139,21 +139,21 @@ async function spotifySearchArtist(url) {
 async function spotifySearchArtistTopTracks(url) {
     let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
     try {
-        let response = await fetch(url + '/top-tracks?market=US',{
-            headers:{
-                'Authorization' : auth,
-                'Content-Type' : 'application/json'
+        let response = await fetch(url + '/top-tracks?market=US', {
+            headers: {
+                'Authorization': auth,
+                'Content-Type': 'application/json'
             }
         });
         if (response.ok) {
             let json = await response.json();
-            
+
             let data = {
-                artistName:'',
-                artistHref:'',
-                track:'',
-                trackHref:'',
-                trackUri:''
+                artistName: '',
+                artistHref: '',
+                track: '',
+                trackHref: '',
+                trackUri: ''
             }
             // find track with artist as first listed artist
             let i = 0;
@@ -165,7 +165,7 @@ async function spotifySearchArtistTopTracks(url) {
                     data.track = json.tracks[i].name;
                     data.trackHref = json.tracks[i].href;
                     data.trackUri = json.tracks[i].uri;
-                    
+
                     list.push(data);
                     break;
                 }
@@ -193,7 +193,7 @@ async function spotifyCreatePlaylistFromArtists() {
     }
     for (let i = 0; i < artistArray.length; i++) {
         await spotifySearchItem(artistArray[i]);
-        progressBarEl.style.width = ((100/artistArray.length)*i) + "%";
+        progressBarEl.style.width = ((100 / artistArray.length) * i) + "%";
     }
     // list should now contain an array of artist objects
 
@@ -206,7 +206,7 @@ async function spotifyCreatePlaylistFromArtists() {
     for (let i = 0; i < list.length; i++) {
         uriArray.push(list[i].trackUri);
     }
-    
+
     await spotifyAddItemsPlaylist(uriArray);
     playlistLinkEl.innerHTML = "<a href='" + listExternalUrl + "'>Spotify Playlist</a>";
     progressBarEl.style.width = '100%';
@@ -217,17 +217,17 @@ async function spotifyGetCurrentUser() {
     let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
 
     try {
-        let response = await fetch('https://api.spotify.com/v1/me',{
-            headers:{
-                'Authorization' : auth,
-                'Content-Type' : 'application/json'
+        let response = await fetch('https://api.spotify.com/v1/me', {
+            headers: {
+                'Authorization': auth,
+                'Content-Type': 'application/json'
             }
         });
         if (response.ok) {
             let json = await response.json();
             userId = json.id;
-            
-            
+
+
         } else {
             handleError(await response.json());
         }
@@ -245,10 +245,10 @@ async function spotifyCreatePlaylist() {
     }
     new Date().getTime()
     try {
-        let response = await fetch('https://api.spotify.com/v1/users/'+userId+'/playlists',{
-            headers:{
-                'Authorization' : auth,
-                'Content-Type' : 'application/json'
+        let response = await fetch('https://api.spotify.com/v1/users/' + userId + '/playlists', {
+            headers: {
+                'Authorization': auth,
+                'Content-Type': 'application/json'
             },
             method: 'POST',
             body: JSON.stringify(data)
@@ -257,7 +257,7 @@ async function spotifyCreatePlaylist() {
             let json = await response.json();
             listUrl = json.href;
             listExternalUrl = json.external_urls.spotify;
-            
+
         } else {
             handleError(await response.json());
         }
@@ -269,15 +269,15 @@ async function spotifyCreatePlaylist() {
 async function spotifyAddItemsPlaylist(uriArray) {
     let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
     const data = {
-        uris : uriArray,
+        uris: uriArray,
         position: 0
     }
 
     try {
-        let response = await fetch(listUrl + '/tracks',{
-            headers:{
-                'Authorization' : auth,
-                'Content-Type' : 'application/json'
+        let response = await fetch(listUrl + '/tracks', {
+            headers: {
+                'Authorization': auth,
+                'Content-Type': 'application/json'
             },
             method: 'POST',
             body: JSON.stringify(data)
@@ -285,7 +285,7 @@ async function spotifyAddItemsPlaylist(uriArray) {
         if (response.ok) {
             let json = await response.json();
             listUrl = json.href;
-            
+
         } else {
             handleError(await response.json());
         }

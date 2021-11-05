@@ -1,7 +1,0 @@
-youtube.js: 
-script.js: 
-ticketmaster.js: David
-prefix.js:
-index.html: Tom
-spotify.js: 
-Readme.md: Joe

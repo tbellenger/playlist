@@ -39,7 +39,7 @@ function connectAndCreate() {
         let expiry = JSON.parse(localStorage.getItem('expires_at'));
         let now = new Date().getTime();
         console.log('expire', expiry);
-        console.log('now   ',now);
+        console.log('now   ', now);
         if (expiry == null || now > expiry) {
             redirectToSpotifyAuthorizeEndpoint();
         } else {

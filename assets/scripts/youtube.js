@@ -91,11 +91,11 @@ async function updatePlaylist() {
         // Handle the results here (response.result has the parsed body).
         //console.log("Response", response);
         for (let i = 0; i < artistNameArray.length; i++) {
-            plProgressEl.style.width = ((i + 1)/artistNameArray.length)*100 + "%"
+            plProgressEl.style.width = ((i + 1) / artistNameArray.length) * 100 + "%"
             await searchVideos(artistNameArray[i]);
         }
         for (let i = 0; i < videoIds.length; i++) {
-            plProgressEl.style.width = ((i + 1)/artistNameArray.length)*100 + "%"
+            plProgressEl.style.width = ((i + 1) / artistNameArray.length) * 100 + "%"
             await insertVideo(i, videoIds[i]);
         }
         showPlayListLink();

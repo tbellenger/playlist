@@ -18,13 +18,13 @@ function updateSearchContents() {
     //console.log("searchResult \n \t\t", searchResult)
     let mainContentEl = document.querySelector('.main');
     mainContentEl.style.display = 'inherit';
-    if(searchResult.artistInfo.length != null ) {
+    if (searchResult.artistInfo.length != null) {
         let aEvent = searchResult.artistInfo[0]; // grab the event name and event image
         let progressBarEl = document.querySelector('#progress-bar');
         let playlistLinkEl = document.querySelector('#playlist-link');
         let eventTitleId = "event-title"
         let eventLineUpId = "event-lineup"
-        let eventShortDescID = "event-short-desc"; 
+        let eventShortDescID = "event-short-desc";
         let eventImgId = "event-img"
         let eventTitle = searchResult.artistInfo[0].name;
         let eventPictureUrl = searchResult.artistInfo[0].picture
@@ -36,7 +36,7 @@ function updateSearchContents() {
         playlistLinkEl.innerHTML = "";
         progressBarEl.style.width = "0%";
 
-        let eventImgElement = document.querySelector("#"+eventImgId)
+        let eventImgElement = document.querySelector("#" + eventImgId)
         eventImgElement.setAttribute("src", eventPictureUrl)
         localStorage.setItem('festival_name', searchResult.artistInfo[0].name);
         //make an empty Icon element, just in case we need to add a new event to the list
@@ -48,7 +48,7 @@ function updateSearchContents() {
         let pShortDescEl = document.querySelector("#" + eventShortDescID)
         // set the description to Location & date
         pShortDescEl.innerHTML = eventLocation + ': ' + eventStartDate
-        if(eventEndDate.length > 1) // some events do not list an end date, but if it does update the description
+        if (eventEndDate.length > 1) // some events do not list an end date, but if it does update the description
             pShortDescEl.innerHTML = eventLocation + ': (' + eventStartDate + ' to ' + eventEndDate + ')';
         // for the event grab all the artists info
 
@@ -57,13 +57,13 @@ function updateSearchContents() {
         let spanTitleEl = document.querySelector("#" + eventTitleId);
         if (spanTitleEl != null) { // if the event card is already on the page 
             // then you can grab the event card and update its data
-            
+
             // grab the child element that should already be on the page
             // this is the Icon that shows more details about the event when you click on it.
             childElementMaterialIcon = spanTitleEl.querySelector(".material-icons");
             spanTitleEl.innerHTML = eventTitle // update the title incase they changes the name of the festival
             spanTitleEl.append(childElementMaterialIcon) // add the icon element that opens the playlist menu
-            
+
             //grab the container that will hold the list of artists
             let pEventLineUpEl = document.querySelector("#" + eventLineUpId)
             pEventLineUpEl.innerHTML = "" // clear out the old Lineup
