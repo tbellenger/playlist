@@ -1,7 +1,12 @@
 let contentEl = document.querySelector("#content");
 
 
-
+// This is called when the Spotify popup calls the callback page
+// in callback/index.html
+// Once loaded we check the result returned from Spotify in 
+// the callback. If error then the user cancelled the OAuth
+// Otherwise it contains a code and we move on to exchange the
+// code for the token
 window.addEventListener('load', function (event) {
     searchParams = new URLSearchParams(this.location.search);
     if (searchParams.get('error') !== null) {
@@ -12,6 +17,11 @@ window.addEventListener('load', function (event) {
     }
 });
 
+// exchange the code for a token using POST
+// If successful then access token, refresh token and expiry 
+// get stored in localstorage
+// Once complete this code will call spotConnectionCallback in 
+// prefix.js and then close the popup window
 function exchangeToken(code) {
     const code_verifier = JSON.parse(localStorage.getItem('code_verifier'));
 

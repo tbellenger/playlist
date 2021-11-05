@@ -81,11 +81,11 @@ function getArtistNameList(name) {
             let attractArray = data._embedded.events[0]._embedded.attractions;
             for (let i = 0; i < attractArray.length; i++) {
                 artistNameArray.push(attractArray[i].name);
-                
+
                 let lastImageIndex = attractArray[i].images.length - 1;
                 if (lastImageIndex < 0)
                     lastImageIndex = 0;
-                
+
                 let images = attractArray[i].images;
                 let currImage = getRequiredImage(images);
                 if (currImage !== "") {
