@@ -1,5 +1,5 @@
 /****************************************************
- * Spotify Auth
+ * Spotify Auth from 
  * https://github.com/tobika/spotify-auth-PKCE-example
  */
 
@@ -14,6 +14,8 @@ let refresh_token = JSON.parse(localStorage.getItem('refresh_token')) || null;
 let expires_at = JSON.parse(localStorage.getItem('expires_at')) || null;
 
 // Auth functions
+
+// Generates data required for OAuth PKCE
 function generateRandomString(length) {
     let text = '';
     const possible =
@@ -84,9 +86,13 @@ function redirectToSpotifyAuthorizeEndpoint() {
 * SPOTIFY API CALLS - ONLY USE ONCE AUTH COMPLETE
 */
 
+// list of artist/track objects
 let list = [];
+// URL to playlist
 let listUrl = '';
+// External URL to playlist
 let listExternalUrl = '';
+// User ID
 let userId = '';
 
 
@@ -136,6 +142,15 @@ async function spotifySearchArtist(url) {
     }
 }
 
+// GET method to search for artist top track
+// url is the api url for the artist
+// this creates an object with the top track from 
+// the artist and pushes it to the list array
+// object is called data below
+// artist top tracks return tracks where the artist may not be
+// the main artist so when looking through the top tracks the 
+// one which actually lists them as the artist first is the one
+// that is selected. 
 async function spotifySearchArtistTopTracks(url) {
     let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
     try {
@@ -178,6 +193,13 @@ async function spotifySearchArtistTopTracks(url) {
     }
 }
 
+// This function is the main link to the page contents
+// It uses a combination of the other functions to 
+// search for each of the artists in the event, then 
+// get the current user, create a playlist for that user
+// and then finally add each of the top tracks to the playlist
+// a page progress bar is updated and a link to the playlist 
+// is displayed
 async function spotifyCreatePlaylistFromArtists() {
     list = [];
     listUrl = '';
@@ -213,6 +235,8 @@ async function spotifyCreatePlaylistFromArtists() {
 
 }
 
+// GET method to get the currently logged in user
+// This stores the user ID in userID
 async function spotifyGetCurrentUser() {
     let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
 
@@ -236,6 +260,12 @@ async function spotifyGetCurrentUser() {
     }
 }
 
+// Use POST method to create a playlist under a user ID
+// The user should be logged in and OAuth completed
+// userId is the user ID of the logged in user
+// Playlist name is created using the name of the festival 
+// This function stores the playlist url in listUrl 
+// This function stores an external link to the playlist in listExternalUrl
 async function spotifyCreatePlaylist() {
     let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
     const data = {
@@ -266,6 +296,9 @@ async function spotifyCreatePlaylist() {
     }
 }
 
+// Use POST method to add items to an existing playlist
+// uriArray is the array of items to add
+// listUrl is set to the url of the playlist to be updated
 async function spotifyAddItemsPlaylist(uriArray) {
     let auth = 'Bearer ' + JSON.parse(localStorage.getItem('access_token'));
     const data = {
@@ -294,6 +327,7 @@ async function spotifyAddItemsPlaylist(uriArray) {
     }
 }
 
+// Handles fetch error results using template
 function handleError(error) {
     console.error(error);
     searchResultsEl.innerHTML = errorTemplate({
@@ -302,6 +336,7 @@ function handleError(error) {
     });
 }
 
+// Error template for fetch error results
 function errorTemplate(data) {
     return `<h2>Error info</h2>
       <table>

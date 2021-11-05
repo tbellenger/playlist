@@ -14,6 +14,9 @@ const redirect_uri = 'https://tbellenger.github.io/playlist/callback/'; // Your 
 // testing url
 //const redirect_uri = 'http://127.0.0.1:5500/callback/'; // Your redirect uri
 
+
+// Called by ticketmaster.js when the artist search returns an
+// event. This updates the page with the result of the search
 function updateSearchContents() {
     //console.log("searchResult \n \t\t", searchResult)
     let mainContentEl = document.querySelector('.main');
@@ -87,10 +90,14 @@ function updateSearchContents() {
 
 }
 
+// Called by the popup before it closes itself
+// If OAuth was successful then this starts
+// the playlist creation process
 function spotConnectionCallback() {
     connectAndCreate();
 }
 
+// Tempate for each artist listing
 function artistTemplate(eventArtist) {
     return `<div class="pg-card">
     <img class="pg-artist-img" src="${eventArtist.picture}">
