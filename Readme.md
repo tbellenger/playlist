@@ -29,8 +29,8 @@ The following image demonstrates the web application's appearance and functional
 
   (Links to an external site.)
 
-* [Repository](https://github.com/tbellenger/playlist/)
-* [Live Site](https://tbellenger.github.io/playlist/)
+* <a target="_blank" href="https://github.com/tbellenger/playlist/">Repository</a>
+* <a target="_blank" href="https://tbellenger.github.io/playlist/">Live Site</a>
 
 ## Credits
  
@@ -43,9 +43,10 @@ Lydia Loy
 ## Resources
 
 The project leverages many third party APIs and libraries, so we can focus on what we do best, coding. Ticketmaster and spotify are used in conjunction with eachother to pull the latest info about each event and artist in realtime. Leveraging the sweetalerts library allows us to create a unique user experience to provide feedback to the end user, without having to recreate the wheel, aka JS window.alerts(). Lastly, materialize is a developer friendly front end framework providing modern CSS themes.
-* https://developer.ticketmaster.com/
-* https://developer.spotify.com/
-* https://sweetalert.js.org/
-* https://materializecss.com/
+* <a target="_blank" href="https://developer.ticketmaster.com/">https://developer.ticketmaster.com/</a> 
+* <a target="_blank" href="https://developer.spotify.com/">https://developer.spotify.com/</a> 
+* <a target="_blank" href="https://sweetalert.js.org/">https://sweetalert.js.org/</a> 
+* <a target="_blank" href="https://materializecss.com/">https://materializecss.com/</a>
+
 
 
