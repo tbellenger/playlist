@@ -230,7 +230,7 @@ async function spotifyCreatePlaylistFromArtists() {
     }
 
     await spotifyAddItemsPlaylist(uriArray);
-    playlistLinkEl.innerHTML = "<a href='" + listExternalUrl + "'>Spotify Playlist</a>";
+    playlistLinkEl.innerHTML = "<a target='_blank' href='" + listExternalUrl + "'>Spotify Playlist</a>";
     progressBarEl.style.width = '100%';
 
 }
